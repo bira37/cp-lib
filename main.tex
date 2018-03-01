@@ -1,0 +1,225 @@
+\documentclass[a4paper, twocolumn, landscape, 9pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{multicol}
+\usepackage[margin=0.5in, bmargin=0.4in, tmargin=0.8in]{geometry}
+\usepackage{titlesec}
+\usepackage{etoolbox}
+\usepackage{fancyhdr}
+\usepackage[titles]{tocloft}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Page \thepage}
+\lhead{Federal University of Bahia - Universidade Federal da Bahia}
+
+\input{lst}
+
+% usage of commands
+% section, subsection and subsubsection were renewed so they receive 2 arguments instead of 1. ex: \section{title}{text}
+% \includecode[language]{file} include code from codes/{file}. default language is C++.
+% \includepiece[language]{file}{firstline}{lastline} does the same thing, but it includes from firstline to lastline only.
+%
+
+%% Control the fonts and formatting used in the table of contents.
+
+%% Aesthetic spacing redefines that look nicer to me than the defaults.
+
+\setlength{\cftbeforesecskip}{0.02em}
+\setlength{\cftbeforesubsecskip}{0.02em}
+\setlength{\cftbeforesubsubsecskip}{0.02em}
+
+%% Use Helvetica-Narrow Bold for Chapter entries
+
+\renewcommand{\cftsecfont}{%
+  \fontsize{10}{10}\usefont{T1}{phv}{bc}{n}\selectfont
+}
+\renewcommand{\cftsubsecfont}{
+	\fontsize{9}{9}\usefont{T1}{phv}{c}{n}\selectfont
+}
+\renewcommand{\cftsubsubsecfont}{
+	\fontsize{9}{9}\usefont{T1}{phv}{c}{n}\selectfont
+}
+
+\renewcommand{\familydefault}{\ttdefault}
+\setlength{\columnsep}{1cm}
+
+\let\Asection\section
+\let\Bsection\subsection
+\let\Csection\subsubsection
+
+\renewcommand{\section}[2]{
+   \ifstrequal{#2}{}{\Asection[#1 *]{#1} #2}{\Asection{#1} #2} %
+}
+\renewcommand{\subsection}[2]{
+    \ifstrequal{#2}{}{\Bsection[#1 *]{#1} #2}{\Bsection{#1} #2} %
+}
+\renewcommand{\subsubsection}[2]{
+    \ifstrequal{#2}{}{\Csection[#1 *]{#1} #2}{\Csection{#1} #2} %
+}
+
+\title{Competitive Programming Algorithms and Topics}
+\author{Ubiratan Neto}
+\date{}
+
+\begin{document}
+	
+\titleformat{\section}[hang]{\large}{}{0pt}{\thesection. }
+\titleformat{\subsection}[hang]{\normalsize}{}{0pt}{\thesubsection. }
+\titleformat{\subsubsection}[hang]{\small}{}{0pt}{\thesubsubsection. }
+\titlespacing{\section}{0px}{3px}{2px}
+\titlespacing{\subsection}{0px}{2px}{1px}
+
+% generate title and table of contents with no heading
+\maketitle
+\thispagestyle{fancy}
+
+\makeatletter
+%\renewcommand{\l@subsection}{\@dottedtocline{2}{1.5em}{3.0em}}
+%\renewcommand{\l@subsubsection}{\@dottedtocline{3}{3.0em}{4em}}
+\def\tableofcontents{\@starttoc{toc}}
+\makeatother
+
+%\centering\textcolor{red}{\textbf{THE WHOLE LIB USES dcmp() FOR FLOATING-POINT COMPARISON}}
+
+\tableofcontents
+%\newpage
+\newpage
+\section{Extras}{
+    \subsection{Template}{
+        \includecode{extras/template.cpp}
+    }
+    \newpage
+    \subsection{Coordinate Compression}{
+        \includecode{extras/coordcompression.cpp}
+    }
+    \subsection{2D Coordinate Compression}{
+        \includecode{extras/2dcoordcompression.cpp}
+    }
+    \newpage
+    \subsection{SQRT Decomposition}{
+        \includecode{extras/mosdecomp.cpp}
+    }
+     \subsection{Submission Script}{
+        \includecode{extras/submit.sh}
+    }
+    \newpage
+    \subsection{SQRT Decomposition}{
+        \includecode{especial/mosdecomp.cpp}
+    }
+    
+}
+\section{Algebra}{
+    \subsection{Matrix Exponentiation}{
+    	\includecode{algebra/matrix_exponentiation.cpp}
+    }
+    \newpage
+}
+\section{Data Structures}{
+    \subsection{Range BIT}{
+        \includecode{data_structures/range_bit.cpp}
+    }
+    \newpage
+    \subsection{Segment Tree - Point Update}{
+        \includecode{data_structures/PointSegmentTree.cpp}
+    }
+    \newpage
+    \subsection{Segment Tree - Range Update}{
+        \includecode{data_structures/RangeSegmentTree.cpp}
+    }
+    \subsection{Dynamic Segment Tree - Point Update}{
+        \includecode{data_structures/dynamic_segtree.cpp}
+    }
+}
+\section{Dynamic Programming}{
+    \subsection{LIS}{
+        \includecode{dp/lis.cpp}
+    }
+    \newpage
+}
+\section{Divide and Conquer}{
+    \subsection{Closest Pair of Points}{
+        \includecode{divide_and_conquer/ClosestPointsProblem.cpp}
+    }
+    \subsection{Centroid Decomposition}{
+        \includecode{divide_and_conquer/centroid.cpp}
+    }
+    \subsection{Dynamic Connectivity Offline}{
+        \includecode{divide_and_conquer/dynacon.cpp}
+    }
+    \newpage 
+}
+\section{Geometry}{
+    \subsection{Convex Hull - Monotone Chain}{
+        \includecode{geometry/convexhull.cpp}
+    }
+    \subsection{Shoelace - Polygon Area}{
+        \includecode{geometry/shoelace.cpp}
+    }
+    \newpage
+}
+\section{Graphs}{
+    \subsection{Euler Circuit}{
+        \includecode{graphs/euler.cpp}
+    }
+    \newpage
+    \subsection{LCA}{
+        \includecode{graphs/lca.cpp}
+    }
+    \newpage
+    \subsection{Tarjan Bridges}{
+        \includecode{graphs/tarjanbridges.cpp}
+    }
+    \newpage
+    \subsection{SCC}{
+        \includecode{graphs/scc.cpp}
+    }
+    \subsection{SP - Bellman Ford}{
+        \includecode{graphs/bellmanford.cpp}
+    }
+    \newpage
+    \subsection{SP - Floyd Warshall}{
+        \includecode{graphs/floydwarshall.cpp}
+    }
+    \subsection{Max Flow - Dinic's Algorithm}{
+        \includecode{graphs/dinic.cpp}
+    }
+    \newpage
+    \subsection{Max Flow - Edmonds Karp}{
+        \includecode{graphs/edmondskarp.cpp}
+    }
+    \newpage
+    \subsection{Heavy Light Decomposition}{
+        \includecode{graphs/hld.cpp}
+    \subsection{Max Flow - Dinic's Algorithm}{
+        \includecode{graphs/Maxflow.cpp}
+    }
+    \newpage
+}
+\section{Math}{
+    \subsection{Binomial Coefficient DP}{
+        \includecode{math/binomial_coefficient.cpp}
+    }
+    \subsection{Erathostenes Sieve}{
+        \includecode{math/ErathostenesSieve.cpp}
+    }
+    \newpage
+}
+\section{Strings}{
+    \subsection{Pi-Function/KMP}{
+        \includecode{strings/KMP.cpp}
+    }
+    \subsection{Z-function}{
+        \includecode{strings/zfunction.cpp}
+    }
+    \newpage
+    \subsection{Rolling Hash}{
+        \includecode{strings/rollinghash.cpp}
+    }
+    \newpage
+    \subsection{Suffix Array - LCP}{
+        \includecode{strings/suffixarray.cpp}
+    }
+}
+%\end{multicols}
+\end{document}

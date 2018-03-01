@@ -1,0 +1,81 @@
+\usepackage{xcolor}
+\usepackage{listings}
+% \usepackage{courier}
+\usepackage{courier}
+\usepackage{pgfplotstable}
+% recommended:
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{verbatim}
+\usepackage{xstring}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\def\trim#1{\ignorespaces#1\unskip} 
+
+\lstset{ %
+  basicstyle=\linespread{0.82}\footnotesize\ttfamily,        % the size of the fonts that are used for the code
+  breakatwhitespace=true,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  commentstyle=\itshape\color{black!63},    % comment style
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=lbtr,	                   % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\bfseries,       % keyword style
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=8pt,                   % how far the line-numbers are from the code
+  numberstyle=\scriptsize, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stringstyle=,     % string literal style
+  tabsize=2,	                   % sets default tabsize to 2 spaces
+  inputencoding=utf8
+}
+
+\lstdefinestyle{colored}{
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\color{green!30!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=,
+  stringstyle=\color{orange},
+}
+
+\lstdefinestyle{mystyle}{
+    %backgroundcolor=\color{backcolour},   
+    commentstyle=\color{green!30!black},
+    keywordstyle=\color{magenta},
+    numberstyle=\color{codegray},
+    stringstyle=\color{codepurple},
+    rulecolor=\color{codegray},
+}
+
+\lstset{columns=fullflexible}
+
+\def\EOF{1000}
+
+\def\normLineNumber#1{\trim{\detokenize{#1}}}
+
+\newcommand{\includenote}[1]{\lstinputlisting{codes/#1}}
+\newcommand{\includecode}[2][C++]{
+    \lstinputlisting[escapechar=, language=#1]{codes/#2}
+}
+
+\newcommand{\includepiece}[3][C++]{
+	%{\detokenize{#2} (\normLineNumber{#3})}
+    \lstinputlisting[escapechar=, language=#1, linerange={#3}]{codes/#2}
+}
+
+% \pgfplotstabletypeset{col sep=tab}
+
+\newcommand{\includetable}[1]{
+    \begin{verbatim}\input{notes/#1}\end{verbatim}
+}
