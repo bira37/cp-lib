@@ -1,8 +1,8 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.11.29)  26 DEC 2017 17:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.11.29)  1 MAR 2018 14:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**main.tex lst.tex
+**main.tex
 (./main.tex
 LaTeX2e <2016/02/01>
 Babel <3.9q> and hyphenation patterns for 3 language(s) loaded.
@@ -999,7 +999,7 @@ Package: xstring 2013/10/13  v1.7c  String manipulations (C Tellechea)
 LaTeX Warning: Unused global option(s):
     [9pt].
 
-No file main.aux.
+(./main.aux)
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 65.
@@ -1015,7 +1015,7 @@ LaTeX Font Info:    ... okay on input line 65.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 65.
 LaTeX Font Info:    ... okay on input line 65.
 LaTeX Font Info:    Try loading font information for T1+pcr on input line 65.
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
 *geometry* driver: auto-detecting
@@ -1124,7 +1124,23 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 74.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 74.
-(./main.toc)
+(./main.toc
+LaTeX Font Info:    Try loading font information for T1+phv on input line 1.
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd
+File: t1phv.fd 2001/06/04 scalable font definitions for T1/phv.
+)
+LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <10> not available
+(Font)              Font shape `T1/pcr/b/n' tried instead on input line 1.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 1.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 1.
+
+
+LaTeX Font Warning: Font shape `T1/phv/c/n' undefined
+(Font)              using `T1/phv/m/n' instead on input line 2.
+
+)
 \tf@toc=\write5
 \openout5 = `main.toc'.
 
@@ -1140,57 +1156,66 @@ File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-(./codes/extras/template.cpp
-LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <8> not available
-(Font)              Font shape `T1/pcr/b/n' tried instead on input line 1.
+(./codes/data_structures/pointers_seg_tree.cpp
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 23.
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 1.
+LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <8> not available
+(Font)              Font shape `T1/pcr/b/n' tried instead on input line 4.
+ [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
 
-Overfull \hbox (136.63828pt too wide) in paragraph at lines 34--37
-[][][][][][][][][][][][][][][]  
- []
+]) (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
+) (./codes/data_structures/range_update_seg_tree.cpp)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
+)
+(./codes/data_structures/range_update_bit.cpp)
+Underfull \vbox (badness 2846) has occurred while \output is active []
 
-) [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}
+ [2]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
+)
+(./codes/uncategorized/lis.cpp)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
+)
+(./codes/geometry/closest_pair_of_points.cpp)
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-]
+ [3]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-(./codes/extras/coordcompression.cpp)
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
-File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
-)
-(./codes/extras/2dcoordcompression.cpp)
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
-File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
-)
-(./codes/extras/mosdecomp.cpp)
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
-File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
-)
-(./codes/extras/submit.sh) [2]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
-File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
-)
-(./codes/especial/mosdecomp.cpp) [3
+(./codes/graphs/dynammic_connectivity.cpp
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-] (./main.aux) ) 
+ [4])
+[5
+
+] (./main.aux)
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+ ) 
 Here is how much of TeX's memory you used:
- 25683 strings out of 494953
- 620347 string characters out of 6180976
- 867297 words of memory out of 5000000
- 28484 multiletter control sequences out of 15000+600000
- 11602 words of font info for 38 fonts, out of 8000000 for 9000
+ 25730 strings out of 494953
+ 620974 string characters out of 6180976
+ 983921 words of memory out of 5000000
+ 28519 multiletter control sequences out of 15000+600000
+ 17844 words of font info for 44 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 71i,11n,79p,798b,1607s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</us
-r/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/urw/courier/ucrro8a.pfb>
-Output written on main.pdf (3 pages, 47366 bytes).
+ 71i,12n,79p,790b,2256s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
+e/texmf-dist/fonts/type1/urw/courier/ucrb8a.pfb></usr/share/texlive/texmf-dist/
+fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/u
+rw/courier/ucrro8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/
+uhvb8ac.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
+
+Output written on main.pdf (5 pages, 75773 bytes).
 PDF statistics:
- 30 PDF objects out of 1000 (max. 8388607)
- 21 compressed objects within 1 object stream
+ 44 PDF objects out of 1000 (max. 8388607)
+ 31 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 
