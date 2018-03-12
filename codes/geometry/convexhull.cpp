@@ -1,11 +1,12 @@
-//Convex Hull - Monotone Chain
-//Generates Upper and Lower Hull 
+/* Convex Hull - Monotone Chain */
+/* Generates Upper and Lower Hull */
+/* It is needed to give array of points ordered by <x,y> */
 
 vector < pair<int, int> > upper, lower;
 vector< pair<int, int> > hull;
 
 
-int direction(pair<int, int> & a, pair<int, int> & b, pair<int, int> & c){
+int cross(pair<int, int> & a, pair<int, int> & b, pair<int, int> & c){
     pair<int, int> vec1(b.ff - a.ff, b.ss - a.ss);
     pair<int, int> vec2(c.ff - b.ff, c.ss - b.ss);
     return vec1.ff*vec2.ss - vec1.ss*vec2.ff;
@@ -13,7 +14,7 @@ int direction(pair<int, int> & a, pair<int, int> & b, pair<int, int> & c){
 
 void calculate_upper(vector< pair<int, int> > & p){
    	for(int i=0; i<p.size(); i++){
-        	while(upper.size() >= 2 && direction(upper[upper.size()-2], upper.back(), p[i]) >= 0){
+        	while(upper.size() >= 2 && cross(upper[upper.size()-2], upper.back(), p[i]) >= 0){
        		     upper.pop_back();
       		}
         	upper.push_back(p[i]);
@@ -22,7 +23,7 @@ void calculate_upper(vector< pair<int, int> > & p){
 
 void calculate_lower(vector< pair<int, int> > & p){
 	for(int i=0; i<p.size(); i++){
-        	while(lower.size() >= 2 && direction(lower[lower.size()-2], lower.back(), p[i]) <= 0){
+        	while(lower.size() >= 2 && cross(lower[lower.size()-2], lower.back(), p[i]) <= 0){
        		     lower.pop_back();
       		}
         	lower.push_back(p[i]);

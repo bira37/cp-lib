@@ -1,24 +1,24 @@
-void precompute(int* b, string & pattern){
-	int i=0, j=-1;
-	b[i] = j;
-	while(i < pattern.size()){
-		while(j>=0 && pattern[i] != pattern[j]) j = b[j];
-		i++;
-		j++;
-		b[i] = j;
+/* Knuth - Morris - Pratt Algorithm */
+/* Failure Function for String Matching */
+
+
+int pi[N];
+string s, t;
+
+void prefix(int n) {
+	pi[0] = 0;
+	for(int i = 1; i < n; i++) {
+		pi[i] = pi[i-1];
+		while(pi[i] > 0 && t[i] != t[pi[i]]) pi[i] = pi[pi[i]-1];
+		if(t[i] == t[pi[i]]) pi[i]++;
 	}
 }
 
-int kmp(int * b, string & str, string & pattern){
-	int i=0, j=0;
-	while(i<str.size()){ 
-		while(j >=0 && c != pattern[j]) j = b[j];
-		j++;
-		if(j == pattern.size()){
-			cout << i-j+1 << endl;
-			j = b[j];
-		}
-		i++;
+void matching(int n){
+	int j = 0;
+	for(int i=0; i<n; i++){
+		while(j > 0 && s[i] != t[j]) j = pi[j];
+		if(s[i] == t[j]) j++;
+		if(j == t.size()) cout << "match in " << j-t.size()+1 << endl;
 	}
 }
-		

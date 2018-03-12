@@ -1,3 +1,5 @@
+/* Matrix Exponentiation Implementation */
+
 typedef vector< vector<int> > Matrix;
 
 Matrix operator *(const Matrix & a, const Matrix & b){

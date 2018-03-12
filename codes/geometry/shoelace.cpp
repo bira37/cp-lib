@@ -1,4 +1,6 @@
-//Area of a polygon using clockwise ordered points 
+/* Shoelace formula */
+/* Calculate area of convex polygon */
+/* Points given in clockwise/counterclockwise order */
 
 int cross(pair<int, int> & a, pair<int, int> & b){
 	return a.ff*b.ss - a.ss*b.ff;
