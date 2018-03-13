@@ -17,8 +17,11 @@ void prefix(int n) {
 void matching(int n){
 	int j = 0;
 	for(int i=0; i<n; i++){
-		while(j > 0 && s[i] != t[j]) j = pi[j];
+		while(j > 0 && s[i] != t[j]) j = pi[j-1];
 		if(s[i] == t[j]) j++;
-		if(j == t.size()) cout << "match in " << j-t.size()+1 << endl;
+		if(j == t.size()){
+			cout << "match in " << j-t.size()+1 << endl;
+			j = pi[j-1];
+		}
 	}
 }
