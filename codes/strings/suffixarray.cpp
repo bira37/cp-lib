@@ -1,3 +1,9 @@
+/* Suffix Array using Counting Sort Implementation */
+/* rnk is inverse of sa array */
+/* aux arrays are needed for sorting step */
+/* inverse sorting (using rotating arrays and blocks of power of 2) */
+/* rmq data structure needed for calculating lcp of two non adjacent suffixes sorted */
+  
 int rnk[N],tmp[N], sa[N], sa_aux[N], lcp[N];
 int block=0, n;
 string s;
@@ -11,17 +17,17 @@ bool suffixcmp(int i, int j){
 }
 
 void suffixSort(int MAX_VAL){
-    for(int i=0; i<=MAX_VAL; i++) tmp[i] = 0;
-    for(int i=0; i<n; i++) tmp[rnk[i]]++;
-    for(int i=1; i<=MAX_VAL; i++) tmp[i] += tmp[i-1];
-    for(int i = n-1; i>=0; i--){
-        int aux = sa[i]-block;
-        aux%=n;
-        if(aux < 0) aux+=n;
-        sa_aux[--tmp[rnk[aux]]] = aux;
-    }
-    for(int i=0; i<n; i++) sa[i] = sa_aux[i];
-    tmp[0] = 0;
+  for(int i=0; i<=MAX_VAL; i++) tmp[i] = 0;
+  for(int i=0; i<n; i++) tmp[rnk[i]]++;
+  for(int i=1; i<=MAX_VAL; i++) tmp[i] += tmp[i-1];
+  for(int i = n-1; i>=0; i--){
+      int aux = sa[i]-block;
+      aux%=n;
+      if(aux < 0) aux+=n;
+      sa_aux[--tmp[rnk[aux]]] = aux;
+  }
+  for(int i=0; i<n; i++) sa[i] = sa_aux[i];
+  tmp[0] = 0;
 	for(int i=1; i<n; i++) tmp[i] = tmp[i-1] + suffixcmp(sa[i-1], sa[i]);
 	for(int i=0; i<n; i++) rnk[sa[i]] = tmp[i];
 }
@@ -62,11 +68,6 @@ void calculate_lcp(){
 
 int lcp(int x, int y){
 	if(x == y) return n - x;
-<<<<<<< HEAD
-	if(rank[x] > rank[y]) swap(x,y);
-	return rmq(rank[x], rank[y]-1); //segtree
-=======
 	if(rnk[x] > rnk[y]) swap(x,y);
-	return rmq(rnk[x], rnk[y]-1); //segtree
->>>>>>> f0818d9c6f7176c6be88277a45d8e00876833222
+	return rmq(rnk[x], rnk[y]-1);
 }

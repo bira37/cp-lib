@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.11.29)  1 MAR 2018 14:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.11.29)  15 MAR 2018 12:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1181,9 +1181,14 @@ File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
 (./codes/geometry/closest_pair_of_points.cpp)
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [3]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
+)
+(./codes/geometry/convexhull.cpp [3])
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
+)
+(./codes/geometry/shoelace.cpp)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
@@ -1191,7 +1196,37 @@ File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [4])
-[5
+Underfull \vbox (badness 1796) has occurred while \output is active []
+
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
+)
+(./codes/math_nt/binomial_coefficient.cpp)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
+)
+(./codes/math_nt/ErathostenesSieve.cpp)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
+)
+(./codes/math_nt/matrix_exponentiation.cpp [5])
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
+)
+(./codes/strings/KMP.cpp)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
+)
+(./codes/strings/zfunction.cpp)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
+)
+(./codes/strings/rollinghash.cpp)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
+)
+(./codes/strings/suffixarray.cpp [6]) [7
 
 ] (./main.aux)
 
@@ -1199,10 +1234,10 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 25730 strings out of 494953
- 620974 string characters out of 6180976
- 983921 words of memory out of 5000000
- 28519 multiletter control sequences out of 15000+600000
+ 25899 strings out of 494953
+ 623887 string characters out of 6180976
+ 1003921 words of memory out of 5000000
+ 28641 multiletter control sequences out of 15000+600000
  17844 words of font info for 44 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  71i,12n,79p,790b,2256s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1212,10 +1247,10 @@ fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/u
 rw/courier/ucrro8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/
 uhvb8ac.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
 
-Output written on main.pdf (5 pages, 75773 bytes).
+Output written on main.pdf (7 pages, 90236 bytes).
 PDF statistics:
- 44 PDF objects out of 1000 (max. 8388607)
- 31 compressed objects within 1 object stream
+ 52 PDF objects out of 1000 (max. 8388607)
+ 37 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

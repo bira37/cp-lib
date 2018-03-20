@@ -1,3 +1,6 @@
+/* Max Flow Dinic's Algorithm */
+/* Full copy-paste from Roberto Sales' cp-library */
+/* (who knows how to use this shit ??) */
 
 template <class NumT = int> struct Edge {
   int a, b;

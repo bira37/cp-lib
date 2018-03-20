@@ -1,6 +1,5 @@
 /* Knuth - Morris - Pratt Algorithm */
-/* Failure Function for String Matching */
-
+/* Failure Function for String Matching */ 
 
 int pi[N];
 string s, t;

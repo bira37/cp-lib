@@ -6,5 +6,16 @@
 \contentsline {subsection}{\numberline {2.1}Longest Increasing Subsequence}{3}
 \contentsline {section}{\numberline {3}Geometry}{3}
 \contentsline {subsection}{\numberline {3.1}Closest Pair of Points}{3}
+\contentsline {subsection}{\numberline {3.2}Convex Hull - Monotone Chain Algorithm}{3}
+\contentsline {subsection}{\numberline {3.3}Shoelace Formula for Polygon Area}{4}
 \contentsline {section}{\numberline {4}Graphs}{4}
 \contentsline {subsection}{\numberline {4.1}Dynammic Connectivity - connected(u,v) query}{4}
+\contentsline {section}{\numberline {5}Math and Number Theory}{5}
+\contentsline {subsection}{\numberline {5.1}Binomial Coefficient DP}{5}
+\contentsline {subsection}{\numberline {5.2}Erathostenes Sieve + Logn Prime Factorization}{5}
+\contentsline {subsection}{\numberline {5.3}Matrix Exponentiation}{5}
+\contentsline {section}{\numberline {6}String Algorithms}{6}
+\contentsline {subsection}{\numberline {6.1}KMP Failure Function + String Matching}{6}
+\contentsline {subsection}{\numberline {6.2}Z-Function}{6}
+\contentsline {subsection}{\numberline {6.3}Rolling Hash}{6}
+\contentsline {subsection}{\numberline {6.4}Suffix Array + Linear Sort}{6}
