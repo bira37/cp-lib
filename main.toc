@@ -14,8 +14,9 @@
 \contentsline {subsection}{\numberline {5.1}Binomial Coefficient DP}{5}
 \contentsline {subsection}{\numberline {5.2}Erathostenes Sieve + Logn Prime Factorization}{5}
 \contentsline {subsection}{\numberline {5.3}Matrix Exponentiation}{5}
-\contentsline {section}{\numberline {6}String Algorithms}{6}
-\contentsline {subsection}{\numberline {6.1}KMP Failure Function + String Matching}{6}
-\contentsline {subsection}{\numberline {6.2}Z-Function}{6}
-\contentsline {subsection}{\numberline {6.3}Rolling Hash}{6}
-\contentsline {subsection}{\numberline {6.4}Suffix Array + Linear Sort}{6}
+\contentsline {subsection}{\numberline {5.4}Fast Fourier Transform - Recursive and Iterative}{6}
+\contentsline {section}{\numberline {6}String Algorithms}{7}
+\contentsline {subsection}{\numberline {6.1}KMP Failure Function + String Matching}{7}
+\contentsline {subsection}{\numberline {6.2}Z-Function}{7}
+\contentsline {subsection}{\numberline {6.3}Rolling Hash}{7}
+\contentsline {subsection}{\numberline {6.4}Suffix Array + Linear Sort}{8}
