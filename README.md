@@ -8,12 +8,22 @@
 	
 * Uncategorized
 	* [ ] Longest Increase Subsequence
+	
+* Basic 2D Geometry
+  * [x] Point Structure
+  * [x] Vector Structure
+  * [x] Line/Segment Structure
+  * [x] Distance from Point to Line
+  * [x] Distance from Point to Segment
+  * [ ] Distance from Line to Segment
+  * [ ] Line-Line Intersection
+  * [ ] Segment-Segment Intersection
+  * [ ] Line-Segment Intersection
+  * [ ] All of Circle...
 		
-*  2D Geometry
+*  2D Geometry Algorithms
 	* [ ] Closest Pair of Points
-	* [ ] Convex Hull - Monotone Chain
-	* [ ] Shoelace Formula - Polygon Area
-	* [ ] Useful Functions(Intersection, Distance, etc)
+	* [x] Convex Hull(Monotone Chain) + Perimeter/Area Calculation
 	* [ ] Smallest Enclosing Circle Randomized Algorithm
 
 * Math and Number Theory
@@ -29,10 +39,12 @@
 	* [ ] Suffix Array + Linear Sorting (O(nlogn) S.Array)
 
 * Graphs
+  * [x] LCA
 	* [ ] Dynammic Connectivity for connected(u,v) - query 
 	
 * Extras
-  * [x] Query Square Root Decomposition (Mo's Algorithm)	
+  * [x] Query Square Root Decomposition (Mo's Algorithm)
+  * [x] Coordinate Compression	
  
 * Some Problems
 	
