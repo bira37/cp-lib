@@ -2,8 +2,11 @@ struct Compresser {
   
   vector<int> value;
   
+  void init(int n){
+  	value.resize(n);
+ 	}
+  
   void compress(vector<int> & v){
-    value.resize((int)v.size());
 	  vector<int> tmp;
 	  set<int> s;
 	  for(int i=0; i<v.size(); i++) s.insert(v[i]);
@@ -15,4 +18,4 @@ struct Compresser {
 	  }
   }
   
-};
+} compresser;

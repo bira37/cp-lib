@@ -4,9 +4,7 @@ struct LCA {
   vector<int> st, ed, dad, anc[20];
   vector<bool> vis;
   
-  LCA() {}
-  
-  LCA(int n){
+  void init(int n){
     tempo = 0;
     st.resize(n+1);
     ed.resize(n+1);
@@ -60,4 +58,4 @@ struct LCA {
 	  }
   }
   
-};
+} lca;

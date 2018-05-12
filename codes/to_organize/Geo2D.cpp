@@ -177,7 +177,7 @@ struct Segment2D {
   
 };
 
-double distancePointSegment(Point2D & p, Segment2D & l){
+double distancePointSegment2D(Point2D & p, Segment2D & l){
   double dot1 = Vector2D(l.p, p)*Vector2D(l.p, l.q);
   double dot2 = Vector2D(l.q, p)*Vector2D(l.q, l.p);
   
@@ -185,11 +185,11 @@ double distancePointSegment(Point2D & p, Segment2D & l){
   else return min(p.distanceTo(l.p), p.distanceTo(l.q));
 }
 
-double distancePointLine(Point2D & p, Line2D & l){
+double distancePointLine2D(Point2D & p, Line2D & l){
   return (1.*abs(l.a*p.x + l.b*p.y + l.c))/l.normal.size();
 }
 
-Point2D projectPointInSegment(Point2D & p, Segment2D & s){
+Point2D projectPointInSegment2D(Point2D & p, Segment2D & s){
   //returns closest point from p in segment s
   Vector2D u = s.v.normalize();
   Vector2D w(s.p, p);

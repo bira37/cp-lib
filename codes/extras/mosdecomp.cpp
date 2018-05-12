@@ -1,23 +1,49 @@
 struct query{
 	int id, l, r, ans;
+	bool operator<(const query & b) const {
+	  return l/(int)sqrt(n) < b.l/(int)sqrt(n) || l/(int)sqrt(n) == b.l/(int)sqrt(n) && r < b.r;
+	}
 };
 
-bool cmp_mos(const query & a, const query & b){
-	return a.l/(int)sqrt(n) < b/(int)sqrt(n) || a.l/(int)sqrt(n) == b/(int)sqrt(n) && a.r < b.r;
-}
+struct SqrtDecomposition {
 
-bool cmp_ans(const query & a, const query & b){
-	return a.id < b.id;
-}
+  vector<query> q;
+  
+  void init(int n){
+  	q.resize(n);
+  }
+  
+  void add(int idx){
+ 
+  }
+  
+  void remove(int idx){
 
-void sqrtdecomp(vector<query> & q){
-	sort(q.begin(), q.end(), cmp_mos);
-	int l =0, r = -1;
-	for(int i=0; i<n; i++){
-		while(q[i].l < l) add(--l);
-		while(r < q[i].r) add(++r);
-		while(q[i].l > l) remove(l++);
-		while(r > q[i].r) remove(r--);
-		q[i].ans = answer_query();
-	}
-} 
+  }
+  
+  int answer_query(){
+  
+  }
+
+  void calculate(){
+	  sort(q.begin(), q.end());
+	  int l = 0, r = -1;
+	  for(int i=0; i<q.size(); i++){
+		  while(q[i].l < l) add(--l);
+		  while(r < q[i].r) add(++r);
+		  while(q[i].l > l) remove(l++);
+		  while(r > q[i].r) remove(r--);
+		  q[i].ans = answer_query();
+	  }
+  }
+  
+  void print_ans(){
+    sort(q.begin(), q.end(), [](const query & a, const query & b){
+      return a.id < b.id;
+    });
+    
+    for(query x : q){
+      printf("%d\n", x.ans);
+    }
+  }
+} mos;
