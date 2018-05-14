@@ -15,9 +15,15 @@
   * [x] Line/Segment Structure
   * [x] Distance from Point to Line
   * [x] Distance from Point to Segment
-  * [ ] Distance from Line to Segment
+  * [x] Distance from Line to Segment
+  * [x] Distance from Point to Ray
+  * [x] Distance from Segment to Ray
+  * [x] Distance from Line to Ray
+  * [x] Distance between Segments
+  * [x] Distance between Rays
+  * [x] Distance between Lines
   * [ ] Line-Line Intersection
-  * [ ] Segment-Segment Intersection
+  * [x] Segment-Segment Intersection
   * [ ] Line-Segment Intersection
   * [ ] All of Circle...
 		

@@ -10,6 +10,7 @@
 #define vi vector<int>
 #define vii vector< ii >
 #define EPS 1e-9
+#define INF 1e18
 
 using namespace std;
 

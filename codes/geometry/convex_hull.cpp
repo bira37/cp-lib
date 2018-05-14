@@ -19,17 +19,17 @@ struct ConvexHull {
 	}
 	
 	double area(){
-		double area = points.back()^points[0];
+		double area = points.back().x*points[0].y - points.back().y*points[0].x;
 		for(int i=0; i<points.size()-1; i++){
-			area += points[i]^points[i+1];
+			area += points[i].x*points[i+1].y - points[i].y*points[i+1].x;
 		}
 		return area/2.;
 	}
 	
 	int area2(){
-		int area2 = points.back()^points[0];
+		int area2 = points.back().x*points[0].y - points.back().y*points[0].x;
 		for(int i=0; i<points.size()-1; i++){
-			area2 += points[i]^points[i+1];
+			area2 += points[i].x*points[i+1].y - points[i].y*points[i+1].x;
 		}
 		return area2;
 	}
@@ -42,4 +42,4 @@ struct ConvexHull {
 		return val;
 	}
 
-};
+} chull;
