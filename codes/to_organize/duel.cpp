@@ -1,3 +1,28 @@
+#include <bits/stdc++.h>
+
+#define int long long
+#define ff first
+#define ss second
+#define endl '\n'
+#define ii pair<int, int>
+#define DESYNC ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
+#define pb push_back
+#define vi vector<int>
+#define vii vector< ii >
+#define EPS 1e-9
+#define INF 1e18
+#define ROOT 1
+
+using namespace std;
+
+inline int mod(int n){ return (n%1000000007); }
+
+int gcd(int a, int b){
+  if(a == 0 || b == 0) return 0;
+  if(b == 1) return b;
+  else return gcd(b, a%b);
+}
+
 /* Fast Fourier Transform Implementation */
 /* Complex numbers implemented by hand */
 /* Poly needs to have degree of next power of 2 (result poly has size next_pot2(2*n) */
@@ -157,3 +182,22 @@ struct FFT{
   }
   
 }fft;
+
+int32_t main(){
+  ifstream cin("duel.in");
+  ofstream cout("duel.out");
+	string s;
+	cin >> s;
+	FFT::Poly A(s.size()), B(s.size());
+	for(int i=0; i<s.size(); i++){
+	  A.c[i].a = B.c[i].a = s[i] - '0';
+	}
+	FFT::Poly C = fft.multiply(A,B);
+	int ans = 0;
+	for(int i=1; i<s.size(); i++){
+	  ans += (s[i]-'0')*((int)(C.c[(i+i)].a + 0.5))/2;
+	}
+	cout << ans << endl;    
+}
+
+

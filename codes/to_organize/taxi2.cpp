@@ -1,3 +1,30 @@
+#include <stdio.h>
+#include <vector>
+#include <queue>
+
+#define int long long
+#define ff first
+#define ss second
+#define endl '\n'
+#define ii pair<int, int>
+#define DESYNC ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
+#define pb push_back
+#define vi vector<int>
+#define vii vector< ii >
+#define EPS 1e-9
+#define INF 1e18
+#define ROOT 1
+
+using namespace std;
+
+inline int mod(int n){ return (n%1000000007); }
+
+inline void scan_int(int* p) {
+    static char c;
+    while ((c = getchar_unlocked()) < '0'); // just to be safe
+    for (*p = c-'0'; (c = getchar_unlocked()) >= '0'; *p = *p*10+c-'0');
+}
+
 struct Dinic {
 
   struct FlowEdge{
@@ -7,7 +34,7 @@ struct Dinic {
   };
   
   vector< vector<FlowEdge> >  adj;
-  vector<int> level, used;
+  vector<int> level;
   int src, snk;
   int sz;
   int max_flow;
@@ -17,7 +44,6 @@ struct Dinic {
     snk = n+1;
     adj.resize(n+2, vector< FlowEdge >());
     level.resize(n+2);
-    used.resize(n+2);
     sz = n+2;
     max_flow = 0;
   }
@@ -62,8 +88,7 @@ struct Dinic {
   int send_flow(int u, int flow){
     if(u == snk) return flow;
     
-    for(int &i = used[u]; i<adj[u].size(); i++){
-      FlowEdge &e = adj[u][i];
+    for(FlowEdge &e : adj[u]){
       
       if(level[u]+1 != level[e.v] || e.c <= 0) continue;
       
@@ -86,10 +111,29 @@ struct Dinic {
     max_flow = 0;
     
     while(bfs()){
-      for(int i=0; i<sz; i++) used[i] = 0;
       while(int inc = send_flow(src, INF)) max_flow += inc;
     }
     
   }
   
 };
+
+signed main(){
+  int n,m;
+  scan_int(&n);
+  scan_int(&m);
+  Dinic dinic(n);
+  for(int i=1; i<=m; i++){
+	  int u,v,c;
+	  scan_int(&u);
+    scan_int(&v);
+    scan_int(&c);
+	  if(u == v) continue;
+	  dinic.add_edge(u,v,c);
+	  dinic.add_edge(v,u,c);
+  }
+  dinic.add_to_src(1, INF);
+  dinic.add_to_snk(n, INF);
+	dinic.calculate();
+	printf("%lld\n", dinic.max_flow);
+}

@@ -1,3 +1,28 @@
+#include <bits/stdc++.h>
+
+#define int long long
+#define ff first
+#define ss second
+#define endl '\n'
+#define ii pair<int, int>
+#define DESYNC ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
+#define pb push_back
+#define vi vector<int>
+#define vii vector< ii >
+#define EPS 1e-9
+#define INF 1e18
+#define ROOT 1
+
+using namespace std;
+
+inline int mod(int n){ return (n%1000000007); }
+
+int gcd(int a, int b){
+  if(a == 0 || b == 0) return 0;
+  if(b == 1) return b;
+  else return gcd(b, a%b);
+}
+
 struct Dinic {
 
   struct FlowEdge{
@@ -93,3 +118,45 @@ struct Dinic {
   }
   
 };
+
+int32_t main(){
+	DESYNC;
+	int n;
+	cin >> n;
+	ii v[n+1];
+	for(int i=1; i<=n; i++){
+	  cin >> v[i].ff >> v[i].ss;
+	}
+	
+	int ans = 0;
+	for(int i=1; i<=n; i++){
+	  //do for i
+	  Dinic dinic(n+n+2);
+	  int cnt = 0;
+	  for(int j = 1; j<=n; j++){
+	    if(i == j) continue;
+	    if(v[j].ff == i || v[j].ss == i) cnt++;
+	  }
+	  
+	  for(int j=1; j<=n; j++){
+	    if(i == j) continue;
+	    dinic.add_to_src(j, 1);
+	    if(v[i].ff == j || v[i].ss == j) dinic.add_to_snk(j+n, cnt-2);
+	    else dinic.add_to_snk(j+n, cnt-1);
+	  }
+	  
+	  for(int j=1; j<=n; j++){
+	    if(i == j) continue;
+	    if(v[j].ff == i || v[j].ss == i) continue;
+	    dinic.add_edge(j, v[j].ff+n, 1);
+	    dinic.add_edge(j, v[j].ss+n, 1);
+	  }
+	  
+	  dinic.calculate();
+	  if(dinic.max_flow < n-1-cnt) ans++;
+	}
+
+	cout << ans <<endl;
+}
+
+
