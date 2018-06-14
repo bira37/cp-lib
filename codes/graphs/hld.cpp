@@ -1,7 +1,6 @@
-<<<<<<< HEAD
-=======
+
 //Uses Segment tree
->>>>>>> f0818d9c6f7176c6be88277a45d8e00876833222
+
 int L[N], vis[N], vis2[N], P[N], ch[N], subsz[N], st[N], ed[N], heavy[N];
 int t = 0;
 vector<int> adj[N];
