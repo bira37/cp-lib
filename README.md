@@ -6,6 +6,7 @@
 	* [ ] Range Update/Query Binary Indexed Tree
 	* [ ] Range Update/Query Persistent Segment Tree
 	* [x] Trie
+	* [x] Lichao Segment Tree (Online Convex Hull Trick)
 	
 * Uncategorized
 	* [x] Longest Increase Subsequence

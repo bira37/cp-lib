@@ -68,10 +68,7 @@ void calculate_scc(int n){
 	for(int i=0; i<n; i++){
 		for(int j=0; j<adj[i].size(); j++){
 			int v = adj[i][j];
-			if(find(scc[i]) != find(scc[v])){
-				scc_adj[scc[i]].push_back(scc[v]);
-				merge(scc[i], scc[v]);
-			}
+			scc_adj[scc[i]].push_back(scc[v]);
 		}
 	}
 }

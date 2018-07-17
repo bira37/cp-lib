@@ -1,9 +1,9 @@
 struct Dinic {
 
   struct FlowEdge{
-    int v, rev, c;
+    int v, rev, c, cap;
     FlowEdge() {}
-    FlowEdge(int v, int c, int rev) : v(v), c(c), rev(rev) {}
+    FlowEdge(int v, int c, int cap, int rev) : v(v), c(c), cap(cap), rev(rev) {}
   };
   
   vector< vector<FlowEdge> >  adj;
@@ -25,16 +25,16 @@ struct Dinic {
   void add_edge(int u, int v, int c){
     int id1 = adj[u].size();
     int id2 = adj[v].size();
-    adj[u].pb(FlowEdge(v, c, id2));
-    adj[v].pb(FlowEdge(u, 0, id1));
+    adj[u].pb(FlowEdge(v, c, c, id2));
+    adj[v].pb(FlowEdge(u, 0, 0, id1));
   }
   
   void add_to_src(int v, int c){
-    adj[src].pb(FlowEdge(v, c, -1));
+    adj[src].pb(FlowEdge(v, c, c, -1));
   }
   
   void add_to_snk(int u, int c){
-    adj[u].pb(FlowEdge(snk, c, -1));
+    adj[u].pb(FlowEdge(snk, c, c, -1));
   }
   
   bool bfs(){
