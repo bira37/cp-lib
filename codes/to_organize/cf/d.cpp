@@ -15,30 +15,42 @@
 
 using namespace std;
 
-inline int mod(int n){ return (n%1000000007); }
+int count(int n){
+  if(n == 0) return 1;
+  if(n == 1) return 1;
+  int f[n+1];
+  f[0] = 1;
+  f[1] = 1;
+  for(int i=2; i<=n; i++) f[i] = f[i-1] + f[i-2];
+  return f[n];
+}
+
+vector<int> solve(int n, int k){
+  if(n == 0) return vector<int>();
+  if(count(n-1) >= k){
+    vector<int> ans = solve(n-1, k);
+    vector<int> ret;
+    ret.pb(1);
+    for(int x : ans) ret.pb(x+1);
+    return ret;
+  }
+  else {
+    vector<int> ans = solve(n-2, k - count(n-1));
+    vector<int> ret;
+    ret.pb(2);
+    ret.pb(1);
+    for(int x : ans) ret.pb(x+2);
+    return ret;
+  }
+}
 
 int32_t main(){
 	DESYNC;
-	int n,m;
-	cin >> n >> m;
-	vector< ii > e;
-	if(n-1 > m){
-	  cout << "Impossible" << endl;
-	  return 0;
-	}
-	for(int i=1; i<=n; i++){
-	  for(int j=i+1; j<=n; j++){
-	    if(__gcd(i, j) == 1){
-	      e.pb(ii(i,j));
-	    }
-	    if(e.size() == m){
-	      cout << "Possible" << endl;
-	      for(int i=0; i<m; i++) cout << e[i].ff << " " << e[i].ss << endl;
-	      return 0;
-	    }
-	  }
-	}
-	cout << "Impossible" << endl;
+	int n,k;
+	cin >> n >> k;
+	vector<int> ans = solve(n,k);
+	for(int x : ans) cout << x << " ";
+	cout << endl;
 }
 
 

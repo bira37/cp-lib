@@ -23,9 +23,31 @@ int gcd(int a, int b){
   else return abs(__gcd(a,b));
 }
 
-int32_t main(){
-	DESYNC;
-	
+bool solve(int n, int k){
+  if(k < 4) return true;
+  if(n == 1) return true;
+  int cnt = 0;
+  bool ans = false;
+  if((n-1)%k == 0){
+    cnt++;
+    ans |= solve((n-1)/k, k);
+  }
+  if((n+1)%k == 0){
+    cnt++;
+    ans |= solve((n+1)/k, k);
+  }
+  if(n%k == 0){
+    cnt++;
+    ans |= solve(n/k, k);
+  }
+  if(cnt == 0) ans = false;
+  return ans;
 }
 
-
+int32_t main(){
+  DESYNC;
+  int n,k;
+  cin >> k >> n;
+  if(solve(n,k)) cout << "YES" << endl;
+  else cout << "NO" << endl;
+} 

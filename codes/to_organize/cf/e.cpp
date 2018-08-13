@@ -17,36 +17,75 @@ using namespace std;
 
 inline int mod(int n){ return (n%1000000007); }
 
-int gcd(int a, int b){
-  if(a == 0 || b == 0) return 0;
-  if(b == 1) return b;
-  else return gcd(b, a%b);
+vector<int> love[112345];
+vector<int> hate[112345];
+int comp[112345];
+bool vis[112345];
+int c[112345];
+
+void dfs(int u, int k){
+  comp[u] = k;
+  vis[u] = true;
+  for(int v : love[u]){
+    if(vis[v]) continue;
+    dfs(v, k);
+  }
+}
+
+bool go(int u, int color){
+  c[u] = color;
+  bool ans = true;
+  for(int v : hate[u]){
+    if(c[v] == color) return false;
+    if(c[v] != -1) continue;
+    ans &= go(v, color^1);
+  }
+  return ans;
 }
 
 int32_t main(){
 	DESYNC;
-	int n;
-	cin >> n;
-	int v[n+1];
-	for(int i=0; i<n; i++){
-	  cin >> v[i];
+	int n,m;
+	cin >> n >> m;
+	vector< ii > to_add;
+	for(int i=0; i<m; i++){
+	  int u,v,c;
+	  cin >> u >> v >> c;
+	  if(c == 1) love[u].pb(v), love[v].pb(u);
+	  else to_add.pb(ii(u,v));
 	}
-  reverse(v, v+n);
-  int pot = 1;
-  int mod = 998244353;
-  int ans = 0;
-  ans += v[0];
-  for(int i=1; i<n; i++){
-    int fac = (i+2)*pot;
-    fac %= mod;
-    fac *= v[i];
-    fac %= mod;
-    ans += fac;
-    ans %= mod;
-    pot *= 2;
-    pot %= mod;
-  }
-  cout << ans << endl;
+	for(int i=0; i<=n; i++){
+	  vis[i] = false;
+	}
+	int k = 1;
+	for(int i=1; i<=n; i++){
+	  if(!vis[i]){
+	    dfs(i, k);
+	    k++;
+	  }
+	}
+	for(ii p : to_add){
+	  int u = p.ff;
+	  int v = p.ss;
+	  hate[comp[u]].pb(comp[v]);
+	  hate[comp[v]].pb(comp[u]);
+	}
+	for(int i=0; i<k; i++){
+	  c[i] = -1;
+	}
+	int ans = 0;
+	for(int i=1; i<k; i++){
+	  if(c[i] == -1){
+	    if(!go(i, 0)){
+	     cout << 0 << endl;
+	     return 0;
+	    }
+	    ans++;
+	  }
+	}
+	int ret = 1;
+	for(int i=0; i<ans-1; i++) ret = mod(ret*2LL);
+	cout << ret << endl;
 }
 
 

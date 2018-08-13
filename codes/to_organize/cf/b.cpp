@@ -23,26 +23,61 @@ int gcd(int a, int b){
   else return gcd(b, a%b);
 }
 
+int ll[2123], rr[2123];
+vector<int> pre, post;
+bool vis[2123];
+int label[2123];
+int adj[2123];
+
+void pre_order(int x){
+  pre.pb(x);
+  if(ll[x] != 0) pre_order(ll[x]);
+  if(rr[x] != 0) pre_order(rr[x]);
+}
+
+void post_order(int x){
+  if(ll[x] != 0) post_order(ll[x]);
+  if(rr[x] != 0) post_order(rr[x]);
+  post.pb(x);
+}
+
 int32_t main(){
 	DESYNC;
-	string s;
-	cin >> s;
-	string t;
-	string k;
-	for(char c : s){
-	  if(c == '1') k+=c;
-	  else t+=c;
-	}
-	s = k + t;
-	int last = -1;
-	for(int i=0; i<s.size(); i++){
-	  if(s[i] == '2'){
-	    sort(s.begin() + last+1, s.begin()+ i);
-	    last = i;
+	int t;
+	cin >> t;
+	for(int test = 1; test <= t; test++){
+	  cout << "Case #" << test << ":";
+	  int n,k;
+	  cin >> n >> k;
+	  pre.clear();
+	  post.clear();
+	  for(int i=1; i<=n; i++){
+	    vis[i] = false;
+	    cin >> ll[i] >> rr[i];
+	  }
+	  pre_order(1);
+	  post_order(1);
+	  for(int i=0; i<pre.size(); i++) adj[pre[i]] = post[i];
+	  int cnt = 0;
+	  for(int i=1; i<=n; i++){
+	    if(vis[i]) continue;
+	    int cur = i;
+	    cnt++;
+	    cnt = min(cnt, k);
+	    while(!vis[cur]){
+	      vis[cur] = true;
+	      label[cur] = cnt;
+	      cur = adj[cur];
+	    }
+	  }
+	  int mx = 0;
+	  for(int i=1; i<=n; i++) mx = max(mx, label[i]);
+	  if(mx != k) cout << " Impossible" << endl;
+	  else {
+	    for(int i=1; i<=n; i++) cout << " " << label[i];
+	    cout << endl;
 	  }
 	}
-	sort(s.begin() + last+1, s.end());
-	cout << s << endl;
 }
 
 

@@ -16,11 +16,7 @@ struct Point2D {
     return Point2D(x - b.x, y - b.y);
   }
   
-  bool operator<(const Point2D b) const{
-    return x < b.x || (x == b.x && y < b.y);
-  }
-  
-  void operator=(const Point2D b) const{
+  void operator=(const Point2D b) {
     x = b.x;
     y = b.y;
   }
@@ -29,8 +25,12 @@ struct Point2D {
     return sqrt((x - b.x)*(x - b.x) + (y - b.y)*(y - b.y));
   }
   
-  int distanceTo2(Point2D b){
+  int squareDistanceTo(Point2D b){
     return (x - b.x)*(x - b.x) + (y - b.y)*(y - b.y);
+  }
+  
+  bool operator<(const Point2D & p) const{
+    return tie(x,y) < tie(p.x, p.y);
   }
   
 };
@@ -58,7 +58,7 @@ struct Vector2D {
     return Vector2D(x - b.x, y - b.y);
   }
   
-  void operator=(const Vector2D b) const{
+  void operator=(const Vector2D b) {
     x = b.x;
     y = b.y;
   }
@@ -71,9 +71,9 @@ struct Vector2D {
 		return x*b.y - y*b.x;
 	}
 	
-	bool operator<(const Vector2D b) const{
-		return x < b.x || (x == b.x && y < b.y);
-	}
+	bool operator<(const Vector2D & v) const{
+    return tie(x,y) < tie(v.x, v.y);
+  }
 	
 	Vector2D scale(int n){
 	  return Vector2D(x*n, y*n);
@@ -83,12 +83,17 @@ struct Vector2D {
 	  return sqrt(x*x + y*y);
 	}
 	
-	int size2(){
+	int squareSize(){
 	  return x*x + y*y;
 	}
 	
+	//Only with double type
 	Vector2D normalize(){
 	  return Vector2D((double)x/size(), (double)y/size());
+	}
+	
+	Vector2D rotate(double ang){
+	  return Vector2D(x*cos(ang) + y*-sin(ang), x*sin(ang) + y*cos(ang));
 	}
 	
 };
@@ -110,7 +115,7 @@ struct Line2D {
     c = 0;
   }
   
-  void operator=(const Line2D l) const{
+  void operator=(const Line2D l){
     a = l.a;
     b = l.b;
     c = l.c;
@@ -138,6 +143,23 @@ struct Line2D {
     a = -v.y;
     b = v.x;
     c = -(a*p.x + b*p.y);
+  }
+  
+  void flip_sign(){
+    a = -a, b = -b, c = -c;
+  }
+  
+  void normalize(){
+    if(a < 0) flip_sign();
+    else if(a == 0 && b < 0) flip_sign();
+    else if(a == 0 && b == 0 && c < 0) flip_sign();
+    int g = max(a, max(b,c));
+    if(a != 0) g = gcd(g, a); if(b != 0) g = gcd(g,b); if(c != 0) g = gcd(g,c);
+    if(g > 0) a/=g, b/=g, c/=g;
+  }
+  
+  bool operator<(const Line2D & l) const{
+    return tie(a,b,c) < tie(l.a, l.b, l.c);
   }
   
 };

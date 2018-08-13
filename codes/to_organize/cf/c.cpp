@@ -25,38 +25,6 @@ int gcd(int a, int b){
 
 int32_t main(){
 	DESYNC;
-	int n,m;
-	cin >> n >> m;
-	int sum = 0;
-	int pos = 0;
-	int neg = 0;
-	ii q[m];
-	for(int i=0; i<m; i++){
-	  cin >> q[i].ff >> q[i].ss;
-	  sum += q[i].ff;
-	  if(q[i].ss > 0) pos+= q[i].ss;
-	  else neg += q[i].ss;
-	}
-	int v[n];
-	for(int i=0; i<n; i++) v[i] = sum;
-  int fac = 0;
-  for(int i=0; i<n; i++){
-    v[i] += fac*pos;
-    fac++;
-  }
-	fac = 0;
-	for(int i=n/2; i<n; i++){
-	  v[i] += fac*neg;
-	  fac++;
-	}
-	fac = 0;
-	for(int i=n/2; i>=0; i--){
-	  v[i] += fac*neg;
-	  fac++;
-	}
-	int acc = 0;
-	for(int i=0; i<n; i++) acc += v[i];
-	cout << fixed << setprecision(9) << (double)acc/(double)n << endl;
 }
 
 
