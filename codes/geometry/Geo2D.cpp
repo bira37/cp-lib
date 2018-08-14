@@ -1,7 +1,18 @@
+struct Circle{
+  Point2D c;
+  int r;
+  Circle() {}
+  Circle(Point2D center, int radius) : c(center), r(radius) {}
+  bool operator=(Circle circ){
+    c = circ.c;
+    r = circ.r;
+  }
+};
+
 struct Geo2D {
 
   double distancePointLine(Point2D p, Line2D l){
-    return double(1.*abs(l.a*p.x + l.b*p.y + l.c))/l.normal.size();
+    return (double)(1.*abs(l.a*p.x + l.b*p.y + l.c))/l.normal.size();
   }
   
   double distancePointSegment(Point2D p, Line2D l){
@@ -282,6 +293,29 @@ struct Geo2D {
     else ans = min(ans, r1.p.distanceTo(r2.p));
     
     return ans;
+    
+  }
+  
+  double circleCircleIntersection(Circle c1, Circle c2){
+  
+    if((c1.r+c2.r)*(c1.r+c2.r) <= (c2.c.x-c1.c.x)*(c2.c.x-c1.c.x) + (c2.c.y-c1.c.y)*(c2.c.y-c1.c.y)){
+      return 0;
+    }
+    if((c1.r-c2.r)*(c1.r-c2.r) >= (c2.c.x-c1.c.x)*(c2.c.x-c1.c.x) + (c2.c.y-c1.c.y)*(c2.c.y-c1.c.y)){
+      return PI*min(c1.r, c2.r)*min(c1.r, c2.r);
+    }
+    double x1 = c1.c.x, x2 = c2.c.x, y1 = c1.c.y, y2 = c2.c.y, r1 = c1.r, r2 = c2.r;
+    double d = sqrt((x2-x1)*(x2-x1) + (y2-y1)*(y2-y1));
+    double r1sqr = c1.r*c1.r;
+    double r2sqr = c2.r*c2.r;
+    double dsqr = d*d;
+    
+    double alpha1 = acos(((c1.r + c2.r)*(c1.r - c2.r) + dsqr)/(2.*d*r1));
+    double alpha2 = acos(((c2.r + c1.r)*(c2.r - c1.r) + dsqr)/(2.*d*r2));
+    double area1 = r1sqr*(alpha1 - sin(alpha1)*cos(alpha1));
+    double area2 = r2sqr*(alpha2 - sin(alpha2)*cos(alpha2));
+    
+    return area1 + area2;
     
   }
   

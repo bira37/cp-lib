@@ -3,6 +3,7 @@
 /* lf[i] stores the lowest prime factor of i(logn factorization) */
 
 bitset<N> prime;
+vector<int> primes;
 int lf[N];
 
 void run_sieve(int n){
@@ -18,4 +19,5 @@ void run_sieve(int n){
 			}
 		}
 	}
+	for(int i=2; i<=n; i++) if(prime[i]) primes.pb(i);
 }

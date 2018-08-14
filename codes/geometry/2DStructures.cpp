@@ -163,3 +163,14 @@ struct Line2D {
   }
   
 };
+
+struct Circle{
+  Point2D c;
+  int r;
+  Circle() {}
+  Circle(Point2D center, int radius) : c(center), r(radius) {}
+  bool operator=(Circle circ){
+    c = circ.c;
+    r = circ.r;
+  }
+};
