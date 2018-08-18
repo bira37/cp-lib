@@ -25,8 +25,8 @@ int gcd(int a, int b){
 }
 
 int32_t main(){
-	DESYNC;
-	
+  DESYNC;
+  
 }
 
 

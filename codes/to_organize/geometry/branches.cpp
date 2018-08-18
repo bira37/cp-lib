@@ -1,3 +1,247 @@
+#include <bits/stdc++.h>
+
+#define int long long
+#define double long double
+#define ff first
+#define ss second
+#define endl '\n'
+#define ii pair<int, int>
+#define DESYNC ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
+#define pb push_back
+#define vi vector<int>
+#define vii vector< ii >
+#define EPS 1e-9
+#define INF 1e18
+#define ROOT 1
+const double PI = acos(-1);
+
+using namespace std;
+
+inline int mod(int n){ return (n%1000000007); }
+
+int gcd(int a, int b){
+  if(a == 0 || b == 0) return 0;
+  else return abs(__gcd(a,b));
+}
+
+////////////////////////////////// 2D Geometry Structures ////////////////////////////////////
+
+struct Point2D {
+  double x,y;
+  
+  Point2D(){
+    x = 0;
+    y = 0;
+  }
+  
+  Point2D(double x, double y) : x(x), y(y) {}
+  
+  Point2D operator+(const Point2D b) const{
+    return Point2D(x + b.x, y + b.y);
+  }
+  
+  Point2D operator-(const Point2D b) const{
+    return Point2D(x - b.x, y - b.y);
+  }
+  
+  void operator=(const Point2D b) {
+    x = b.x;
+    y = b.y;
+  }
+  
+  double distanceTo(Point2D b){
+    return sqrt((x - b.x)*(x - b.x) + (y - b.y)*(y - b.y));
+  }
+  
+  double squareDistanceTo(Point2D b){
+    return (x - b.x)*(x - b.x) + (y - b.y)*(y - b.y);
+  }
+  
+  bool operator<(const Point2D & p) const{
+    return tie(x,y) < tie(p.x, p.y);
+  }
+  
+};
+
+struct Vector2D {
+  double x,y;
+  
+  Vector2D(){
+    x = 0;
+    y = 0;
+  }
+  
+  Vector2D(double x, double y) : x(x), y(y) {}
+  
+  double operator*(const Vector2D b) const{
+    return (x*b.x + y*b.y);
+  }
+  
+  double operator^(const Vector2D b) const{
+		return x*b.y - y*b.x;
+	}
+	
+	Vector2D scale(double n){
+	  return Vector2D(x*n, y*n);
+	}
+  
+  Vector2D(Point2D a, Point2D b){
+    x = b.x - a.x;
+    y = b.y - a.y;
+  }
+  
+  Vector2D operator+(const Vector2D b) const{
+    return Vector2D(x + b.x, y + b.y);
+  }
+  
+  Vector2D operator-(const Vector2D b) const{
+    return Vector2D(x - b.x, y - b.y);
+  }
+  
+  void operator=(const Vector2D b) {
+    x = b.x;
+    y = b.y;
+  }
+	
+	bool operator<(const Vector2D & v) const{
+    return tie(x,y) < tie(v.x, v.y);
+  }
+	
+	double size(){
+	  return sqrt(x*x + y*y);
+	}
+	
+	double squareSize(){
+	  return x*x + y*y;
+	}
+	
+	//Only with double type
+	Vector2D normalize(){
+	  return Vector2D((double)x/size(), (double)y/size());
+	}
+	
+	void rotate(double ang){
+	  double xx = x, yy = y;
+	  x = xx*cos(ang) + yy*-sin(ang);
+	  y = xx*sin(ang) + yy*cos(ang);
+	}
+	
+};
+
+struct Line2D {
+  Point2D p, q;
+  Vector2D v;
+  Vector2D normal;
+  
+  double a,b,c;
+  
+  Line2D() {
+    p = Point2D();
+    q = Point2D();
+    v = Vector2D();
+    normal = Vector2D();
+    a = 0;
+    b = 0;
+    c = 0;
+  }
+  
+  void operator=(const Line2D l){
+    a = l.a;
+    b = l.b;
+    c = l.c;
+    p = l.p;
+    q = l.q;
+    v = l.v;
+    normal = l.normal;
+  }
+  
+  Line2D(Point2D r, Point2D s){
+    p = r;
+    q = s;
+    v = Vector2D(r, s);
+    normal = Vector2D(-v.y, v.x);
+    a = -v.y;
+    b = v.x;
+    c = -(a*p.x + b*p.y);
+  }
+  
+  Line2D(Point2D r, Vector2D s){
+    p = r;
+    q = Point2D(p.x + s.x, p.y + s.y);
+    v = s;
+    normal = Vector2D(-v.y, v.x);
+    a = -v.y;
+    b = v.x;
+    c = -(a*p.x + b*p.y);
+  }
+  
+  void flip_sign(){
+    a = -a, b = -b, c = -c;
+  }
+  
+  void normalize(){
+    if(a < 0) flip_sign();
+    else if(a == 0 && b < 0) flip_sign();
+    else if(a == 0 && b == 0 && c < 0) flip_sign();
+    int g = max(a, max(b,c));
+    if(a != 0) g = gcd(g, a); if(b != 0) g = gcd(g,b); if(c != 0) g = gcd(g,c);
+    if(g > 0) a/=g, b/=g, c/=g;
+  }
+  
+  bool operator<(const Line2D & l) const{
+    return tie(a,b,c) < tie(l.a, l.b, l.c);
+  }
+  
+};
+
+struct Circle{
+  Point2D c;
+  double r;
+  Circle() {}
+  Circle(Point2D center, double radius) : c(center), r(radius) {}
+  
+  bool operator=(Circle circ){
+    c = circ.c;
+    r = circ.r;
+  }
+  
+  pair<Point2D, Point2D> getTangentPoints(Point2D p){
+    double d = p.distanceTo(c);
+    double ang = asin(1.*r/d);
+    Vector2D v1(p, c);
+    v1.rotate(ang);
+    Vector2D v2(p, c);
+    v2.rotate(-ang);
+    v1 = v1.scale(sqrt(d*d - r*r)/d);
+    v2 = v2.scale(sqrt(d*d - r*r)/d);
+    Point2D p1(v1.x + p.x, v1.y + p.y);
+    Point2D p2(v2.x + p.x, v2.y + p.y);
+    return make_pair(p1,p2);
+  }
+  
+  double sectorArea(double ang){
+    return (ang*r*r)/2.;
+  }
+  
+  double arcLength(double ang){
+    return ang*r;
+  }
+  
+  double sectorArea(Point2D p1, Point2D p2){
+    double h = p1.distanceTo(p2);
+    double ang = acos(1. - h*h/r*r);
+    return sectorArea(ang);
+  }
+  
+  double arcLength(Point2D p1, Point2D p2){
+    double h = p1.distanceTo(p2);
+    double ang = acos(1. - (h*h)/(2*r*r));
+    return arcLength(ang);
+  }
+};
+
+////////////////////////////////// End of 2D Geometry Structures /////////////////////////////
+
 ////////////////////////////////// Geometry 2D Algorithms ////////////////////////////////////
 
 struct Geo2D {
@@ -7,15 +251,15 @@ struct Geo2D {
   }
   
   double distancePointSegment(Point2D p, Line2D l){
-    int dot1 = Vector2D(l.p, p)*Vector2D(l.p, l.q);
-    int dot2 = Vector2D(l.q, p)*Vector2D(l.q, l.p);
+    double dot1 = Vector2D(l.p, p)*Vector2D(l.p, l.q);
+    double dot2 = Vector2D(l.q, p)*Vector2D(l.q, l.p);
     
     if(dot1 >= 0 && dot2 >= 0) return distancePointLine(p, l);
     else return min(p.distanceTo(l.p), p.distanceTo(l.q));
   }
   
   double distancePointRay(Point2D p, Line2D l){
-    int dot = Vector2D(l.p, p)*l.v;
+    double dot = Vector2D(l.p, p)*l.v;
     if(dot >= 0) return distancePointLine(p, l);
     else return p.distanceTo(l.p);
   }
@@ -87,13 +331,13 @@ struct Geo2D {
 		
 	  }
 	  else {
-		  int a1 = s1.q.y - s1.p.y;
-		  int b1 = s1.p.x - s1.q.x;
-		  int c1 = a1*s1.p.x + b1*s1.p.y;
-		  int a2 = s2.q.y - s2.p.y;
-		  int b2 = s2.p.x - s2.q.x;
-		  int c2 = a2*s2.p.x + b2*s2.p.y;
-		  int det = a1*b2 - a2*b1;
+		  double a1 = s1.q.y - s1.p.y;
+		  double b1 = s1.p.x - s1.q.x;
+		  double c1 = a1*s1.p.x + b1*s1.p.y;
+		  double a2 = s2.q.y - s2.p.y;
+		  double b2 = s2.p.x - s2.q.x;
+		  double c2 = a2*s2.p.x + b2*s2.p.y;
+		  double det = a1*b2 - a2*b1;
 		  double x = (double)(b2*c1 - b1*c2)/(double)det*1.;
 		  double y = (double)(a1*c2 - a2*c1)/(double)det*1.;
 		  if(s1.p.x-EPS <= x && x <= s1.q.x+EPS && s2.p.x-EPS <= x && x <= s2.q.x+EPS){
@@ -115,8 +359,8 @@ struct Geo2D {
       Line2D r3(l2.p, l2.q);
       Line2D r4(l2.q, l2.p);
       
-      int cross1 = (Vector2D(r3.p, r1.p)^r3.v);
-      int cross2 = (Vector2D(r3.p, r1.q)^r3.v);
+      double cross1 = (Vector2D(r3.p, r1.p)^r3.v);
+      double cross2 = (Vector2D(r3.p, r1.q)^r3.v);
       if(cross2 < cross1) swap(cross1, cross2);
       
       bool ok1 = (cross1 <= 0 && cross2 >= 0) || (distancePointLine(r1.p, r3) > distancePointLine(r1.q, r3));
@@ -179,8 +423,8 @@ struct Geo2D {
       Line2D r1(s.p, s.q);
       Line2D r2(s.q, s.p);
       
-      int cross1 = (Vector2D(r.p, r1.p)^r.v);
-      int cross2 = (Vector2D(r.p, r1.q)^r.v);
+      double cross1 = (Vector2D(r.p, r1.p)^r.v);
+      double cross2 = (Vector2D(r.p, r1.q)^r.v);
       if(cross2 < cross1) swap(cross1, cross2);
       
       bool ok1 = (cross1 <= 0 && cross2 >= 0) || (distancePointLine(r1.p, r) > distancePointLine(r1.q, r));
@@ -208,7 +452,7 @@ struct Geo2D {
       
     
     double ans = INF;
-    int dot = Vector2D(s.p, r.p)*Vector2D(r.p, s.q);
+    double dot = Vector2D(s.p, r.p)*Vector2D(r.p, s.q);
     if(dot >= 0) ans = min(ans, distancePointLine(r.p, s));
     else ans = min(ans, min(r.p.distanceTo(s.p), r.p.distanceTo(s.q)));
     
@@ -229,8 +473,8 @@ struct Geo2D {
       return distancePointLine(s.p, l);
     }
     
-    int cross1 = (Vector2D(l.p, s.p)^l.v);
-    int cross2 = (Vector2D(l.p, s.q)^l.v);
+    double cross1 = (Vector2D(l.p, s.p)^l.v);
+    double cross2 = (Vector2D(l.p, s.q)^l.v);
     if(cross2 < cross1) swap(cross1, cross2);
 	  if(cross1 <= 0 && cross2 >= 0) return 0;
 	  else return min(distancePointLine(s.p, l), distancePointLine(s.q,l)); 
@@ -242,8 +486,8 @@ struct Geo2D {
       return distancePointLine(r.p, l);
     }
     
-    int cross1 = (Vector2D(l.p, r.p)^l.v);
-    int cross2 = (Vector2D(l.p, r.q)^l.v);
+    double cross1 = (Vector2D(l.p, r.p)^l.v);
+    double cross2 = (Vector2D(l.p, r.q)^l.v);
     if(cross2 < cross1) swap(cross1, cross2);
 	  if((cross1 <= 0 && cross2 >= 0) || (distancePointLine(r.p, l) > distancePointLine(r.q, l))) return 0;
 	  return distancePointLine(r.p, l);
@@ -259,8 +503,8 @@ struct Geo2D {
   double distanceRayRay(Line2D r1, Line2D r2){
     if((r1.v^r2.v) != 0){
       
-      int cross1 = (Vector2D(r1.p, r2.p)^r1.v);
-      int cross2 = (Vector2D(r1.p, r2.q)^r1.v);
+      double cross1 = (Vector2D(r1.p, r2.p)^r1.v);
+      double cross2 = (Vector2D(r1.p, r2.q)^r1.v);
       if(cross2 < cross1) swap(cross1, cross2);
       bool ok1 = (cross1 <= 0 && cross2 >= 0) || (distancePointLine(r2.p, r1) > distancePointLine(r2.q, r1));
       
@@ -275,7 +519,7 @@ struct Geo2D {
     }
     
     double ans = INF;
-    int dot = Vector2D(r2.p, r1.p)*r2.v;
+    double dot = Vector2D(r2.p, r1.p)*r2.v;
     if(dot >= 0) ans = min(ans, distancePointLine(r1.p, r2));
     else ans = min(ans, r2.p.distanceTo(r1.p));
     
@@ -313,3 +557,72 @@ struct Geo2D {
 } geo2d;
 
 ////////////////////////////////// End of Geometry 2D Algorithms /////////////////////////////
+
+int32_t main(){
+  DESYNC;
+  Point2D a1,b1,a2,b2;
+  Vector2D v1,v2;
+  cin >> a1.x >> a1.y >> b1.x >> b1.y;
+  cin >> a2.x >> a2.y >> b2.x >> b2.y;
+  cin >> v1.x >> v1.y;
+  cin >> v2.x >> v2.y;
+  Line2D l1(a1,b1), l2(a2,b2);
+
+  double l = 0.0000000000000, r = 1e18;
+  for(int it=0; it<10000; it++){
+    double m = (l+r)/2.;
+    Point2D a, b;
+    a = a1, b = b1;
+    a.x += m*v1.x;
+    a.y += m*v1.y;
+    b.x += m*v1.x;
+    b.y += m*v1.y;
+    Line2D l1(a,b);
+    a = a2, b = b2;
+    a.x += m*v2.x;
+    a.y += m*v2.y;
+    b.x += m*v2.x;
+    b.y += m*v2.y;
+    Line2D l2(a,b);
+    double d1 = geo2d.distanceSegmentSegment(l1,l2);
+    
+    double m2 = m + 1e-9;
+    a = a1, b = b1;
+    a.x += m2*v1.x;
+    a.y += m2*v1.y;
+    b.x += m2*v1.x;
+    b.y += m2*v1.y;
+    l1 = Line2D(a,b);
+    a = a2, b = b2;
+    a.x += m2*v2.x;
+    a.y += m2*v2.y;
+    b.x += m2*v2.x;
+    b.y += m2*v2.y;
+    l2 = Line2D(a,b);
+    double d2 = geo2d.distanceSegmentSegment(l1,l2);
+    if(d1 > d2){
+      l = m;
+    }
+    else r = m;
+  }
+  Point2D a, b;
+  a = a1, b = b1;
+  a.x += l*v1.x;
+  a.y += l*v1.y;
+  b.x += l*v1.x;
+  b.y += l*v1.y;
+  //cout << a.x << ", " << a.y << " // " << b.x << ", " << b.y << endl;
+  Line2D ll1(a,b);
+  a = a2, b = b2;
+  a.x += l*v2.x;
+  a.y += l*v2.y;
+  b.x += l*v2.x;
+  b.y += l*v2.y;
+  //cout << a.x << ", " << a.y << " // " << b.x << ", " << b.y << endl;
+  Line2D ll2(a,b);
+  double d1 = geo2d.distanceSegmentSegment(ll1,ll2);
+  if(d1 < 1e-15) cout << fixed << setprecision(9) << l << endl;
+  else cout << -1 << endl;
+}
+
+

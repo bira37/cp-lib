@@ -1,3 +1,5 @@
+////////////////////////////////// 2D Geometry Structures ////////////////////////////////////
+
 struct Point2D {
   int x,y;
   
@@ -45,6 +47,18 @@ struct Vector2D {
   
   Vector2D(int x, int y) : x(x), y(y) {}
   
+  int operator*(const Vector2D b) const{
+    return (x*b.x + y*b.y);
+  }
+  
+  int operator^(const Vector2D b) const{
+		return x*b.y - y*b.x;
+	}
+	
+	Vector2D scale(int n){
+	  return Vector2D(x*n, y*n);
+	}
+  
   Vector2D(Point2D a, Point2D b){
     x = b.x - a.x;
     y = b.y - a.y;
@@ -62,22 +76,10 @@ struct Vector2D {
     x = b.x;
     y = b.y;
   }
-  
-  int operator*(const Vector2D b) const{
-    return (x*b.x + y*b.y);
-  }
-  
-  int operator^(const Vector2D b) const{
-		return x*b.y - y*b.x;
-	}
 	
 	bool operator<(const Vector2D & v) const{
     return tie(x,y) < tie(v.x, v.y);
   }
-	
-	Vector2D scale(int n){
-	  return Vector2D(x*n, y*n);
-	}
 	
 	double size(){
 	  return sqrt(x*x + y*y);
@@ -92,8 +94,10 @@ struct Vector2D {
 	  return Vector2D((double)x/size(), (double)y/size());
 	}
 	
-	Vector2D rotate(double ang){
-	  return Vector2D(x*cos(ang) + y*-sin(ang), x*sin(ang) + y*cos(ang));
+	void rotate(double ang){
+	  double xx = x, yy = y;
+	  x = xx*cos(ang) + yy*-sin(ang);
+	  y = xx*sin(ang) + yy*cos(ang);
 	}
 	
 };
@@ -166,11 +170,48 @@ struct Line2D {
 
 struct Circle{
   Point2D c;
-  int r;
+  double r;
   Circle() {}
-  Circle(Point2D center, int radius) : c(center), r(radius) {}
+  Circle(Point2D center, double radius) : c(center), r(radius) {}
+  
   bool operator=(Circle circ){
     c = circ.c;
     r = circ.r;
   }
+  
+  pair<Point2D, Point2D> getTangentPoints(Point2D p){
+    double d = p.distanceTo(c);
+    double ang = asin(1.*r/d);
+    Vector2D v1(p, c);
+    v1.rotate(ang);
+    Vector2D v2(p, c);
+    v2.rotate(-ang);
+    v1 = v1.scale(sqrt(d*d - r*r)/d);
+    v2 = v2.scale(sqrt(d*d - r*r)/d);
+    Point2D p1(v1.x + p.x, v1.y + p.y);
+    Point2D p2(v2.x + p.x, v2.y + p.y);
+    return make_pair(p1,p2);
+  }
+  
+  double sectorArea(double ang){
+    return (ang*r*r)/2.;
+  }
+  
+  double arcLength(double ang){
+    return ang*r;
+  }
+  
+  double sectorArea(Point2D p1, Point2D p2){
+    double h = p1.distanceTo(p2);
+    double ang = acos(1. - h*h/r*r);
+    return sectorArea(ang);
+  }
+  
+  double arcLength(Point2D p1, Point2D p2){
+    double h = p1.distanceTo(p2);
+    double ang = acos(1. - (h*h)/(2*r*r));
+    return arcLength(ang);
+  }
 };
+
+////////////////////////////////// End of 2D Geometry Structures /////////////////////////////

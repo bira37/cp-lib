@@ -1,3 +1,5 @@
+/* Use upper_bound to swap to longest non decreasing subsequence */
+
 struct LIS{
   vector<int> seq;
 
