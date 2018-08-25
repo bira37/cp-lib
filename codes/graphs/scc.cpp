@@ -1,5 +1,3 @@
-//Implementation uses dsu (cut parallel edges)
-
 vector<int> adj[N];
 vector<int> adj_t[N];
 vector<int> scc_adj[N];

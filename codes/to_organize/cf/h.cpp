@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 
-#define int long long
+#define int unsigned long long
 #define double long double
 #define ff first
 #define ss second
@@ -11,7 +11,7 @@
 #define vi vector<int>
 #define vii vector< ii >
 #define EPS 1e-9
-#define INF 1e18
+#define INF ULLONG_MAX
 #define ROOT 1
 const double PI = acos(-1);
 
@@ -24,9 +24,52 @@ int gcd(int a, int b){
   else return abs(__gcd(a,b));
 }
 
-int32_t main(){
-  DESYNC;
-  
+int b;
+vector<int> divisors;
+map<int,int> memo;
+
+int go(int k){
+  if(memo.count(k)) return memo[k];
+  if(k < b) return k;
+  int best = INF;
+  for(int d : divisors){
+    if(k%d > 0) continue;
+    int x = k/d;
+    if(x%d == 0 && d*d < b) continue;
+    int a = go(x);
+    if(a == INF) continue;
+    if(a > (LLONG_MAX - d)/b) continue; 
+    best = min(best, a*b + d);
+  }
+  memo[k] = best;
+  return best;
 }
 
-
+int32_t main(){
+  DESYNC;
+  int n;
+  cin >> b >> n;
+  set<int> s;
+  for(int i=2; i<b; i++){
+    if(n%i == 0 && i*i >= b){
+      divisors.pb(i);
+      s.insert(i);
+    }
+  }
+  if(n >= INT_MAX){
+    for(int d : divisors){
+      for(int i = 2; i<=sqrt(d); i++){
+        if(d%i == 0){
+          if(s.count(i)) s.erase(s.find(i));
+          if(s.count(d/i)) s.erase(s.find(d/i));
+        }
+      }
+    }
+  }
+  divisors.clear();
+  for(int x : s) divisors.pb(x);
+  sort(divisors.begin(), divisors.end(), greater<int>());
+  int ans = go(n);
+  if(ans == INF) cout << "impossible" << endl;
+  else cout << ans << endl;
+}
