@@ -1,4 +1,4 @@
-struct Lichao{
+namespace Lichao{
   //min lichao tree
   
   struct line {
@@ -21,36 +21,40 @@ struct Lichao{
       right = NULL;
     }
   };
-   
-  node * root;
   
-  Lichao(){
-    root = new node();
-  }
+  struct LichaoTree {
   
-  void add(node * root, int l, int r, line ln){
-    if(!root->left) root->left = new node();
-    if(!root->right) root->right = new node();
-    int m = (l+r)>>1;
-    bool left = ln.eval(l) < (root->ln).eval(l);
-    bool mid = ln.eval(m) < (root->ln).eval(m);
+    node * root;
     
-    if(mid){
-      swap(root->ln, ln);
+    LichaoTree() {
+      root = new node();
+    }
+  
+    void add(node * root, int l, int r, line ln){
+      if(!root->left) root->left = new node();
+      if(!root->right) root->right = new node();
+      int m = (l+r)>>1;
+      bool left = ln.eval(l) < (root->ln).eval(l);
+      bool mid = ln.eval(m) < (root->ln).eval(m);
+      
+      if(mid){
+        swap(root->ln, ln);
+      }
+      
+      if(l == r) return;
+      else if(left != mid) add(root->left, l, m, ln);
+      else add(root->right, m+1, r, ln);
     }
     
-    if(l == r) return;
-    else if(left != mid) add(root->left, l, m, ln);
-    else add(root->right, m+1, r, ln);
-  }
+    int query(node * root, int l, int r, int x){
+      if(!root->left) root->left = new node();
+      if(!root->right) root->right = new node();
+      int m = (l+r)>>1;
+      if(l == r) return (root->ln).eval(x);
+      else if(x < m) return min((root->ln).eval(x), query(root->left, l, m, x));
+      else return min((root->ln).eval(x), query(root->right, m+1, r, x));
+    }
   
-  int query(node * root, int l, int r, int x){
-    if(!root->left) root->left = new node();
-    if(!root->right) root->right = new node();
-    int m = (l+r)>>1;
-    if(l == r) return (root->ln).eval(x);
-    else if(x < m) return min((root->ln).eval(x), query(root->left, l, m, x));
-    else return min((root->ln).eval(x), query(root->right, m+1, r, x));
-  }
+  };
   
-}; 
+}

@@ -3,7 +3,7 @@
 #pragma GCC optimize ("unroll-loops")
 #pragma GCC target("sse,sse2,sse3,ssse3,sse4")
 #define min(a,b) (a < b ? a : b)
-#define sqr 518
+#define sqr 516
 
 
 
@@ -21,21 +21,21 @@ int main(){
 	scanf("%d%d", &n,&q);
 	sum[0] = 0;
 	for(int i=0; i<n; ++i){
-	  scanf("%d", &v[i]);
+	  scanf("%d", v+i);
 	  sum[i+1] = (i+1)*(i+1) - i*i;
 	}
 	int nb = (n+sqr-1)/sqr;
 	for(int i=0; i<nb; i++){
 	  int lim4 = min(n, (i+1)*sqr);
 	  acc = 0;
-	  for(int j=lim4-1; j>=0; j--){
+	  for(int j=lim4-1; j>=0; --j){
 	    f[i+1][v[j]]++;
 	    int lb = j/sqr;
 	    cnt[v[j]]++;
 	    acc += sum[cnt[v[j]]];
 	    ans[lb][i] = acc;
 	  }
-	  for(int j=lim4-1; j>=0; j--){
+	  for(int j=lim4-1; j>=0; --j){
 	    cnt[v[j]] = 0;
 	  }
 	}
@@ -69,19 +69,19 @@ int main(){
     int lim1 = min(lb*sqr-1, min(r, n-1));
     int lim2 = rhs*min(r, n-1);
     
-    for(int i=l; i <= lim1; i++){
+    for(int i=lim1; i >= l; --i){
       cnt[v[i]]++;
 	    acc += sum[cnt[v[i]] + mul*(f[rb+1][v[i]] - f[lb][v[i]])];
     }
-    for(int i = (rb+1)*sqr; i <= lim2; ++i){
+    for(int i = lim2, fim =(rb+1)*sqr; i >= fim; --i){
       cnt[v[i]]++;
 	    acc += sum[cnt[v[i]] + mul*(f[rb+1][v[i]] - f[lb][v[i]])];
     }
     
-    for(int i=l; i <= lim1; i++){
+    for(int i=lim1; i >= l; --i){
       cnt[v[i]] = 0;
     }
-    for(int i = (rb+1)*sqr; i <= lim2; i++){
+    for(int i = lim2, fim =(rb+1)*sqr; i >= fim; --i){
       cnt[v[i]] = 0;
     }
     
