@@ -10,6 +10,7 @@ struct Tarjan{
   vector<bool> isArticulation;
   
   Tarjan() {}
+  
   Tarjan(int n){
     st.resize(n+1);
     low.resize(n+1);
@@ -18,7 +19,7 @@ struct Tarjan{
     bridges.clear();
   }
   
-  void tarjan(int u, int p){
+  void calculate(int u, int p){
 	  st[u] = low[u] = ++cont;
 	  int son = 0;
 	  for(int i=0; i<adj[u].size(); i++){
@@ -27,7 +28,7 @@ struct Tarjan{
 			  continue;
 		  }
 		  if(!st[adj[u][i]]){
-			  tarjan(adj[u][i], u);
+			  calculate(adj[u][i], u);
 			  low[u] = min(low[u], low[adj[u][i]]);
 			  if(low[adj[u][i]] >= st[u]) isArticulation[u] = true; //check articulation
 

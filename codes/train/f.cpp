@@ -13,11 +13,12 @@
 #define EPS 1e-9
 #define INF 1e18
 #define ROOT 1
+#define M 1000000007
 const double PI = acos(-1);
 
 using namespace std;
 
-inline int mod(int n){ return (n%1000000007); }
+inline int mod(int n, int m){ int ret = n%m; if(ret < 0) ret += m; return ret; }
 
 int gcd(int a, int b){
   if(a == 0 || b == 0) return 0;

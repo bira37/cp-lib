@@ -1,4 +1,5 @@
 namespace Hash{
+
   int B1, B2, M1, M2;
   
   void init(){

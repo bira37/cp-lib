@@ -10,11 +10,11 @@ namespace DynamicSegmentTree{
 	  }
   };
 
-  struct DynamicSegTree{
+  struct Tree{
   
     node * root;
     
-    DynamicSegTree(){
+    Tree(){
       root = new node();
     }
     

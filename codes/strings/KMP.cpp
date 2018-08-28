@@ -3,19 +3,13 @@
 struct KMP{
   vector<int> pi;
   
-  string t;
-  
   vector<int> matches;
   
   KMP() {}
-  
-  KMP(string s){
-    pi.resize(s.size());
-    t = s;
-  }
 
-  void calculate() {
+  void calculate(string t) {
     int n = t.size();
+    pi.resize(n);
 	  pi[0] = 0;
 	  for(int i = 1; i < n; i++) {
 		  pi[i] = pi[i-1];

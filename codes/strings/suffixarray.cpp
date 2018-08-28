@@ -84,6 +84,8 @@ struct SuffixArray{
 	  }
   }
   
+  void build_lcp() {} // todo
+  
   int lcp(int x, int y){
 	  if(x == y) return n - x;
 	  if(rnk[x] > rnk[y]) swap(x,y);

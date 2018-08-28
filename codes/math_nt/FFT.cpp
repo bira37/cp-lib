@@ -1,16 +1,14 @@
 /* Fast Fourier Transform Implementation */
 /* Complex numbers implemented by hand */
 /* Poly needs to have degree of next power of 2 (result poly has size next_pot2(2*n) */
-/* Uses Roots of Unity Idea (Z^n = 1, divide and conquer strategy)
+/* Uses Roots of Unity (Z^n = 1, divide and conquer strategy)
 /* Inverse FFT only changes to the conjugate of Primitive Root of Unity */
 /* Remember to use round to get integer value of Coefficients of Poly C */
 /* Iterative FFT is way faster (bit reversal idea + straightforward conquer for each block of each size) */
 /* std::complex doubles the execution time */
 
-struct FFT{
+namespace FFT{
 
-  FFT() {}
-  
   struct Complex{
 	  double a, b;
 	
@@ -156,4 +154,4 @@ struct FFT{
 	  return C;
   }
   
-}fft;
+};

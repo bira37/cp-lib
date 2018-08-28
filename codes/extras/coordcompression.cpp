@@ -2,9 +2,11 @@ struct Compresser {
   
   vector<int> value;
   
-  void init(int n){
-  	value.resize(n);
- 	}
+  Compresser() {}
+  
+  Compresser(int n){
+    value.resize(n);
+  }
   
   void compress(vector<int> & v){
 	  vector<int> tmp;

@@ -1,6 +1,6 @@
 #!/bin/sh
 rm a.out
-cp ../../extras/template.cpp a.cpp
+cp ../extras/template.cpp a.cpp
 cp a.cpp b.cpp
 cp a.cpp c.cpp
 cp a.cpp d.cpp
@@ -13,4 +13,3 @@ cp a.cpp j.cpp
 cp a.cpp k.cpp
 cp a.cpp l.cpp
 cp a.cpp m.cpp
-

@@ -1,9 +1,9 @@
-long long mergesort_count(vector<int> & v){
+int mergesort_count(vector<int> & v){
 	vector<int> a,b;
 	if(v.size() == 1) return 0;
 	for(int i=0; i<v.size()/2; i++) a.push_back(v[i]);
 	for(int i=v.size()/2; i<v.size(); i++) b.push_back(v[i]);
-	long long ans = 0;
+	int ans = 0;
 	ans += mergesort_count(a);
 	ans += mergesort_count(b);
 	a.push_back(LLONG_MAX);

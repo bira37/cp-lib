@@ -5,17 +5,11 @@ struct ZFunction{
 
   vector<int> z;
   
-	string t;
-	
 	ZFunction() {}
-	
-	ZFunction(string s){
-	  t = s;
-	  z.resize(t.size());
-	}
 	
   void calculate(){
 	  int n = t.size();
+	  z.resize(n);
 	  z[0] = 0;
 	  int l = 0, r = 0;
 	  for(int i=1; i<n; i++){

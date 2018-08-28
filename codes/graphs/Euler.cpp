@@ -15,6 +15,7 @@
 //and v one more exit grade
 
 struct EulerianCircuit {
+
   vector< set<int> > adj;
   vector<int> walk;
   vector<int> deg;
