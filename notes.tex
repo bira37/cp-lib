@@ -1,0 +1,115 @@
+\documentclass[12pt]{article}%
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage{comment}
+\usepackage[a4paper, top=2.5cm, bottom=2.5cm, left=2.2cm, right=2.2cm]%
+{geometry}
+\usepackage{times}
+\usepackage{amsmath}
+\usepackage{changepage}
+\usepackage{amssymb}
+\usepackage{graphicx}%
+\setcounter{MaxMatrixCols}{30}
+\newtheorem{theorem}{Theorem}
+\newtheorem{acknowledgement}[theorem]{Acknowledgement}
+\newtheorem{algorithm}[theorem]{Algorithm}
+\newtheorem{axiom}{Axiom}
+\newtheorem{case}[theorem]{Case}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{conclusion}[theorem]{Conclusion}
+\newtheorem{condition}[theorem]{Condition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{problem}[theorem]{Problem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{solution}[theorem]{Solution}
+\newtheorem{summary}[theorem]{Summary}
+\newenvironment{proof}[1][Proof]{\textbf{#1.} }{\ \rule{0.5em}{0.5em}}
+
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\begin{document}
+
+\title{Competitive Programming Library - Notes}
+\author{Ubiratan Correia Barbosa Neto}
+\maketitle
+
+\section{Geometry}
+
+\subsection{Isomorphism of 2 polygons: Given two polygons with vertices in clockwise/counter-clockwise order, check if they are isomorphic}
+
+Solution:
+
+For each polygon, run through their vertices appending, for each three consecutive vertices u,v,w:
+
+- square norm of (u,v) vector
+
+- dot-product of (u,v) and (v,w)
+
+- cross-product of (u,v) and (v,w)
+
+- square norm of (v,w) vector
+
+Now, double the array of one of this polygons and then run some string matching algorithm to find if you have a match with the other one. Complexity: $O(n)$, where $n$ is the number of vertices of the polygons. 
+
+\subsection{Centroid of a triangle}
+
+Draw a line from each corner that divides the opposite side of the triangle in two equal parts. The intersection of these 3 lines is called the centroid.
+
+\subsection{Circumcenter of a triangle}
+
+Draw a perpendicular line from each mid-point of the three sides of the triangle. The intersection point is called the circumcenter of the triangle, which is the center of the circumcircle of this triangle.
+
+\subsection{Incenter of a triangle}
+
+Draw a line from each corner of the triangle, dividing the angle in two equal parts. The intersection point is called the incenter of the triangle, which is the center of the incircle of this triangle.
+
+\subsection{Orthocenter of a triangle}
+
+Draw a line from each corner of the triangle, making a 90º angle with the opposite side. The intersection point is called the orthocenter of the triangle. It can be outside of the triangle.
+
+\subsection{Pick's Theorem: Given a polygon constructed using $n$ vertices with integer coordinates, count the number of integer coordinate points strictly inside this polygon}
+
+Solution:
+
+Pick's theorem states that the number of integer coordinates $I$ stricly inside a polygon formed by vertices with integer coordinates is given by $I = (2A - B + 2)/2$, where:
+
+- A = Area of the polygon. We can calculate the area using shoelace's formula.
+
+- B = Number of vertices with integer coordinates on all edges of the polygon. This number $B'$, for each edge, (excluding the endpoints) can be calculated this way: 
+
+\hspace{2mm} - $|x' - x''| - 1$, if the edge is parallel to y-axis.
+    
+\hspace{2mm} - $|y' - y''| - 1$, if the edge is parralel to x-axis.
+    
+\hspace{2mm} - $gcd(|x' - x''|, |y' - y''|) - 1$, otherwise.
+ 
+\section{Math and Number Theory}
+
+\subsection{Number of ways to make a bracelet with $m$ beads using $n$ colors}
+
+Let $N$ be the number of ways to do it. We'll find, using double counting, $X = 6N$. Then, $N = X/6$. We can find $X$ this way:
+
+If we rotate some sequence $i$ times ($i <= m$), then, we get repetitions if the period of the sequence is $gcd(i,m)$. Therefore, $n^{gcd(i,m)}$ sequences are repetitions.
+
+Now, we can do a formula for that:
+
+$X$ = $\sum_{i = 1}^{m} n^{gcd(i,m)}$
+
+\subsection{Stars and Bars: Given $n$ and $k$, count the number of ways to divide $n$ stars into $k$ groups (there can exist empty groups)}
+
+Solution:
+
+Suppose a string made from a combination of $n$ stars and $k-1$ bars (we need $k-1$ divisions to make $k$ groups). Then, we have to choose $k-1$ positions from $n+k-1$ to put bars, and the rest will be stars. Then, the number of ways can be expressed by ${n+k-1}\choose{k-1}$.    
+
+\end{document}

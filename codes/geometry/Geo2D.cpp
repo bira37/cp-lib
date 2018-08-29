@@ -310,6 +310,57 @@ namespace Geo2D {
     
   }
   
+  Point barycenter(Point & a, Point & b, Point & c, double pA, double pB,  double pC){
+    Point ret = (a.scale(pA) + b.scale(pB) + c.scale(pC));
+    ret.x /= (pA + pB + pC);
+    ret.y /= (pA + pB + pC);
+    return ret;
+  }
+  
+  Point circumcenter(Point & a, Point & b, Point & c){
+    double pA = Point(b,c).squareSize(), pB = Point(a,c).squareSize(), pC = Point(a,b).squareSize();
+    return barycenter(a,b,c, pA*(pB+pC-pA), pB*(pC+pA-pB), pC*(pA+pB-pC));
+  }
+  
+  Point centroid(Point & a, Point & b, Point & c){
+    return barycenter(a,b,c,1,1,1);
+  }
+  
+  Point incenter(Point & a, Point & b, Point & c){
+    return barycenter(a,b,c, Point(b,c).size(), Point(a,c).size(), Point(a,b).size());
+  }
+  
+  Point excenter(Point & a, Point & b, Point & c){
+    return barycenter(a,b,c, -Point(b,c).size(), Point(a,c).size(), Point(a,b).size());
+  }
+  
+  Point orthocenter(Point & a, Point & b, Point & c){
+    double pA = Point(b,c).squareSize(), pB = Point(a,c).squareSize(), pC = Point(a,b).squareSize();
+    return bary(a, b, c, (pA+pB-pC)*(pC+pA-pB), (pB+pC-pA)*(pA+pB-pC), (pC+pA-pB)*(pB+pC-pA));
+  }
+  
+  Circle minimumCircle(vector<Point> & v){
+    Circle circ(Point(0,0), 1e-14);
+    random_shuffle(v.begin(), v.end());
+    for(int i=0; i<v.size(); i++){
+      if(!circ.inside(v[i])){
+        circ = Circle(v[i], 0);
+        for(int j=0; j<i; j++){
+          if(!circ.inside(v[j])){
+            circ = Circle((v[i] + v[j]).scale(0.5), Point(v[i], v[j]).size()*0.5);
+            for(int k = 0; k<j; k++){
+              if(!circ.inside(v[k])){
+                Point center = circumcenter(v[i], v[j], v[k]);
+                circ = Circle(center, Point(center, v[k]).size());
+              }
+            }
+          }
+        }
+      }
+    }
+    return circ;
+  }
+  
 }
 
 ////////////////////////////////// End of Geometry  Algorithms /////////////////////////////

@@ -179,6 +179,13 @@ namespace Geo2D {
       double ang = acos(1. - (h*h)/(2*r*r));
       return arcLength(ang);
     }
+    
+    bool inside(const Point & p){
+      if(Point(c,p).size() + EPS < r) return true;
+      else if(r + EPS < Point(c,p).size()) return false; 
+      else return true;
+    }
+    
   };
   
 }

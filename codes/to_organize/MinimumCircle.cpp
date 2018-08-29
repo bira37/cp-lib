@@ -91,13 +91,16 @@ point bary(PT(A), PT(B), PT(C), double a, double b, double c){
 point centroid(PT(A), PT(B), PT(C)){
   return bary(A, B, C, 1, 1, 1);
 }
+
 point circumcenter(PT(A), PT(B), PT(C)){
   double a = norm(B-C), b = norm(C-A), c = norm(A-B);
   return bary(A, B, C, a*(b+c-a), b*(c+a-b), c*(a+b-c));
 }
+
 point incenter(PT(A), PT(B), PT(C)){
   return bary(A, B, C, abs(B-C), abs(A-C), abs(A-B));
 }
+
 point orthocenter(PT(A), PT(B), PT(C)){
   double a = norm(B-C), b = norm(C-A), c = norm(A-B);
   return bary(A, B, C, (a+b-c)*(c+a-b), (b+c-a)*(a+b-c), (c+a-b)*(b+c-a));
@@ -122,6 +125,7 @@ const int N = 1e5+10;
 point v[N];
  
 int32_t main() {
+    ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
     int n;
     cin >> n;
  
