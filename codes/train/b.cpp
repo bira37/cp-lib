@@ -25,9 +25,44 @@ int gcd(int a, int b){
   else return abs(__gcd(a,b));
 }
 
+namespace Trie{
+
+  struct node {
+    node *adj[26];
+    node(){
+      for(int i=0; i<26; i++) adj[i] =  NULL;
+    }
+  };
+
+  struct Tree{
+
+    node *t;
+    
+    Tree(){
+      t = new node();
+    }
+    
+    void add(){
+      node *cur = t;
+      
+    }
+    
+    int query(){
+      node *cur = t;
+    }
+    
+    void remove(){
+      node *cur = t;
+    } 
+
+  };
+  
+}
+
 int32_t main(){
   DESYNC;
-  
+    
+
 }
 
 

@@ -5,17 +5,18 @@
 /* N is equal to the maximum size of tree (given by statement) */
 
 struct CentroidDecomposition {
-  vector<int> adj[N];
-  bool removed[N];
-  int L[N], subsz[N];
-  int c_p[N];
-
-  void init(int n){
-	  for(int i=0; i<=n;i++){
-		  removed[i] = false;
-		  adj[i].clear();
-		  L[i] = 0;
-		  subsz[i] = 1;
+  vector<bool> removed;
+  vector<int> L, subsz;
+  vector<int> c_p;
+  
+  CentroidDecomposition() {}
+  
+  CentroidDecomposition(int n){
+    removed.resize(n+1);
+    L.resize(n+1);
+    c_p.resize(n+1);
+    subsz.resize(n+1);
+    for(int i=0; i<=n;i++){
 		  c_p[i] = -1;
 	  }
   }

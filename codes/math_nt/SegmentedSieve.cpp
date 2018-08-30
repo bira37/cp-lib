@@ -3,7 +3,7 @@
 
 namespace NT {
 
-  bitset<SIZE_N> prime;
+  bitset<MAX_N> prime;
   vector<int> primes;
   vector<int> seg_primes;
 

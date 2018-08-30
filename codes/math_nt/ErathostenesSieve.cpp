@@ -4,10 +4,10 @@
 
 namespace NT {
 
-  bitset<N> prime;
+  bitset<MAX_N> prime;
   vector<int> primes;
-  int lf[N];
-  int totient[N];
+  int lf[MAX_N];
+  int totient[MAX_N];
 
   void Sieve(int n){
 	  for(int i=0; i<=n; i++) lf[i] = i;

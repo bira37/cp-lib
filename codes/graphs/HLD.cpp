@@ -2,7 +2,6 @@ struct HLD {
 
   vector<int> L, vis, vis2, P, ch, subsz, st, ed, heavy;
   int t = 0;
-  vector< vector<int> > adj;
   
   HLD () {}
   
@@ -16,48 +15,40 @@ struct HLD {
     st.resize(n+1);
     ed.resize(n+1);
     heavy.resize(n+1);
-    adj.resize(n+1);
-  }
-  
-  void init(int n){
-	  t = 0;
+    t = 0;
 	  for(int i=0; i<=n; i++){
-		  vis[i] = false;
-		  vis2[i] = false;
-		  adj[i].clear();
 		  ch[i] = i;
-		  L[i] = 0;
 		  P[i] = -1;
-		  subsz[i] = 1;
 		  heavy[i] = -1;
 	  }
   }
 
-  void pre_dfs(int u){
+  void precalculate(int u){
 	  vis[u] = true;
+	  subsz[u] = 1;
 	  for(int i=0; i<adj[u].size(); i++){
 		  int v = adj[u][i];
 		  if(vis[v]) continue;
 		  P[v] = u;
 		  L[v]=L[u]+1;
-		  pre_dfs(v);
+		  precalculate(v);
 		  if(heavy[u] == -1 || subsz[heavy[u]] < subsz[v]) heavy[u] = v;
 		  subsz[u]+=subsz[v];
 	  }
   }
 
-  void st_dfs(int u){
+  void build(int u){
 	  vis2[u] = true;
 	  st[u]=t;
 	  v[t++] = //segtree value
 	  if(heavy[u] != -1){
 		  ch[heavy[u]] = ch[u];
-		  st_dfs(heavy[u]);
+		  build(heavy[u]);
 	  }
 	  for(int i=0; i<adj[u].size(); i++){
 		  int v = adj[u][i];
 		  if(vis2[v] || v == heavy[u]) continue;
-		  st_dfs(v);
+		  build(v);
 	  }
 	  ed[u] = t;
 	  v[t++] = 0; //trick

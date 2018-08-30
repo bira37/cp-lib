@@ -336,7 +336,7 @@ namespace Geo2D {
   
   Point orthocenter(Point & a, Point & b, Point & c){
     double pA = Point(b,c).squareSize(), pB = Point(a,c).squareSize(), pC = Point(a,b).squareSize();
-    return bary(a, b, c, (pA+pB-pC)*(pC+pA-pB), (pB+pC-pA)*(pA+pB-pC), (pC+pA-pB)*(pB+pC-pA));
+    return barycenter(a, b, c, (pA+pB-pC)*(pC+pA-pB), (pB+pC-pA)*(pA+pB-pC), (pC+pA-pB)*(pB+pC-pA));
   }
   
   Circle minimumCircle(vector<Point> & v){
@@ -359,6 +359,87 @@ namespace Geo2D {
       }
     }
     return circ;
+  }
+  
+  long long ClosestPairOfPoints(vector<Point> &a) {
+    //returns square of distance
+	  long long mid = a[a.size()/2].x;
+	  int n = a.size();
+	
+	  vector<Point> l;
+	  vector<Point> r;
+	  int i = 0;
+	  for(; i < a.size()/2; i++) l.push_back(a[i]);
+	  for(; i < a.size(); i++) r.push_back(a[i]);
+
+	  long long d = LLONG_MAX;
+	
+	  if(l.size() > 1) {
+   		d = min(d, ClosestPairOfPoints(l));
+	  } if(r.size() > 1) {
+		  d = min(d, ClosestPairOfPoints(r));
+	  }
+	
+	  a.clear();
+	
+	  vector<Point> ll;
+	  vector<Point> rr;
+	
+	
+	  int j = 0;
+	  i = 0;
+	  for(int k=0; k<n; k++){
+		  if(i < l.size() && j < r.size()){
+			  if(r[j].y <= l[i].y){
+				  if((r[j].x - mid)*(r[j].x - mid) < d) {
+					  rr.push_back(r[j]);
+				  }
+				  a.push_back(r[j++]);
+			  }
+			  else {
+				  if((l[i].x - mid)*(l[i].x - mid) < d) {
+					  ll.push_back(l[i]);
+				  }
+				  a.push_back(l[i++]);
+			  }
+		  }
+		  else if(i < l.size()){
+			  if((l[i].x - mid)*(l[i].x - mid) < d) {
+				  ll.push_back(l[i]);
+			  }
+			  a.push_back(l[i++]);
+		  }
+		  else {
+			  if((r[j].x - mid)*(r[j].x - mid) < d) {
+					  rr.push_back(r[j]);
+			  }
+				  a.push_back(r[j++]);
+		  }
+	  }
+	
+	  for(int i = 0; i < ll.size(); i++) {
+	
+		  int ini = 0, end = rr.size()-1;
+		  int j;
+		
+		  while(ini < end) {
+			  j = (ini + end) / 2;
+			  if((rr[j].y - ll[i].y)*(rr[j].y - ll[i].y) > d && rr[j].y < ll[i].y)
+				  ini = j+1;
+			  else end = j;
+		  }
+		
+		  j = ini;
+	
+		  for(; j < rr.size(); j++) {
+			  if((rr[j].y - ll[i].y)*(rr[j].y - ll[i].y) > d) break;
+			  long long cur =  (ll[i].x - rr[j].x)*(ll[i].x - rr[j].x) + (ll[i].y - rr[j].y)*(ll[i].y - rr[j].y);
+			  if(cur < d) {
+				  d = cur;
+			  }
+		  }
+	  }
+	  return d;
   }
   
 }

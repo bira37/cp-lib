@@ -1,5 +1,5 @@
 struct ConvexHullTrick {
-  //max cht
+  //max cht, suppose lines are added in crescent order of a
     
   vector<line> cht;
   
