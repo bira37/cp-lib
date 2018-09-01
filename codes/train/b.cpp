@@ -25,44 +25,38 @@ int gcd(int a, int b){
   else return abs(__gcd(a,b));
 }
 
-namespace Trie{
+int v[212345];
+int n, w;
 
-  struct node {
-    node *adj[26];
-    node(){
-      for(int i=0; i<26; i++) adj[i] =  NULL;
-    }
-  };
-
-  struct Tree{
-
-    node *t;
-    
-    Tree(){
-      t = new node();
-    }
-    
-    void add(){
-      node *cur = t;
-      
-    }
-    
-    int query(){
-      node *cur = t;
-    }
-    
-    void remove(){
-      node *cur = t;
-    } 
-
-  };
-  
+bool check(double x){
+  double k = x/(3.*n);
+  for(int i=0; i<n; i++){
+    if(k > v[i]) return false;
+  }
+  for(int i=n; i<2*n; i++){
+    if(2.*k > v[i]) return false;
+  }
+  return true;
 }
-
+ 
 int32_t main(){
   DESYNC;
-    
-
+  cin >> n >> w;
+  double l = 0, r = w;
+  for(int i=0; i<2*n; i++){
+    cin >> v[i];
+  }
+  sort(v, v+2*n);
+  double ans = 0.0;
+  for(int it = 0; it < 200; it++){
+    double m = (l+r)/2.;
+    if(check(m)){
+      ans = m;
+      l = m;
+    }
+    else r = m;
+  }
+  cout << fixed << setprecision(9) << ans << endl;
 }
 
 
