@@ -27,20 +27,9 @@ int gcd(int a, int b){
 
 int32_t main(){
   DESYNC;
-  int mn1, mx1, mn2,mx2,mn3,mx3;
-  int n;
-  cin >> n;
-  int ans1 = 0, ans2= 0, ans3= 0;
-  cin >> mn1 >> mx1 >> mn2 >> mx2 >> mn3 >> mx3;
-  while(n > 0 && ans1 < mx1) ans1++, n--;
-  while(n > 0 && ans2 < mn2) ans2++, n--;
-  while(n > 0 && ans3 < mn3) ans3++, n--;
-  while(ans2 < mn2) ans2++, ans1--;
-  while(ans3 < mn3) ans3++, ans1--;
-  while(n > 0 && ans2 < mx2) ans2++, n--;
-  while(n > 0 && ans3 < mx3) ans3++, n--;
-  cout << ans1 << " " << ans2 << " " << ans3 << endl;
-
+  int n,k;
+  cin >> n >> k;
+  cout << (k+n-1)/n << endl;
 }
 
 

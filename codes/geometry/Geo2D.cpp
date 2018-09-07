@@ -96,7 +96,7 @@ namespace Geo2D {
 		  int det = a1*b2 - a2*b1;
 		  double x = (double)(b2*c1 - b1*c2)/(double)det*1.;
 		  double y = (double)(a1*c2 - a2*c1)/(double)det*1.;
-		  if(s1.p.x-EPS <= x && x <= s1.q.x+EPS && s2.p.x-EPS <= x && x <= s2.q.x+EPS){
+		  if(s1.p.x-EPS <= x && x <= s1.q.x+EPS && s2.p.x-EPS <= x && x <= s2.q.x+EPS && ((s1.p.y-EPS <= y && y <= s1.q.y+EPS && s2.p.y-EPS <= y && y <= s2.q.y+EPS) || (s1.q.y-EPS <= y && y <= s1.p.y+EPS && s2.q.y-EPS <= y && y <= s2.p.y+EPS) || (s1.p.y-EPS <= y && y <= s1.q.y+EPS && s2.q.y-EPS <= y && y <= s2.p.y+EPS) || (s1.q.y-EPS <= y && y <= s1.p.y+EPS && s2.p.y-EPS <= y && y <= s2.q.y+EPS))){
 		    //cout << x << " " << y << endl;
 		    return true;
 		  }

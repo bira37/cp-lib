@@ -1,19 +1,19 @@
 # Ubiratan Correia Barbosa Neto - Competitive Programming
 
 * Data Structures
-	* [ ] Point Update/Query Dynammic/Persistent Segment Tree
-	* [ ] Range Update/Query Segment Tree
-	* [ ] Range Update/Query Binary Indexed Tree
-	* [ ] Range Update/Query Persistent Segment Tree
+	* [x] Segment Tree
+	* [x] Binary Indexed Tree
+	* [x] Dynamic/Persistent Segment Tree
 	* [x] Trie
 	* [x] Lichao Segment Tree (Online Convex Hull Trick)
+	* [x] Offline Convex Hull Trick
 	
 * Uncategorized
 	* [x] Longest Increase Subsequence
 	* [x] Inversion Count Offline (Merge-Sort)
 	
 * Basic 2D Geometry
-  * [x] Point Structure
+  * [x] Point/Vector Structure
   * [x] Vector Structure
   * [x] Line/Segment Structure
   * [x] Distance from Point to Line
@@ -28,7 +28,8 @@
   * [x] Line-Line Intersection
   * [x] Segment-Segment Intersection
   * [x] Line-Segment Intersection
-  * [ ] All of Circle...
+  * [x] Circle Intersection
+  * [x] Tangent Line 
 		
 *  2D Geometry Algorithms
 	* [ ] Closest Pair of Points

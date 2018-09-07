@@ -25,98 +25,55 @@ int gcd(int a, int b){
   else return abs(__gcd(a,b));
 }
 
-struct BIT {
-  
-  vector<int> bit;
+int dp[20][5][2];
 
-  BIT() {}
-  
-  int n;
-   
-  BIT(int n) {
-    this->n = n;
-    bit.resize(n+1);
+int count(string s, int i, int cnt, bool f){
+  if(cnt < 0) return 0;
+  if(i == s.size()){
+    return (cnt == 0);
   }
-
-  void update(int idx, int val){
-	  for(int i = idx; i <= n; i += i&-i){
-		  bit[i]+=val;
-	  }
+  if(dp[i][cnt][f] != -1) return dp[i][cnt][f];
+  dp[i][cnt][f] = 0;
+  //go to 0
+  dp[i][cnt][f] += count(s, i+1, cnt, f || (s[i] != '0'));
+  //go to others
+  if(f){
+    for(int d = '1'; d <= '9'; d++){
+      dp[i][cnt][f] += count(s, i+1, cnt-1, f);
+    }
   }
-
-  int prefix_query(int idx){
-	  int ans = 0;
-	  for(int i=idx; i>0; i -= i&-i){
-		  ans += bit[i];
-	  }
-	  return ans;
+  else {
+    for(int d = '1'; d <= s[i]; d++){
+      dp[i][cnt][f] += count(s, i+1, cnt-1, s[i] != d);
+    }
   }
-  
-  int query(int l, int r){
-	  return prefix_query(r) - prefix_query(l-1);
-  }
-  
-  int kth(int k) {
-    int cur = 0;
-    int acc = 0;
-    for(int i = 19; i >= 0; i--) {
-      if(cur + (1<<i) > n) continue;
-      if(acc + bit[cur + (1<<i)] < k) {
-        cur += (1<<i);
-        acc += bit[cur];
+  return dp[i][cnt][f];
+}
+ 
+int32_t main(){
+  DESYNC;
+  int t;
+  cin >> t;
+  while(t--){
+    int l, r;
+    cin >> l >> r;
+    l--;
+    string a = to_string(l);
+    string b = to_string(r);
+    for(int i=0; i<20; i++){
+      for(int j=0; j<5; j++){
+        for(int k =0; k<2; k++) dp[i][j][k] = -1;
       }
     }
-    return ++cur;
-  }
-  
-};
-
-int32_t main(){
-  //DESYNC;
-  int n;
-  cin >> n;
-  int v[n];
-  int d[n];
-  
-  BIT bit1(n), bit2(n);
-  
-  map<int, vector< ii >, greater<int> > m;
-  for(int i=0; i<n; i++) cin >> v[i];
-  for(int i=0; i<n; i++) cin >> d[i];
-  vector < ii > a;
-  for(int i=0; i<n; i++){
-    a.pb(ii(d[i], v[i]));
-  }  
-  sort(a.begin(), a.end());
-  for(int i=0; i<n; i++){
-    m[a[i].ss].pb(ii(i+1, a[i].ff));
-    bit1.update(i+1, a[i].ff);
-    bit2.update(i+1, 1);
-  }
-  
-  int qtd = 0;
-  int acc = 0;
-  int ans = INF;
-  for(auto x : m){
-    int tira = n - (x.ss.size()-1) - x.ss.size();
-    //cout << "key " << x.ff << " " << tira << endl;
-    tira -= qtd;
-    tira = max(0LL, tira);
-    for(ii k : x.ss){
-      bit2.update(k.ff, -1);
-      bit1.update(k.ff, -k.ss);
-    } 
-    int cur = acc;
-    if(tira > 0){
-      //cout << bit2.kth(tira) << endl;
-      cur += bit1.prefix_query(bit2.kth(tira));
+    int ans1 = count(b, 0, 3, false) + count(b, 0, 2, false) + count(b, 0, 1, false) + count(b, 0, 0, false);
+    for(int i=0; i<20; i++){
+      for(int j=0; j<5; j++){
+        for(int k =0; k<2; k++) dp[i][j][k] = -1;
+      }
     }
-    //cout << cur << endl;
-    ans = min(ans, cur);
-    qtd += x.ss.size();
-    for(ii k : x.ss) acc += k.ss;
+    int ans2 = count(a, 0, 3, false) + count(a, 0, 2, false) + count(a, 0, 1, false) + count(a, 0, 0, false);
+    cout << ans1 - ans2 << endl;
   }
-  cout << ans << endl;      
 }
 
 

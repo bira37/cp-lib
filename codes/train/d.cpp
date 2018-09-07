@@ -25,80 +25,52 @@ int gcd(int a, int b){
   else return abs(__gcd(a,b));
 }
 
-vector<int> adj[112345];
-int c[112345];
-bool vis[112345] = {0};
-bool xablau = false;
-int sz;
-int cnt[2];
-
-void go(int u){
-  vis[u] = true;
-  sz++;
-  for(int v : adj[u]){
-    if(vis[v]) continue;
-    go(v);
-  }
-}
-
-void dfs(int u, int color){
-  c[u] = color;
-  vis[u] = true;
-  cnt[c[u]]++;
-  for(int v : adj[u]){
-    if(c[v] == c[u]){
-      xablau = true;
-    }
-    if(vis[v]) continue;
-    dfs(v, color^1);
-    if(xablau) return;
-  }
-}
+int a[312345], b[312345];
 
 int32_t main(){
-  DESYNC;
-  int n,m;
-  cin >> n >> m;
-  if(m == 0){
-    cout << 3 << " " << (n*(n-1)*(n-2))/6 << endl;
-    return 0;
+  int n;
+  int m;
+  scanf("%I64d", &n); 
+  for(int i=n-1; i>=0; i--){
+    scanf("%I64d", &a[i]); 
   }
-  
-  for(int i=0; i<m; i++){
-    int a,b;
-    cin >>a >> b;
-    adj[a].pb(b);
-    adj[b].pb(a);
+  scanf("%I64d", &m); 
+  for(int i=m-1; i>=0; i--){
+    scanf("%I64d", &b[i]); 
   }
-  
-  vector<int> two, more;
-  for(int i=1; i<=n; i++){
-    if(vis[i]) continue;
-    sz = 0;
-    go(i);
-    if(sz == 2) two.pb(i);
-    else if(sz > 2) more.pb(i);
-  }
-  if(more.size() == 0){
-    cout << 2 << " " << two.size()*(n-2) << endl;
-    return 0;
-  }
-  
-  for(int i=1; i<=n; i++){
-    vis[i] = false;
-    c[i] = -1;
-  }
+  int sa = 0, sb = 0;
+  int pa = n-1, pb = m-1;
   int ans = 0;
-  for(int u : more){
-    cnt[0] = 0, cnt[1] = 0;
-    dfs(u, 0);
-    if(xablau){
-      cout << 0 << " " << 1 << endl;
-      return 0;
+  while(pa >= 0 || pb >= 0){
+    if(sa < sb && pa >= 0){
+      sa += a[pa];
+      pa--;
     }
-    ans += (cnt[0]*(cnt[0]-1))/2 + (cnt[1]*(cnt[1]-1))/2;
+    else if(sa < sb && pa < 0) break;
+    else if(sb < sa && pb >= 0){
+      sb += b[pb];
+      pb--;
+    }
+    else if(sb < sa && pb < 0) break;
+    if(sa == sb && sa > 0){
+      ans++;
+      sa = 0;
+      sb = 0;
+    }
+    else if(sa == sb){
+      if(pa >= 0){
+        sa += a[pa];
+        pa--;
+      }
+      else if(pb >= 0){
+        sb += b[pb];
+        pb--;
+      }
+      else break;
+    }
   }
-  cout << 1 << " " << ans << endl;   
+  if(sa == 0 && sb == 0) printf("%I64d\n", ans);
+  else puts("-1");
 }
 
 
