@@ -3,6 +3,7 @@
 namespace Geo2D {
 
   double distancePointLine(Point p, Line l){
+    if(l.normal.squareSize() == 0) return INF;
     return (double)(1.*abs(l.a*p.x + l.b*p.y + l.c))/l.normal.size();
   }
   
@@ -32,11 +33,15 @@ namespace Geo2D {
     else return Point(s.p.x + res.x, s.p.y + res.y);
   }
   
-  bool intersectionSegmentSegment(Line s1, Line s2){
+  Point intersectionSegmentSegment(Line s1, Line s2){
+    //Assumes that intersection exists
     //Assuming that endpoints are ordered by x
     if(s1.p.x > s1.q.x) swap(s1.p, s1.q);
     if(s2.p.x > s2.q.x) swap(s2.p, s2.q);
+    
     if(abs(s1.v^s2.v) <= EPS){
+    
+      //parallel segments
 		  Point v1(s2.p, s1.p);
 		  if(s1.p.x == s1.q.x && s2.p.x == s2.q.x && s1.p.x == s2.p.x){
 			  Point ansl, ansr;
@@ -48,16 +53,12 @@ namespace Geo2D {
 			  else ansr = s1.q;
 			  if(ansl.x == ansr.x && ansl.y == ansr.y){
 			    //cout << ansr.x << " " << ansr.y << endl;
-			    return true;
-			  }
-			  else if(ansr.y < ansl.y){
-			    //cout << "Empty" << endl;
-			    return false;
+			    return Point(ansr.x, ansr.y);
 			  }
 			  else {
 				  if(ansl.x == ansr.x && ansl.y > ansr.y) swap(ansl, ansr);
 				  //cout << ansl.x << " " << ansl.y << endl << ansr.x << " " << ansr.y << endl;
-				  return true;
+				  return Point(INF, INF);
 			  }
 		  }
 		  else if(abs(s1.v^v1) <= EPS){
@@ -68,25 +69,18 @@ namespace Geo2D {
 			  else ansr = s1.q;
 			  if(ansl.x == ansr.x && ansl.y == ansr.y){
 			    //cout << ansr.x << " " << ansr.y << endl;
-			    return true;
-			  }
-			  else if(ansr.x < ansl.x){
-			    //cout << "Empty" << endl;
-			    return false;
+			    return Point(ansr.x, ansr.y);
 			  }
 			  else {
 				  if(ansl.x == ansr.x && ansl.y > ansr.y) swap(ansl, ansr);
 				  //cout << ansl.x << " " << ansl.y << endl << ansr.x << " " << ansr.y << endl;
-				  return true;
+				  return Point(INF, INF);
 			  }
-		  }
-		  else {
-		    //cout << "Empty" << endl;
-		    return false;
 		  }
 		
 	  }
 	  else {
+	    //general case
 		  int a1 = s1.q.y - s1.p.y;
 		  int b1 = s1.p.x - s1.q.x;
 		  int c1 = a1*s1.p.x + b1*s1.p.y;
@@ -94,20 +88,18 @@ namespace Geo2D {
 		  int b2 = s2.p.x - s2.q.x;
 		  int c2 = a2*s2.p.x + b2*s2.p.y;
 		  int det = a1*b2 - a2*b1;
+		  
 		  double x = (double)(b2*c1 - b1*c2)/(double)det*1.;
 		  double y = (double)(a1*c2 - a2*c1)/(double)det*1.;
-		  if(s1.p.x-EPS <= x && x <= s1.q.x+EPS && s2.p.x-EPS <= x && x <= s2.q.x+EPS && ((s1.p.y-EPS <= y && y <= s1.q.y+EPS && s2.p.y-EPS <= y && y <= s2.q.y+EPS) || (s1.q.y-EPS <= y && y <= s1.p.y+EPS && s2.q.y-EPS <= y && y <= s2.p.y+EPS) || (s1.p.y-EPS <= y && y <= s1.q.y+EPS && s2.q.y-EPS <= y && y <= s2.p.y+EPS) || (s1.q.y-EPS <= y && y <= s1.p.y+EPS && s2.p.y-EPS <= y && y <= s2.q.y+EPS))){
-		    //cout << x << " " << y << endl;
-		    return true;
-		  }
-		  else {
-		    //cout << "Empty" << endl;
-		    return false;
-		  }
+		  //cout << x << " " << y << endl;
+		  return Point(x,y);
 	  }
   }
+	  
   
   double distanceSegmentSegment(Line l1, Line l2){
+    if(l1.p == l2.p && l1.q == l2.q) return 0;
+    if(l1.q == l2.p && l1.p == l2.q) return 0;
     if((l1.v^l2.v) != 0){
     
       Line r1(l1.p, l1.q);
