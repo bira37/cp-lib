@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.11.29)  15 JUN 2018 00:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.11.29)  14 SEP 2018 09:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1164,56 +1164,58 @@ LaTeX Font Info:    Font shape `T1/pcr/bx/n' in size <8> not available
 ] (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-(./codes/data_structures/pointers_seg_tree.cpp
+(./codes/data_structures/DynamicSegmentTree.cpp
 LaTeX Font Info:    Font shape `T1/pcr/m/it' in size <8> not available
-(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 1.
+(Font)              Font shape `T1/pcr/m/sl' tried instead on input line 5.
 )
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-(./codes/data_structures/range_update_seg_tree.cpp [2])
+(./codes/data_structures/SegmentTree.cpp [2])
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-(./codes/data_structures/range_update_bit.cpp)
+(./codes/data_structures/BIT.cpp) [3]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-(./codes/data_structures/trie.cpp)
+(./codes/data_structures/Trie.cpp)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-(./codes/data_structures/stl_ordered_set.cpp) [3]
+(./codes/data_structures/OrderedSet.cpp)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-(./codes/uncategorized/lis.cpp)
+(./codes/data_structures/ConvexHullTrick.cpp) [4]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-(./codes/uncategorized/inversioncount.cpp)
+(./codes/data_structures/Lichao.cpp)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-(./codes/uncategorized/mosdecomp.cpp) [4]
+(./codes/data_structures/LichaoDouble.cpp) [5]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-(./codes/geometry/closest_pair_of_points.cpp)
+(./codes/uncategorized/coordcompression.cpp)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-(./codes/geometry/2DStructures.cpp [5]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-) [6]
+(./codes/uncategorized/LIS.cpp)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-(./codes/geometry/Geo2D.cpp
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [7]
+(./codes/uncategorized/InversionCount.cpp) [6]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
+)
+(./codes/uncategorized/MosQueryDecomposition.cpp)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
+)
+(./codes/geometry/2DStructures.cpp [7]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
@@ -1223,48 +1225,84 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-(./codes/geometry/convex_hull.cpp) [9]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
-File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
-)
-(./codes/graphs/dynammic_connectivity.cpp
+(./codes/geometry/Geo2D.cpp
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [10])
+ [9]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [10]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [11]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [12])
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-(./codes/graphs/bellmanford.cpp)
+(./codes/geometry/convex_hull.cpp [13])
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-(./codes/graphs/euler.cpp) [11]
-(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
-File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
-) (./codes/graphs/scc.cpp) (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.d
-ef
-File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
+(./codes/graphs/dynammic_connectivity.cpp [14]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 )
-(./codes/graphs/centroid_decomposition.cpp [12])
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-(./codes/graphs/floydwarshall.cpp)
+(./codes/graphs/BellmanFord.cpp) [15]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-(./codes/graphs/tarjanbridges.cpp) [13]
+(./codes/graphs/Euler.cpp)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
+) (./codes/graphs/SCC.cpp [16]) (/usr/share/texlive/texmf-dist/tex/latex/base/u
+tf8.def
+File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
+)
+(./codes/graphs/CentroidDecomposition.cpp)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-(./codes/graphs/dinic.cpp) [14]
+(./codes/graphs/FloydWarshall.cpp) [17]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
-) (./codes/graphs/hld.cpp) (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.d
-ef
+)
+(./codes/graphs/Tarjan.cpp)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-(./codes/graphs/lca.cpp) [15]
+(./codes/graphs/Dinic.cpp [18]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
+) (./codes/graphs/HLD.cpp [19]) (/usr/share/texlive/texmf-dist/tex/latex/base/u
+tf8.def
+File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
+)
+(./codes/graphs/LCA.cpp) [20]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
+)
+(./codes/math_nt/DiophantineCRT.cpp)
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
+)
+(./codes/math_nt/discrete_log.cpp) [21]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
@@ -1276,21 +1314,25 @@ File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
+(./codes/math_nt/SegmentedSieve.cpp) [22]
+(/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
+File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
+)
 (./codes/math_nt/matrix_exponentiation.cpp)
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-(./codes/math_nt/FFT.cpp [16]
+(./codes/math_nt/FFT.cpp
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-)
+ [23])
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [17]
+
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-(./codes/strings/KMP.cpp)
+(./codes/strings/KMP.cpp) [24]
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
@@ -1298,20 +1340,23 @@ File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-(./codes/strings/rollinghash.cpp [18])
+(./codes/strings/suffixarray.cpp
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [25])
 (/usr/share/texlive/texmf-dist/tex/latex/base/utf8.def
 File: utf8.def 2015/12/03 v1.1r UTF-8 support for inputenc
 )
-(./codes/strings/suffixarray.cpp) [19] (./main.aux)
+(./codes/strings/rollinghash.cpp) [26] (./main.aux)
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 26411 strings out of 494953
- 631571 string characters out of 6180976
- 1126679 words of memory out of 5000000
- 29072 multiletter control sequences out of 15000+600000
+ 26629 strings out of 494953
+ 634811 string characters out of 6180976
+ 1139856 words of memory out of 5000000
+ 29260 multiletter control sequences out of 15000+600000
  17844 words of font info for 44 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  71i,12n,79p,790b,2138s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1321,10 +1366,10 @@ fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/u
 rw/courier/ucrro8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/
 uhvb8ac.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
 
-Output written on main.pdf (19 pages, 143532 bytes).
+Output written on main.pdf (26 pages, 170766 bytes).
 PDF statistics:
- 90 PDF objects out of 1000 (max. 8388607)
- 63 compressed objects within 1 object stream
+ 112 PDF objects out of 1000 (max. 8388607)
+ 78 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

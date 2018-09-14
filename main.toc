@@ -1,38 +1,44 @@
 \contentsline {section}{\numberline {1}Template}{1}
 \contentsline {subsection}{\numberline {1.1}Template Code}{1}
 \contentsline {section}{\numberline {2}Data Structures}{2}
-\contentsline {subsection}{\numberline {2.1}Segment Tree using Pointers}{2}
-\contentsline {subsection}{\numberline {2.2}Range Update Segment Tree}{2}
-\contentsline {subsection}{\numberline {2.3}Range Update Binary Indexed Tree}{3}
-\contentsline {subsection}{\numberline {2.4}Trie}{3}
-\contentsline {subsection}{\numberline {2.5}STL Ordered Set}{3}
-\contentsline {section}{\numberline {3}Uncategorized}{4}
-\contentsline {subsection}{\numberline {3.1}Longest Increasing Subsequence}{4}
-\contentsline {subsection}{\numberline {3.2}Inversion Count - Merge Sort}{4}
-\contentsline {subsection}{\numberline {3.3}Mo's Decomposition}{4}
-\contentsline {section}{\numberline {4}Geometry}{5}
-\contentsline {subsection}{\numberline {4.1}Closest Pair of Points}{5}
-\contentsline {subsection}{\numberline {4.2}2D Structures}{5}
-\contentsline {subsection}{\numberline {4.3}2D Geometry Functions}{7}
-\contentsline {subsection}{\numberline {4.4}Convex Hull - Monotone Chain Algorithm}{9}
-\contentsline {section}{\numberline {5}Graphs}{10}
-\contentsline {subsection}{\numberline {5.1}Dynammic Connectivity - connected(u,v) query}{10}
-\contentsline {subsection}{\numberline {5.2}Bellman Ford Shortest Path}{11}
-\contentsline {subsection}{\numberline {5.3}Eulerian Circuits/Paths}{11}
-\contentsline {subsection}{\numberline {5.4}Kosaraju SCC}{12}
-\contentsline {subsection}{\numberline {5.5}Centroid Decomposition}{12}
-\contentsline {subsection}{\numberline {5.6}Floyd Warshall Shortest Path}{13}
-\contentsline {subsection}{\numberline {5.7}Tarjan's Bridge/Articulations Algorithm}{13}
-\contentsline {subsection}{\numberline {5.8}Max Flow Dinic's Algorithm}{14}
-\contentsline {subsection}{\numberline {5.9}HLD}{15}
-\contentsline {subsection}{\numberline {5.10}LCA}{15}
-\contentsline {section}{\numberline {6}Math and Number Theory}{16}
-\contentsline {subsection}{\numberline {6.1}Binomial Coefficient DP}{16}
-\contentsline {subsection}{\numberline {6.2}Erathostenes Sieve + Logn Prime Factorization}{16}
-\contentsline {subsection}{\numberline {6.3}Matrix Exponentiation}{16}
-\contentsline {subsection}{\numberline {6.4}Fast Fourier Transform - Recursive and Iterative}{16}
-\contentsline {section}{\numberline {7}String Algorithms}{18}
-\contentsline {subsection}{\numberline {7.1}KMP Failure Function + String Matching}{18}
-\contentsline {subsection}{\numberline {7.2}Z-Function}{18}
-\contentsline {subsection}{\numberline {7.3}Rolling Hash}{18}
-\contentsline {subsection}{\numberline {7.4}Suffix Array + Linear Sort}{19}
+\contentsline {subsection}{\numberline {2.1}Dynamic Segment Tree}{2}
+\contentsline {subsection}{\numberline {2.2}Segment Tree}{2}
+\contentsline {subsection}{\numberline {2.3}Fenwick Tree}{3}
+\contentsline {subsection}{\numberline {2.4}Trie}{4}
+\contentsline {subsection}{\numberline {2.5}STL Ordered Set}{4}
+\contentsline {subsection}{\numberline {2.6}Convex Hull Trick}{4}
+\contentsline {subsection}{\numberline {2.7}Lichao Segment Tree - Convex Hull Trick}{5}
+\contentsline {subsection}{\numberline {2.8}Lichao Segment Tree - Convex Hull Trick - Double Type}{5}
+\contentsline {section}{\numberline {3}Uncategorized}{6}
+\contentsline {subsection}{\numberline {3.1}Coordinate Compression}{6}
+\contentsline {subsection}{\numberline {3.2}Longest Increasing Subsequence}{6}
+\contentsline {subsection}{\numberline {3.3}Inversion Count - Merge Sort}{6}
+\contentsline {subsection}{\numberline {3.4}Mo's Decomposition}{7}
+\contentsline {section}{\numberline {4}Geometry}{7}
+\contentsline {subsection}{\numberline {4.1}2D Structures}{7}
+\contentsline {subsection}{\numberline {4.2}2D Geometry Functions}{9}
+\contentsline {subsection}{\numberline {4.3}Convex Hull - Monotone Chain Algorithm}{13}
+\contentsline {section}{\numberline {5}Graphs}{14}
+\contentsline {subsection}{\numberline {5.1}Dynammic Connectivity - connected(u,v) query}{14}
+\contentsline {subsection}{\numberline {5.2}Bellman Ford Shortest Path}{15}
+\contentsline {subsection}{\numberline {5.3}Eulerian Circuits/Paths}{16}
+\contentsline {subsection}{\numberline {5.4}Kosaraju SCC}{16}
+\contentsline {subsection}{\numberline {5.5}Centroid Decomposition}{17}
+\contentsline {subsection}{\numberline {5.6}Floyd Warshall Shortest Path}{17}
+\contentsline {subsection}{\numberline {5.7}Tarjan's Bridge/Articulations Algorithm}{18}
+\contentsline {subsection}{\numberline {5.8}Max Flow Dinic's Algorithm}{18}
+\contentsline {subsection}{\numberline {5.9}HLD}{19}
+\contentsline {subsection}{\numberline {5.10}LCA}{20}
+\contentsline {section}{\numberline {6}Math and Number Theory}{21}
+\contentsline {subsection}{\numberline {6.1}Diophantine Equations + CRT}{21}
+\contentsline {subsection}{\numberline {6.2}Discrete Logarithm - Shanks Baby-Step Giant-Step}{21}
+\contentsline {subsection}{\numberline {6.3}Binomial Coefficient DP}{22}
+\contentsline {subsection}{\numberline {6.4}Erathostenes Sieve + Logn Prime Factorization}{22}
+\contentsline {subsection}{\numberline {6.5}Segmented Sieve}{22}
+\contentsline {subsection}{\numberline {6.6}Matrix Exponentiation}{23}
+\contentsline {subsection}{\numberline {6.7}Fast Fourier Transform - Recursive and Iterative}{23}
+\contentsline {section}{\numberline {7}String Algorithms}{24}
+\contentsline {subsection}{\numberline {7.1}KMP Failure Function + String Matching}{24}
+\contentsline {subsection}{\numberline {7.2}Z-Function}{25}
+\contentsline {subsection}{\numberline {7.3}Suffix Array + Linear Sort}{25}
+\contentsline {subsection}{\numberline {7.4}Rolling Hash}{26}

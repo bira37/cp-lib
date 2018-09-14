@@ -93,49 +93,57 @@
 
 \newpage
 \section{Data Structures}{
-	\subsection{Segment Tree using Pointers}{
-		\includecode{data_structures/pointers_seg_tree.cpp}
+	\subsection{Dynamic Segment Tree}{
+		\includecode{data_structures/DynamicSegmentTree.cpp}
 	}
-	\subsection{Range Update Segment Tree}{
-		\includecode{data_structures/range_update_seg_tree.cpp}
+	\subsection{Segment Tree}{
+		\includecode{data_structures/SegmentTree.cpp}
 	}
-	\subsection{Range Update Binary Indexed Tree}{
-		\includecode{data_structures/range_update_bit.cpp}
+	\newpage
+	\subsection{Fenwick Tree}{
+		\includecode{data_structures/BIT.cpp}
 	}
+	\newpage
 	\subsection{Trie}{
-	  \includecode{data_structures/trie.cpp}
+	  \includecode{data_structures/Trie.cpp}
 	}
 	\subsection{STL Ordered Set}{
-	  \includecode{data_structures/stl_ordered_set.cpp}
+	  \includecode{data_structures/OrderedSet.cpp}
 	}
+	\subsection{Convex Hull Trick}{
+	  \includecode{data_structures/ConvexHullTrick.cpp}
+	} 
 	\subsection{Lichao Segment Tree - Convex Hull Trick}{
-	  \includecode{data_structures/lichao.cpp}
+	  \includecode{data_structures/Lichao.cpp}
+	}
+	\subsection{Lichao Segment Tree - Convex Hull Trick - Double Type}{
+	  \includecode{data_structures/LichaoDouble.cpp}
 	}
 }
 
 \newpage
 \section{Uncategorized}{
+  \subsection{Coordinate Compression}{
+    \includecode{uncategorized/coordcompression.cpp}
+  }
 	\subsection{Longest Increasing Subsequence}{
-		\includecode{uncategorized/lis.cpp}
+		\includecode{uncategorized/LIS.cpp}
 	}
+	\newpage
 	\subsection{Inversion Count - Merge Sort}{
-	  \includecode{uncategorized/inversioncount.cpp}
+	  \includecode{uncategorized/InversionCount.cpp}
 	}
 	\newpage
 	\subsection{Mo's Decomposition}{
-		\includecode{uncategorized/mosdecomp.cpp}
+		\includecode{uncategorized/MosQueryDecomposition.cpp}
 	}
 }
 
 \newpage
 \section{Geometry}{
-	\subsection{Closest Pair of Points}{
-		\includecode{geometry/closest_pair_of_points.cpp}
-	}
 	\subsection{2D Structures}{
 	  \includecode{geometry/2DStructures.cpp}
 	}
-	\newpage
 	\subsection{2D Geometry Functions}{
 	  \includecode{geometry/Geo2D.cpp}
 	}
@@ -151,46 +159,56 @@
 		\includecode{graphs/dynammic_connectivity.cpp}
 	}
 	\subsection{Bellman Ford Shortest Path}{
-	  \includecode{graphs/bellmanford.cpp}
+	  \includecode{graphs/BellmanFord.cpp}
 	}
 	\newpage
 	\subsection{Eulerian Circuits/Paths}{
-	  \includecode{graphs/euler.cpp}
+	  \includecode{graphs/Euler.cpp}
 	}
 	\newpage
 	\subsection{Kosaraju SCC}{
-	  \includecode{graphs/scc.cpp}
+	  \includecode{graphs/SCC.cpp}
 	}
 	\subsection{Centroid Decomposition}{
-	  \includecode{graphs/centroid_decomposition.cpp}
+	  \includecode{graphs/CentroidDecomposition.cpp}
 	}
 	\subsection{Floyd Warshall Shortest Path}{
-	  \includecode{graphs/floydwarshall.cpp}
+	  \includecode{graphs/FloydWarshall.cpp}
 	}
 	\newpage
 	\subsection{Tarjan's Bridge/Articulations Algorithm}{
-	  \includecode{graphs/tarjanbridges.cpp}
+	  \includecode{graphs/Tarjan.cpp}
 	}
 	\newpage
 	\subsection{Max Flow Dinic's Algorithm}{
-	  \includecode{graphs/dinic.cpp}
+	  \includecode{graphs/Dinic.cpp}
 	}
-	\newpage
 	\subsection{HLD}{
-	  \includecode{graphs/hld.cpp}
+	  \includecode{graphs/HLD.cpp}
 	}
 	\newpage
 	\subsection{LCA}{
-	  \includecode{graphs/lca.cpp}
+	  \includecode{graphs/LCA.cpp}
 	}
 }
 
 \section{Math and Number Theory}{
+  \subsection{Diophantine Equations + CRT}{
+    \includecode{math_nt/DiophantineCRT.cpp}
+  }
+  \subsection{Discrete Logarithm - Shanks Baby-Step Giant-Step}{
+    \includecode{math_nt/discrete_log.cpp}
+  }
+  \newpage
 	\subsection{Binomial Coefficient DP}{
 		\includecode{math_nt/binomial_coefficient.cpp}
 	}
 	\subsection{Erathostenes Sieve + Logn Prime Factorization}{
 		\includecode{math_nt/ErathostenesSieve.cpp}
+	}
+	\newpage
+	\subsection{Segmented Sieve}{
+	  \includecode{math_nt/SegmentedSieve.cpp}
 	}
 	\newpage
 	\subsection{Matrix Exponentiation}{
@@ -205,161 +223,17 @@
 	\subsection{KMP Failure Function + String Matching}{
 		\includecode{strings/KMP.cpp}
 	}
+	\newpage
 	\subsection{Z-Function}{
 		\includecode{strings/zfunction.cpp}
-	}
-	\subsection{Rolling Hash}{
-		\includecode{strings/rollinghash.cpp}
 	}
 	\subsection{Suffix Array + Linear Sort}{
 		\includecode{strings/suffixarray.cpp}
 	}
+	\newpage
+	\subsection{Rolling Hash}{
+		\includecode{strings/rollinghash.cpp}
+	}
 }
-
-
-%dummy
-
-\begin{comment}
-
-\newpage
-\section{Extras}{
-    \subsection{Template}{
-        \includecode{extras/template.cpp}
-    }
-    \newpage
-    \subsection{Coordinate Compression}{
-        \includecode{extras/coordcompression.cpp}
-    }
-    \subsection{2D Coordinate Compression}{
-        \includecode{extras/2dcoordcompression.cpp}
-    }
-    \newpage
-    \subsection{SQRT Decomposition}{
-        \includecode{extras/mosdecomp.cpp}
-    }
-     \subsection{Submission Script}{
-        \includecode{extras/submit.sh}
-    }
-    \newpage
-    \subsection{SQRT Decomposition}{
-        \includecode{especial/mosdecomp.cpp}
-    }
-    
-}
-\section{Algebra}{
-    \subsection{Matrix Exponentiation}{
-    	\includecode{algebra/matrix_exponentiation.cpp}
-    }
-    \newpage
-}
-\section{Data Structures}{
-    \subsection{Range BIT}{
-        \includecode{data_structures/range_bit.cpp}
-    }
-    \newpage
-    \subsection{Segment Tree - Point Update}{
-        \includecode{data_structures/PointSegmentTree.cpp}
-    }
-    \newpage
-    \subsection{Segment Tree - Range Update}{
-        \includecode{data_structures/RangeSegmentTree.cpp}
-    }
-    \subsection{Dynamic Segment Tree - Point Update}{
-        \includecode{data_structures/dynamic_segtree.cpp}
-    }
-}
-\section{Dynamic Programming}{
-    \subsection{LIS}{
-        \includecode{dp/lis.cpp}
-    }
-    \newpage
-}
-\section{Divide and Conquer}{
-    \subsection{Closest Pair of Points}{
-        \includecode{divide_and_conquer/ClosestPointsProblem.cpp}
-    }
-    \subsection{Centroid Decomposition}{
-        \includecode{divide_and_conquer/centroid.cpp}
-    }
-    \subsection{Dynamic Connectivity Offline}{
-        \includecode{divide_and_conquer/dynacon.cpp}
-    }
-    \newpage 
-}
-\section{Geometry}{
-    \subsection{Convex Hull - Monotone Chain}{
-        \includecode{geometry/convexhull.cpp}
-    }
-    \subsection{Shoelace - Polygon Area}{
-        \includecode{geometry/shoelace.cpp}
-    }
-    \newpage
-}
-\section{Graphs}{
-    \subsection{Euler Circuit}{
-        \includecode{graphs/euler.cpp}
-    }
-    \newpage
-    \subsection{LCA}{
-        \includecode{graphs/lca.cpp}
-    }
-    \newpage
-    \subsection{Tarjan Bridges}{
-        \includecode{graphs/tarjanbridges.cpp}
-    }
-    \newpage
-    \subsection{SCC}{
-        \includecode{graphs/scc.cpp}
-    }
-    \subsection{SP - Bellman Ford}{
-        \includecode{graphs/bellmanford.cpp}
-    }
-    \newpage
-    \subsection{SP - Floyd Warshall}{
-        \includecode{graphs/floydwarshall.cpp}
-    }
-    \subsection{Max Flow - Dinic's Algorithm}{
-        \includecode{graphs/dinic.cpp}
-    }
-    \newpage
-    \subsection{Max Flow - Edmonds Karp}{
-        \includecode{graphs/edmondskarp.cpp}
-    }
-    \newpage
-    \subsection{Heavy Light Decomposition}{
-        \includecode{graphs/hld.cpp}
-    \subsection{Max Flow - Dinic's Algorithm}{
-        \includecode{graphs/Maxflow.cpp}
-    }
-    \newpage
-}
-\section{Math}{
-    \subsection{Binomial Coefficient DP}{
-        \includecode{math/binomial_coefficient.cpp}
-    }
-    \subsection{Erathostenes Sieve}{
-        \includecode{math/ErathostenesSieve.cpp}
-    }
-    \newpage
-}
-\section{Strings}{
-    \subsection{Pi-Function/KMP}{
-        \includecode{strings/KMP.cpp}
-    }
-    \subsection{Z-function}{
-        \includecode{strings/zfunction.cpp}
-    }
-    \newpage
-    \subsection{Rolling Hash}{
-        \includecode{strings/rollinghash.cpp}
-    }
-    \newpage
-    \subsection{Suffix Array - LCP}{
-        \includecode{strings/suffixarray.cpp}
-    }
-}
-%\end{multicols}
-
-\end{comment}
 
 \end{document}

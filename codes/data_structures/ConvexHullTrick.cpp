@@ -1,20 +1,15 @@
 struct ConvexHullTrick {
-  //max cht, suppose lines are added in crescent order of a
-    
-  vector<line> cht;
-  
+  //max cht, suppose lines are added in crescent order of a  
+  vector<line> cht; 
   ConvexHullTrick() {}
-  
   struct line{
     int id, a, b;
     line() {}
     line(int id, int a, int b) : id(id), a(a), b(b) {}
   };
-
   bool cmp(const line & a, const line & b){
     return (a.a < b.a || (a.a == b.a && a.b > b.b));
   } 
-
   bool remove(line & a, line & b, line & c){
     if((a.a - c.a)*(c.b - b.b) <= (b.a - c.a)*(c.b - a.b)) return true;
     else return false;
@@ -44,7 +39,7 @@ struct ConvexHullTrick {
   int f(int i, int x){
     return cht[i].a*x + cht[i].b;
   }
-
+  
   //return line index
   int query(int x){
     if(cht.size() == 0) return -1;

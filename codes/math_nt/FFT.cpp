@@ -27,24 +27,19 @@ namespace FFT{
     void operator=(const Complex & b){
       this->a = b.a;
       this->b = b.b;
-    }
-  
+    }  
     Complex operator+(const Complex & y) const {
       return Complex(a + y.a, b + y.b);
     }
-  
     Complex operator-(const Complex & y) const {
       return Complex(a - y.a, b - y.b);
     }
-  
     Complex operator*(const Complex & y) const {
       return Complex(a*y.a - b*y.b, a*y.b + b*y.a);
     }
-  
     Complex operator/(const double & x) const {
       return Complex(a/x, b/x);
     }
-  
     Complex operator/(const Complex & y) const {
       return (*this)*(y.conjugate()/y.size2());
     }

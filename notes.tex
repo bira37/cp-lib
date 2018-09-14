@@ -124,4 +124,21 @@ Suppose a string made from a combination of $n$ stars and $k-1$ bars (we need $k
 
 Using $g = gcd(a,b)$, assume we found some coefficients $(x_1,x_2)$ for the equation $(b$ $mod$ $a)x_1 + ay_1 = g$. We can write $(b$ $mod$ $a) = b - \lfloor \frac{b}{a} \rfloor a$. Substituting this value in the equation gives us $g = bx_1 + a (y_1 - \lfloor \frac{b}{a} \rfloor)$. Then we found that $x = y_1 - \lfloor \frac{b}{a} \rfloor$ and $y = x_1$. Base case is when $a = 0$, where we return $(0,1)$.
 
+\subsection{Chinese Remainder Theorem}
+
+Suppose we have a system consisting of two linear congruences:\\
+
+\hspace{2mm} $x \equiv a_1 (mod$ $n_1)$ 
+
+\hspace{2mm} $x \equiv a_2 (mod$ $n_2)$\\
+
+We can write them as:\\
+ 
+\hspace{2mm} $x = a_1  + k_1*n_1$ 
+
+\hspace{2mm} $x = a_2  + k_2*n_2$\\
+ 
+
+So, $n_1*k_1 + n_2(-k_2) = a_2 - a_1$. The system has answer modulo $lcm(n_1, n_2)$ only if $gcd(n_1,n_2)$ divides $a_2 - a_1$. We can merge these two equations to $x \equiv s (mod$ $n)$, where $s = a_1 + n_1*k_1$, $k_1$ given by the solution of the Diophantine Equation above, and $n = lcm(n_1, n_2)$. We can merge all equations of the system until we remain with only one.
+
 \end{document}
