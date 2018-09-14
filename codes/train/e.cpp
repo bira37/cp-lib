@@ -10,7 +10,7 @@
 #define pb push_back
 #define vi vector<int>
 #define vii vector< ii >
-#define EPS 1e-9
+#define EPS 1e-8
 #define INF 1e18
 #define ROOT 1
 #define M 1000000007
@@ -30,14 +30,14 @@ int gcd(int a, int b){
 namespace Geo2D {
  
   struct Point {
-    int x,y;
+    double x,y;
     
     Point(){
       x = 0;
       y = 0;
     }
     
-    Point(int x, int y) : x(x), y(y) {}
+    Point(double x, double y) : x(x), y(y) {}
     
     Point(Point a, Point b){
       x = b.x - a.x;
@@ -52,15 +52,15 @@ namespace Geo2D {
       return Point(x - b.x, y - b.y);
     }
     
-    int operator*(const Point b) const{
+    double operator*(const Point b) const{
       return (x*b.x + y*b.y);
     }
     
-    int operator^(const Point b) const{
+    double operator^(const Point b) const{
 		  return x*b.y - y*b.x;
 	  }
 	
-	  Point scale(int n){
+	  Point scale(double n){
 	    return Point(x*n, y*n);
 	  }
     
@@ -77,7 +77,7 @@ namespace Geo2D {
       return sqrt((x - b.x)*(x - b.x) + (y - b.y)*(y - b.y));
     }
     
-    int squareDistanceTo(Point b){
+    double squareDistanceTo(Point b){
       return (x - b.x)*(x - b.x) + (y - b.y)*(y - b.y);
     }
     
@@ -89,7 +89,7 @@ namespace Geo2D {
 	    return sqrt(x*x + y*y);
 	  }
 	
-	  int squareSize(){
+	  double squareSize(){
 	    return x*x + y*y;
 	  }
 	
@@ -111,7 +111,7 @@ namespace Geo2D {
     Point v;
     Point normal;
     
-    int a,b,c;
+    double a,b,c;
     
     Line() {
       p = Point();
@@ -224,19 +224,20 @@ namespace Geo2D {
 namespace Geo2D {
 
   double distancePointLine(Point p, Line l){
+    if(l.normal.squareSize() == 0) return INF;
     return (double)(1.*abs(l.a*p.x + l.b*p.y + l.c))/l.normal.size();
   }
   
   double distancePointSegment(Point p, Line l){
-    int dot1 = Point(l.p, p)*Point(l.p, l.q);
-    int dot2 = Point(l.q, p)*Point(l.q, l.p);
+    double dot1 = Point(l.p, p)*Point(l.p, l.q);
+    double dot2 = Point(l.q, p)*Point(l.q, l.p);
     
     if(dot1 >= 0 && dot2 >= 0) return distancePointLine(p, l);
     else return min(p.distanceTo(l.p), p.distanceTo(l.q));
   }
   
   double distancePointRay(Point p, Line l){
-    int dot = Point(l.p, p)*l.v;
+    double dot = Point(l.p, p)*l.v;
     if(dot >= 0) return distancePointLine(p, l);
     else return p.distanceTo(l.p);
   }
@@ -272,6 +273,7 @@ namespace Geo2D {
 			  if(s2.q.y <= s1.q.y) ansr = s2.q;
 			  else ansr = s1.q;
 			  if(ansl.x == ansr.x && ansl.y == ansr.y){
+			    //cout << ansr.x << " " << ansr.y << endl;
 			    return Point(ansr.x, ansr.y);
 			  }
 			  else {
@@ -287,6 +289,7 @@ namespace Geo2D {
 			  if(s2.q.x <= s1.q.x) ansr = s2.q;
 			  else ansr = s1.q;
 			  if(ansl.x == ansr.x && ansl.y == ansr.y){
+			    //cout << ansr.x << " " << ansr.y << endl;
 			    return Point(ansr.x, ansr.y);
 			  }
 			  else {
@@ -309,12 +312,15 @@ namespace Geo2D {
 		  
 		  double x = (double)(b2*c1 - b1*c2)/(double)det*1.;
 		  double y = (double)(a1*c2 - a2*c1)/(double)det*1.;
-		  
+		  //cout << x << " " << y << endl;
 		  return Point(x,y);
 	  }
   }
+	  
   
   double distanceSegmentSegment(Line l1, Line l2){
+    if(l1.p == l2.p && l1.q == l2.q) return 0;
+    if(l1.q == l2.p && l1.p == l2.q) return 0;
     if((l1.v^l2.v) != 0){
     
       Line r1(l1.p, l1.q);
@@ -322,8 +328,8 @@ namespace Geo2D {
       Line r3(l2.p, l2.q);
       Line r4(l2.q, l2.p);
       
-      int cross1 = (Point(r3.p, r1.p)^r3.v);
-      int cross2 = (Point(r3.p, r1.q)^r3.v);
+      double cross1 = (Point(r3.p, r1.p)^r3.v);
+      double cross2 = (Point(r3.p, r1.q)^r3.v);
       if(cross2 < cross1) swap(cross1, cross2);
       
       bool ok1 = (cross1 <= 0 && cross2 >= 0) || (distancePointLine(r1.p, r3) > distancePointLine(r1.q, r3));
@@ -386,8 +392,8 @@ namespace Geo2D {
       Line r1(s.p, s.q);
       Line r2(s.q, s.p);
       
-      int cross1 = (Point(r.p, r1.p)^r.v);
-      int cross2 = (Point(r.p, r1.q)^r.v);
+      double cross1 = (Point(r.p, r1.p)^r.v);
+      double cross2 = (Point(r.p, r1.q)^r.v);
       if(cross2 < cross1) swap(cross1, cross2);
       
       bool ok1 = (cross1 <= 0 && cross2 >= 0) || (distancePointLine(r1.p, r) > distancePointLine(r1.q, r));
@@ -415,7 +421,7 @@ namespace Geo2D {
       
     
     double ans = INF;
-    int dot = Point(s.p, r.p)*Point(r.p, s.q);
+    double dot = Point(s.p, r.p)*Point(r.p, s.q);
     if(dot >= 0) ans = min(ans, distancePointLine(r.p, s));
     else ans = min(ans, min(r.p.distanceTo(s.p), r.p.distanceTo(s.q)));
     
@@ -436,8 +442,8 @@ namespace Geo2D {
       return distancePointLine(s.p, l);
     }
     
-    int cross1 = (Point(l.p, s.p)^l.v);
-    int cross2 = (Point(l.p, s.q)^l.v);
+    double cross1 = (Point(l.p, s.p)^l.v);
+    double cross2 = (Point(l.p, s.q)^l.v);
     if(cross2 < cross1) swap(cross1, cross2);
 	  if(cross1 <= 0 && cross2 >= 0) return 0;
 	  else return min(distancePointLine(s.p, l), distancePointLine(s.q,l)); 
@@ -449,8 +455,8 @@ namespace Geo2D {
       return distancePointLine(r.p, l);
     }
     
-    int cross1 = (Point(l.p, r.p)^l.v);
-    int cross2 = (Point(l.p, r.q)^l.v);
+    double cross1 = (Point(l.p, r.p)^l.v);
+    double cross2 = (Point(l.p, r.q)^l.v);
     if(cross2 < cross1) swap(cross1, cross2);
 	  if((cross1 <= 0 && cross2 >= 0) || (distancePointLine(r.p, l) > distancePointLine(r.q, l))) return 0;
 	  return distancePointLine(r.p, l);
@@ -466,8 +472,8 @@ namespace Geo2D {
   double distanceRayRay(Line r1, Line r2){
     if((r1.v^r2.v) != 0){
       
-      int cross1 = (Point(r1.p, r2.p)^r1.v);
-      int cross2 = (Point(r1.p, r2.q)^r1.v);
+      double cross1 = (Point(r1.p, r2.p)^r1.v);
+      double cross2 = (Point(r1.p, r2.q)^r1.v);
       if(cross2 < cross1) swap(cross1, cross2);
       bool ok1 = (cross1 <= 0 && cross2 >= 0) || (distancePointLine(r2.p, r1) > distancePointLine(r2.q, r1));
       
@@ -482,7 +488,7 @@ namespace Geo2D {
     }
     
     double ans = INF;
-    int dot = Point(r2.p, r1.p)*r2.v;
+    double dot = Point(r2.p, r1.p)*r2.v;
     if(dot >= 0) ans = min(ans, distancePointLine(r1.p, r2));
     else ans = min(ans, r2.p.distanceTo(r1.p));
     
@@ -653,55 +659,38 @@ namespace Geo2D {
 
 ////////////////////////////////// End of Geometry  Algorithms /////////////////////////////
 
-int boundary(Geo2D::Point p, Geo2D::Point q){
-  if(p == q) return 0;
-  if(p.x == q.x) return abs(q.y - p.y) - 1;
-  if(p.y == q.y) return abs(q.x - p.x) - 1;
-  else return gcd(abs(q.x - p.x), abs(q.y - p.y)) - 1;
+double calculate(Geo2D::Point a, Geo2D::Point b, Geo2D::Point c, Geo2D::Point d, Geo2D::Point v1, Geo2D::Point v2, double m1){
+  Geo2D::Point aa(a.x + v1.x*m1, a.y + v1.y*m1), bb(b.x + v1.x*m1, b.y + v1.y*m1);
+  Geo2D::Point cc(c.x + v2.x*m1, c.y + v2.y*m1), dd(d.x + v2.x*m1, d.y + v2.y*m1);
+  Geo2D::Line l1(aa, bb), l2(cc,dd);
+  return Geo2D::distanceSegmentSegment(l1, l2);
 }
 
 int32_t main(){
   DESYNC;
-  int n;
-  cin >> n;
-  Geo2D::Line v[n];
-  int ans = 0;
-  set<Geo2D::Point> k;
-  for(int i=0; i<n; i++){
-    Geo2D::Point a,b;
-    cin >> a.x >> a.y >> b.x >> b.y;
-    if(a == b){
-      ans++;
-    }
-    else if(a.x == b.x){
-      ans += 2;
-      ans += abs(b.y - a.y) -1;
-    }
-    else if(a.y == b.y){
-      ans += 2;
-      ans += abs(b.x - a.x) -1;
-    }
-    else {
-      ans += 2;
-      ans += gcd(abs(b.x-a.x), abs(b.y-a.y))-1;
-    }
-    v[i] = Geo2D::Line(a,b);
-  }
+  Geo2D::Point a,b,c,d;
+  cin >> a.x >> a.y >> b.x >> b.y;
+  cin >> c.x >> c.y >> d.x >> d.y;
+  Geo2D::Point v1, v2;
+  cin >> v1.x >> v1.y;
+  cin >> v2.x >> v2.y;
   
-  
-  for(int i=0; i<n; i++){
-    set< Geo2D::Point > s;
-    for(int j = i+1; j<n; j++){
-      if(Geo2D::distanceSegmentSegment(v[i], v[j]) < 1e-13){
-        Geo2D::Point p = Geo2D::intersectionSegmentSegment(v[i], v[j]);
-        if(p.x != (int)1e9 && p.y != (int)1e9 && !k.count(p)){
-          s.insert(p);
-        }
-      }
-    }
-    ans -= s.size();
+  double l = 0.0, r = (1e9);
+  for(int i=0; i<100; i++){
+    double off = (r-l)/3;
+    
+    double m1 = l + off;
+    double m2 = l + 2*off;
+   
+    double d1 = calculate(a,b,c,d,v1, v2, m1);
+    double d2 = calculate(a,b,c,d,v1, v2, m2);
+    //cout << m1 << " " << m2 << " " <<  d1 << " " << d2 << endl;
+    
+    if(d1 > d2) l = m1;
+    else r = m2;
   }
-  cout << ans << endl;
+  if(calculate(a,b,c,d,v1,v2,l) <= 1e-4) cout << fixed << setprecision(9) << l << endl;
+  else cout << -1 << endl;
 }
 
 

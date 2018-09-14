@@ -25,55 +25,26 @@ int gcd(int a, int b){
   else return abs(__gcd(a,b));
 }
 
-int dp[20][5][2];
+int sum[512345] = {0};
 
-int count(string s, int i, int cnt, bool f){
-  if(cnt < 0) return 0;
-  if(i == s.size()){
-    return (cnt == 0);
-  }
-  if(dp[i][cnt][f] != -1) return dp[i][cnt][f];
-  dp[i][cnt][f] = 0;
-  //go to 0
-  dp[i][cnt][f] += count(s, i+1, cnt, f || (s[i] != '0'));
-  //go to others
-  if(f){
-    for(int d = '1'; d <= '9'; d++){
-      dp[i][cnt][f] += count(s, i+1, cnt-1, f);
+void calculate(){
+  for(int i=1; i<512345; i++){
+    for(int j = i; j<512345; j += i){
+      sum[j] += i;
     }
   }
-  else {
-    for(int d = '1'; d <= s[i]; d++){
-      dp[i][cnt][f] += count(s, i+1, cnt-1, s[i] != d);
-    }
-  }
-  return dp[i][cnt][f];
 }
- 
+
 int32_t main(){
   DESYNC;
+  calculate();
   int t;
   cin >> t;
   while(t--){
-    int l, r;
-    cin >> l >> r;
-    l--;
-    string a = to_string(l);
-    string b = to_string(r);
-    for(int i=0; i<20; i++){
-      for(int j=0; j<5; j++){
-        for(int k =0; k<2; k++) dp[i][j][k] = -1;
-      }
-    }
-    int ans1 = count(b, 0, 3, false) + count(b, 0, 2, false) + count(b, 0, 1, false) + count(b, 0, 0, false);
-    for(int i=0; i<20; i++){
-      for(int j=0; j<5; j++){
-        for(int k =0; k<2; k++) dp[i][j][k] = -1;
-      }
-    }
-    int ans2 = count(a, 0, 3, false) + count(a, 0, 2, false) + count(a, 0, 1, false) + count(a, 0, 0, false);
-    cout << ans1 - ans2 << endl;
-  }
+    int n;
+    cin >> n;
+    cout << sum[n] - n << endl;
+  } 
 }
 
 

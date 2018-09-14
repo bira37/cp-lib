@@ -1,3 +1,32 @@
+#include <bits/stdc++.h>
+
+#define int long long
+#define double long double
+#define ff first
+#define ss second
+#define endl '\n'
+#define ii pair<int, int>
+#define DESYNC ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
+#define pb push_back
+#define vi vector<int>
+#define vii vector< ii >
+#define EPS 1e-9
+#define INF 1e18
+#define ROOT 1
+#define M 1000000007
+const double PI = acos(-1);
+
+using namespace std;
+
+inline int mod(int n, int m){ int ret = n%m; if(ret < 0) ret += m; return ret; }
+
+int gcd(int a, int b){
+  if(a == 0 || b == 0) return 0;
+  else return abs(__gcd(a,b));
+}
+
+map< ii, int> edge;
+
 struct Dinic {
 
   struct FlowEdge{
@@ -117,34 +146,34 @@ struct Dinic {
     }
     return cut;
   }
-  
-  vector< ii > min_edge_cover(){
-    bool covered[sz];
-    for(int i=0; i<sz; i++) covered[i] = false;
-    vector< ii > edge_cover;
-    for(int i=1; i<sz-1; i++){
-      for(FlowEdge e : adj[i]){
-        if(e.cap == 0 || e.v > sz-2) continue;
-        if(e.c == 0){
-          edge_cover.pb(ii(i, e.v));
-          covered[i] = true;
-          covered[e.v] = true;
-          break;
-        }
-      }
-    }
-    for(int i=1; i<sz-1; i++){
-      for(FlowEdge e : adj[i]){
-        if(e.cap == 0 || e.v > sz-2) continue;
-        if(e.c == 0) continue;
-        if(!covered[i] || !covered[e.v]){
-          edge_cover.pb(ii(i, e.v));
-          covered[i] = true;
-          covered[e.v] = true;
-        }
-      }
-    }
-    return edge_cover;
-  }
-  
+    
 };
+
+int32_t main(){
+  DESYNC;
+  int n, m;
+  cin >> n >> m;
+  Dinic dinic(n);
+  dinic.add_to_src(1, INF);
+  dinic.add_to_snk(n, INF);
+  for(int i=0; i<m; i++){
+    int u,v,c;
+    cin >> u >> v >> c;
+    edge[ii(u,v)] = i+1;
+    edge[ii(v,u)] = i+1;
+    dinic.add_edge(u,v,c);
+    dinic.add_edge(v,u,c);
+  }
+  dinic.calculate();
+  vector< ii > cut = dinic.mincut();
+  vector<int> ans;
+  cout << cut.size() << " " << dinic.max_flow << endl;
+  for(ii e : cut){
+    ans.pb(edge[e]);
+  }
+  sort(ans.begin(), ans.end());
+  for(int x : ans) cout << x << " ";
+  cout << endl;
+}
+
+

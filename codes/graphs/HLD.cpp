@@ -16,47 +16,47 @@ struct HLD {
     ed.resize(n+1);
     heavy.resize(n+1);
     t = 0;
-	  for(int i=0; i<=n; i++){
-		  ch[i] = i;
-		  P[i] = -1;
-		  heavy[i] = -1;
-	  }
+    for(int i=0; i<=n; i++){
+      ch[i] = i;
+      P[i] = -1;
+      heavy[i] = -1;
+    }
   }
 
   void precalculate(int u){
-	  vis[u] = true;
-	  subsz[u] = 1;
-	  for(int i=0; i<adj[u].size(); i++){
-		  int v = adj[u][i];
-		  if(vis[v]) continue;
-		  P[v] = u;
-		  L[v]=L[u]+1;
-		  precalculate(v);
-		  if(heavy[u] == -1 || subsz[heavy[u]] < subsz[v]) heavy[u] = v;
-		  subsz[u]+=subsz[v];
-	  }
+    vis[u] = true;
+    subsz[u] = 1;
+    for(int i=0; i<adj[u].size(); i++){
+      int v = adj[u][i];
+      if(vis[v]) continue;
+      P[v] = u;
+      L[v]=L[u]+1;
+      precalculate(v);
+      if(heavy[u] == -1 || subsz[heavy[u]] < subsz[v]) heavy[u] = v;
+      subsz[u]+=subsz[v];
+    }
   }
 
   void build(int u){
-	  vis2[u] = true;
-	  st[u]=t;
-	  v[t++] = //segtree value
-	  if(heavy[u] != -1){
-		  ch[heavy[u]] = ch[u];
-		  build(heavy[u]);
-	  }
-	  for(int i=0; i<adj[u].size(); i++){
-		  int v = adj[u][i];
-		  if(vis2[v] || v == heavy[u]) continue;
-		  build(v);
-	  }
-	  ed[u] = t;
-	  v[t++] = 0; //trick
+    vis2[u] = true;
+    st[u]=t;
+    v[t++] = //segtree value
+    if(heavy[u] != -1){
+      ch[heavy[u]] = ch[u];
+      build(heavy[u]);
+    }
+    for(int i=0; i<adj[u].size(); i++){
+      int v = adj[u][i];
+      if(vis2[v] || v == heavy[u]) continue;
+      build(v);
+    }
+    ed[u] = t;
+    v[t++] = 0; //trick
   }
 
   void update(){
-	  //update path / subtree / edge  
-  }		
+    //update path / subtree / edge  
+  }    
 
   int query(){
     long long ans;

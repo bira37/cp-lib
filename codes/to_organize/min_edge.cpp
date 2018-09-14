@@ -1,3 +1,30 @@
+#include <bits/stdc++.h>
+
+#define int long long
+#define double long double
+#define ff first
+#define ss second
+#define endl '\n'
+#define ii pair<int, int>
+#define DESYNC ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
+#define pb push_back
+#define vi vector<int>
+#define vii vector< ii >
+#define EPS 1e-9
+#define INF 1e18
+#define ROOT 1
+#define M 1000000007
+const double PI = acos(-1);
+
+using namespace std;
+
+inline int mod(int n, int m){ int ret = n%m; if(ret < 0) ret += m; return ret; }
+
+int gcd(int a, int b){
+  if(a == 0 || b == 0) return 0;
+  else return abs(__gcd(a,b));
+}
+
 struct Dinic {
 
   struct FlowEdge{
@@ -148,3 +175,22 @@ struct Dinic {
   }
   
 };
+
+int32_t main(){
+  DESYNC;
+  int n, m;
+  cin >> n >> m;
+  Dinic dinic(n+m);
+  for(int i=1; i<=n; i++) dinic.add_to_src(i, 1);
+  for(int i=1; i<=m; i++) dinic.add_to_snk(i+n, 1);
+  for(int i=1; i<=n; i++){
+    int x;
+    while(cin >> x, x != 0) dinic.add_edge(i, x+n, 1);
+  }
+  dinic.calculate(); 
+  vector< ii > edge_cover = dinic.min_edge_cover();
+  cout << edge_cover.size() << endl;
+  for(ii x : edge_cover) cout << x.ff << " " << x.ss - n << endl;
+}
+
+

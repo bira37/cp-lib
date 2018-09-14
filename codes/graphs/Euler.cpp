@@ -28,33 +28,33 @@ struct EulerianCircuit {
   }
   
   void undirected_euler(int u){
-	  while(!adj[u].empty()){
-		  int v = *(--adj[u].end());
+    while(!adj[u].empty()){
+      int v = *(--adj[u].end());
 
-		  adj[u].erase(v);
-		  adj[v].erase(adj[v].find(u));
-		
-		  euler(v);
-	  }
+      adj[u].erase(v);
+      adj[v].erase(adj[v].find(u));
+    
+      euler(v);
+    }
 
-	  walk.push_back(u);
+    walk.push_back(u);
   }
 
   void directed_euler(int u){
-	  while(!adj[u].empty()){
-		  int v = *(--adj[u].end());
+    while(!adj[u].empty()){
+      int v = *(--adj[u].end());
 
-		  adj[u].erase(v);
-		
-		  euler(v);
-	  }
+      adj[u].erase(v);
+    
+      euler(v);
+    }
 
-	  walk.push_back(u);
+    walk.push_back(u);
   }
   
 };
 
 
-	
-	
+  
+  
 

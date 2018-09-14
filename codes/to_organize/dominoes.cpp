@@ -1,3 +1,30 @@
+#include <bits/stdc++.h>
+
+#define int long long
+#define double long double
+#define ff first
+#define ss second
+#define endl '\n'
+#define ii pair<int, int>
+#define DESYNC ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
+#define pb push_back
+#define vi vector<int>
+#define vii vector< ii >
+#define EPS 1e-9
+#define INF 1e18
+#define ROOT 1
+#define M 1000000007
+const double PI = acos(-1);
+
+using namespace std;
+
+inline int mod(int n, int m){ int ret = n%m; if(ret < 0) ret += m; return ret; }
+
+int gcd(int a, int b){
+  if(a == 0 || b == 0) return 0;
+  else return abs(__gcd(a,b));
+}
+
 struct Dinic {
 
   struct FlowEdge{
@@ -118,33 +145,93 @@ struct Dinic {
     return cut;
   }
   
-  vector< ii > min_edge_cover(){
-    bool covered[sz];
-    for(int i=0; i<sz; i++) covered[i] = false;
-    vector< ii > edge_cover;
-    for(int i=1; i<sz-1; i++){
-      for(FlowEdge e : adj[i]){
-        if(e.cap == 0 || e.v > sz-2) continue;
-        if(e.c == 0){
-          edge_cover.pb(ii(i, e.v));
-          covered[i] = true;
-          covered[e.v] = true;
-          break;
-        }
-      }
+};
+
+int n;
+int dx[] = {0,1,0,-1};
+int dy[] = {1, 0, -1, 0};
+
+int f(int x, int y){
+  return (x-1)*n + y;
+}
+
+int32_t main(){
+  DESYNC;
+  int k;
+  cin >> n >> k;
+  if(n == 1){
+    cout << "No" << endl;
+    return 0;
+  }
+  set< ii > s;
+  Dinic dinic(n*n + n*n);
+  for(int i=1; i<=n; i++){
+    for(int j=1; j<=n; j++){
+      s.insert(ii(i,j));
     }
-    for(int i=1; i<sz-1; i++){
-      for(FlowEdge e : adj[i]){
-        if(e.cap == 0 || e.v > sz-2) continue;
-        if(e.c == 0) continue;
-        if(!covered[i] || !covered[e.v]){
-          edge_cover.pb(ii(i, e.v));
-          covered[i] = true;
-          covered[e.v] = true;
-        }
-      }
-    }
-    return edge_cover;
+  }
+  for(int i=0; i<k; i++){
+    int x,y;
+    cin >> x >> y;
+    s.erase(s.find(ii(x,y)));
   }
   
-};
+  for(ii x : s){
+    dinic.add_to_src(f(x.ff, x.ss), INF);
+    dinic.add_to_snk(f(x.ff,x.ss) + n*n, INF);
+    dinic.add_edge(f(x.ff, x.ss), f(x.ff,x.ss) + n*n, 1);
+    for(int i = 0; i<4; i++){
+      int nx = dx[i] + x.ff;
+      int ny = dy[i] + x.ss;
+      if(!s.count(ii(nx,ny))) continue;
+      dinic.add_edge(f(x.ff,x.ss) + n*n, f(nx,ny), INF);
+    }
+  }
+  
+  dinic.calculate();
+  
+  if(dinic.max_flow != s.size()){
+    cout << "No" << endl;
+    return 0;
+  }
+  
+  set< ii > used;
+  set< ii > ver, hor;
+  for(int i=1; i<=n; i++){
+    for(int j=1; j<=n; j++){
+      for(Dinic::FlowEdge e : dinic.adj[f(i,j)]){
+        if(e.v != f(i,j) + n*n) continue;
+        if(e.cap - e.c == 1) used.insert(ii(i,j));
+      }
+    }
+  }
+  set< ii > vis;
+  for(ii x : used){
+    if(vis.count(x)) continue;
+    int nx = x.ff + 1;
+    int ny = x.ss;
+    if(used.count(ii(nx,ny)) && !vis.count(ii(nx,ny))){
+      ver.insert(x);
+      vis.insert(x); vis.insert(ii(nx,ny));
+      continue;
+    }
+    nx = x.ff;
+    ny = x.ss+1;
+    if(used.count(ii(nx,ny)) && !vis.count(ii(nx,ny))){
+      hor.insert(x);
+      vis.insert(x); vis.insert(ii(nx,ny));
+      continue;
+    }
+  }
+  if(2*(ver.size() + hor.size()) != dinic.max_flow){
+    cout << "No" << endl;
+    return 0;
+  }
+  cout << "Yes" << endl; 
+  cout << ver.size() << endl;
+  for(ii x : ver) cout << x.ff << " " << x.ss << endl;
+  cout << hor.size() << endl;
+  for(ii x : hor) cout << x.ff << " " << x.ss << endl;            
+}
+
+

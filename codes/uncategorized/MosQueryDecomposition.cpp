@@ -3,11 +3,11 @@ namespace Mos {
   int sqr;
 
   struct query{
-	  int id, l, r, ans;
-	  bool operator<(const query & b) const {
-	    if(l/sqr != b.l/sqr) return l/sqr < b.l/sqr;
-	    return (l/sqr) % 2 ? r > b.r : r < b.r;
-	  }
+    int id, l, r, ans;
+    bool operator<(const query & b) const {
+      if(l/sqr != b.l/sqr) return l/sqr < b.l/sqr;
+      return (l/sqr) % 2 ? r > b.r : r < b.r;
+    }
   };
 
   struct QueryDecomposition {
@@ -36,15 +36,15 @@ namespace Mos {
     }
 
     void calculate(){
-	    sort(q.begin(), q.end());
-	    int l = 0, r = -1;
-	    for(int i=0; i<q.size(); i++){
-		    while(q[i].l < l) add(--l);
-		    while(r < q[i].r) add(++r);
-		    while(q[i].l > l) remove(l++);
-		    while(r > q[i].r) remove(r--);
-		    q[i].ans = answer_query();
-	    }
+      sort(q.begin(), q.end());
+      int l = 0, r = -1;
+      for(int i=0; i<q.size(); i++){
+        while(q[i].l < l) add(--l);
+        while(r < q[i].r) add(++r);
+        while(q[i].l > l) remove(l++);
+        while(r > q[i].r) remove(r--);
+        q[i].ans = answer_query();
+      }
     }
     
     void print(){

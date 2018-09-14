@@ -1,9 +1,36 @@
+#include <bits/stdc++.h>
+
+#define int long long
+#define double long double
+#define ff first
+#define ss second
+#define endl '\n'
+#define ii pair<int, int>
+#define DESYNC ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
+#define pb push_back
+#define vi vector<int>
+#define vii vector< ii >
+#define EPS 1e-9
+#define INF 1e18
+#define ROOT 1
+#define M 1000000007
+const double PI = acos(-1);
+
+using namespace std;
+
+inline int mod(int n, int m){ int ret = n%m; if(ret < 0) ret += m; return ret; }
+
+int gcd(int a, int b){
+  if(a == 0 || b == 0) return 0;
+  else return abs(__gcd(a,b));
+}
+
 struct Dinic {
 
   struct FlowEdge{
-    int v, rev, c, cap;
+    int v, rev, c, cap, id;
     FlowEdge() {}
-    FlowEdge(int v, int c, int cap, int rev) : v(v), c(c), cap(cap), rev(rev) {}
+    FlowEdge(int v, int c, int cap, int rev, int id) : v(v), c(c), cap(cap), rev(rev), id(id) {}
   };
   
   vector< vector<FlowEdge> >  adj;
@@ -22,19 +49,19 @@ struct Dinic {
     max_flow = 0;
   }
   
-  void add_edge(int u, int v, int c){
+  void add_edge(int u, int v, int c, int id){
     int id1 = adj[u].size();
     int id2 = adj[v].size();
-    adj[u].pb(FlowEdge(v, c, c, id2));
-    adj[v].pb(FlowEdge(u, 0, 0, id1));
+    adj[u].pb(FlowEdge(v, c, c, id2, id));
+    adj[v].pb(FlowEdge(u, 0, 0, id1, id));
   }
   
   void add_to_src(int v, int c){
-    adj[src].pb(FlowEdge(v, c, c, -1));
+    adj[src].pb(FlowEdge(v, c, c, -1, -1));
   }
   
   void add_to_snk(int u, int c){
-    adj[u].pb(FlowEdge(snk, c, c, -1));
+    adj[u].pb(FlowEdge(snk, c, c, -1, -1));
   }
   
   bool bfs(){
@@ -118,33 +145,30 @@ struct Dinic {
     return cut;
   }
   
-  vector< ii > min_edge_cover(){
-    bool covered[sz];
-    for(int i=0; i<sz; i++) covered[i] = false;
-    vector< ii > edge_cover;
-    for(int i=1; i<sz-1; i++){
-      for(FlowEdge e : adj[i]){
-        if(e.cap == 0 || e.v > sz-2) continue;
-        if(e.c == 0){
-          edge_cover.pb(ii(i, e.v));
-          covered[i] = true;
-          covered[e.v] = true;
-          break;
-        }
-      }
-    }
-    for(int i=1; i<sz-1; i++){
-      for(FlowEdge e : adj[i]){
-        if(e.cap == 0 || e.v > sz-2) continue;
-        if(e.c == 0) continue;
-        if(!covered[i] || !covered[e.v]){
-          edge_cover.pb(ii(i, e.v));
-          covered[i] = true;
-          covered[e.v] = true;
-        }
-      }
-    }
-    return edge_cover;
-  }
-  
 };
+
+int ans[112345];
+
+int32_t main(){
+  DESYNC;
+  int n,m;
+  cin >> n >> m;
+  Dinic dinic(n);
+  dinic.add_to_src(1, INF);
+  dinic.add_to_snk(n, INF);
+  for(int i=0; i<m; i++){
+    int u,v,c;
+    cin >> u >> v >> c;
+    dinic.add_edge(u,v,c,i);
+  }
+  dinic.calculate();
+  cout << dinic.max_flow << endl;
+  for(int i = 1; i<=n; i++){
+    for(Dinic::FlowEdge e : dinic.adj[i]){
+      if(e.id >= 0) ans[e.id] = abs(e.cap - e.c);
+    }
+  }
+  for(int i=0; i<m; i++) cout << ans[i] << endl;  
+}
+
+

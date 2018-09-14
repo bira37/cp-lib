@@ -8,17 +8,17 @@ namespace NT {
   vector<int> seg_primes;
 
   void Sieve(int n){
-	  prime.set();
-	  prime[0] = false;
-	  prime[1] = false;
-	  for(int p = 2; p*p <= n; p++){
-		  if(prime[p]){
-			  for(int i=p*p; i<=n; i+=p){
-				  prime[i] = false;
-			  }
-		  }
-	  }
-	  for(int i=2; i<=n; i++) if(prime[i]) primes.pb(i);
+    prime.set();
+    prime[0] = false;
+    prime[1] = false;
+    for(int p = 2; p*p <= n; p++){
+      if(prime[p]){
+        for(int i=p*p; i<=n; i+=p){
+          prime[i] = false;
+        }
+      }
+    }
+    for(int i=2; i<=n; i++) if(prime[i]) primes.pb(i);
   }
 
   void SegmentedSieve(int l, int r){

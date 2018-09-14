@@ -30,12 +30,12 @@ namespace Geo2D {
     }
     
     int operator^(const Point b) const{
-		  return x*b.y - y*b.x;
-	  }
-	
-	  Point scale(int n){
-	    return Point(x*n, y*n);
-	  }
+      return x*b.y - y*b.x;
+    }
+  
+    Point scale(int n){
+      return Point(x*n, y*n);
+    }
     
     void operator=(const Point b) {
       x = b.x;
@@ -59,23 +59,23 @@ namespace Geo2D {
     }
     
     double size(){
-	    return sqrt(x*x + y*y);
-	  }
-	
-	  int squareSize(){
-	    return x*x + y*y;
-	  }
-	
-	  //Only with double type
-	  Point normalize(){
-	    return Point((double)x/size(), (double)y/size());
-	  }
-	
-	  void rotate(double ang){
-	    double xx = x, yy = y;
-	    x = xx*cos(ang) + yy*-sin(ang);
-	    y = xx*sin(ang) + yy*cos(ang);
-	  }
+      return sqrt(x*x + y*y);
+    }
+  
+    int squareSize(){
+      return x*x + y*y;
+    }
+  
+    //Only with double type
+    Point normalize(){
+      return Point((double)x/size(), (double)y/size());
+    }
+  
+    void rotate(double ang){
+      double xx = x, yy = y;
+      x = xx*cos(ang) + yy*-sin(ang);
+      y = xx*sin(ang) + yy*cos(ang);
+    }
     
   };
 
@@ -94,6 +94,16 @@ namespace Geo2D {
       a = 0;
       b = 0;
       c = 0;
+    }
+    
+    Line(int aa, int bb, int cc){
+      a = aa;
+      b = bb;
+      c = cc;
+      normal = Point(a,b);
+      v = Point(-normal.y, normal.x);
+      p = Point();
+      q = Point();
     }
     
     void operator=(const Line l){
@@ -147,6 +157,7 @@ namespace Geo2D {
     }
     
     pair<Point, Point> getTangentPoints(Point p){
+      //p needs to be outside the circle
       double d = p.distanceTo(c);
       double ang = asin(1.*r/d);
       Point v1(p, c);

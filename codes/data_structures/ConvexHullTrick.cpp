@@ -12,25 +12,25 @@ struct ConvexHullTrick {
   };
 
   bool cmp(const line & a, const line & b){
-	  return (a.a < b.a || (a.a == b.a && a.b > b.b));
+    return (a.a < b.a || (a.a == b.a && a.b > b.b));
   } 
 
   bool remove(line & a, line & b, line & c){
-	  if((a.a - c.a)*(c.b - b.b) <= (b.a - c.a)*(c.b - a.b)) return true;
-	  else return false;
+    if((a.a - c.a)*(c.b - b.b) <= (b.a - c.a)*(c.b - a.b)) return true;
+    else return false;
   }
 
   void add(line & v){
-	  if(cht.empty()){
-	    cht.push_back(v);
-	  }
-	  else {
-		  if(cht.back().a == v.a) return;
-		  while(cht.size() > 1 && remove(cht[cht.size()-2], cht.back(), v)){
-		    cht.pop_back();
-		  }
-		  cht.push_back(v);
-	  }
+    if(cht.empty()){
+      cht.push_back(v);
+    }
+    else {
+      if(cht.back().a == v.a) return;
+      while(cht.size() > 1 && remove(cht[cht.size()-2], cht.back(), v)){
+        cht.pop_back();
+      }
+      cht.push_back(v);
+    }
   }
 
   void preprocess_cht(vector< line > & v){

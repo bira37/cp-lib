@@ -15,47 +15,47 @@ struct LCA {
   }
 
   void dfs(int u){
-	  vis[u] = true;
-	  st[u] = tempo++;
-	  for(int i=0; i<adj[u].size(); i++){
-		  int v = adj[u][i];
-		  if(!vis[v]){
-			  dad[v] = u;
-			  dfs(v);
-		  }
-	  } 
-	  ed[u] = tempo++;
+    vis[u] = true;
+    st[u] = tempo++;
+    for(int i=0; i<adj[u].size(); i++){
+      int v = adj[u][i];
+      if(!vis[v]){
+        dad[v] = u;
+        dfs(v);
+      }
+    } 
+    ed[u] = tempo++;
   }
 
   bool is_ancestor(int u, int v){
-	  return st[u] <= st[v] && st[v] <= ed[u];
+    return st[u] <= st[v] && st[v] <= ed[u];
   }
 
   int query(int u, int v){
-	  if(is_ancestor(u,v)) return u;
-	  for(int i=19; i>=0; i--){
-		  if(anc[i][u] == -1) continue;
-		  if(!is_ancestor(anc[i][u],v)) u = anc[i][u];
-	  }
-	  return dad[u];
+    if(is_ancestor(u,v)) return u;
+    for(int i=19; i>=0; i--){
+      if(anc[i][u] == -1) continue;
+      if(!is_ancestor(anc[i][u],v)) u = anc[i][u];
+    }
+    return dad[u];
   }
 
   void precalculate(){
-	  dad[1] = -1;
-	  dfs(1);
-	  for(int i=1; i<st.size(); i++){
-		  anc[0][i] = dad[i];
-	  }
-	  for(int i=1; i<20; i++){
-		  for(int j=1; j<st.size(); j++){
-				  if(anc[i-1][j] != -1){
-					  anc[i][j] = anc[i-1][anc[i-1][j]];
-				  }
-				  else {
-					  anc[i][j] = -1;
-				  }
-		  }
-	  }
+    dad[1] = -1;
+    dfs(1);
+    for(int i=1; i<st.size(); i++){
+      anc[0][i] = dad[i];
+    }
+    for(int i=1; i<20; i++){
+      for(int j=1; j<st.size(); j++){
+          if(anc[i-1][j] != -1){
+            anc[i][j] = anc[i-1][anc[i-1][j]];
+          }
+          else {
+            anc[i][j] = -1;
+          }
+      }
+    }
   }
   
 } lca;

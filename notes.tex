@@ -62,6 +62,14 @@ For each polygon, run through their vertices appending, for each three consecuti
 
 Now, double the array of one of this polygons and then run some string matching algorithm to find if you have a match with the other one. Complexity: $O(n)$, where $n$ is the number of vertices of the polygons. 
 
+\subsection{Given two polygons A and B that rotates around points P and Q(respectively) at the same speed and in the same direction, tell if they can collide}
+
+Observation: Suppose a reference system where A doesn't rotate. Then, the point Q rotates in the opposite direction around P, while B still rotates around Q. If you draw it, you can see that B doesn't move relative to Q. Thus, we can only rotate B around point P and check the intersection between the circle with center $C = P - Q + B$ and $radius = distance(P,Q)$, for each vertex of B, and all segments of polygon A. If some of them intersect, then there is a collision. Complexity: $O(nm)$, where $n$ and $m$ are the number of vertices of the polygons.
+
+\subsection{Area of Planar Polygon in 3D}
+
+Let $V$ be the 3D vector that represents the sum of all cross-products between all consecutive points of the polygon. Let $N$ be a unit vector that represents the normal of the polygon (any 2 consecutive points can be used to acquire). The area is given by $A = \frac{1}{2}|N \cdot V|$. 
+
 \subsection{Centroid of a triangle}
 
 Draw a line from each corner that divides the opposite side of the triangle in two equal parts. The intersection of these 3 lines is called the centroid.
@@ -111,5 +119,9 @@ $X$ = $\sum_{i = 1}^{m} n^{gcd(i,m)}$
 Solution:
 
 Suppose a string made from a combination of $n$ stars and $k-1$ bars (we need $k-1$ divisions to make $k$ groups). Then, we have to choose $k-1$ positions from $n+k-1$ to put bars, and the rest will be stars. Then, the number of ways can be expressed by ${n+k-1}\choose{k-1}$.    
+
+\subsection{Extended Euclidean Algorithm - Solve the equation $ax + by = gcd(a,b)$}
+
+Using $g = gcd(a,b)$, assume we found some coefficients $(x_1,x_2)$ for the equation $(b$ $mod$ $a)x_1 + ay_1 = g$. We can write $(b$ $mod$ $a) = b - \lfloor \frac{b}{a} \rfloor a$. Substituting this value in the equation gives us $g = bx_1 + a (y_1 - \lfloor \frac{b}{a} \rfloor)$. Then we found that $x = y_1 - \lfloor \frac{b}{a} \rfloor$ and $y = x_1$. Base case is when $a = 0$, where we return $(0,1)$.
 
 \end{document}
