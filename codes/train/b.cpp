@@ -27,7 +27,31 @@ int gcd(int a, int b){
 
 int32_t main(){
   DESYNC;
-  
+  int t;
+  cin >> t;
+  while(t--){
+    int n, k;
+    cin >> n >> k;
+    k++;
+    int lis[n+1];
+    lis[0] = 0;
+    vector<int> v(n+1);
+    v[0] = INT_MAX;
+    for(int i=0; i<n; i++){
+      cin >> v[i+1];
+    }
+    int mx = 0;
+    for(int i=1; i<=n; i++){
+      lis[i] = 0;
+      for(int j = 0; j < i; j++){
+        if(v[j] > v[i] || (j == k && v[j] <= v[i])){
+          lis[i] = max(lis[i], lis[j]+1);
+        }
+      }
+      mx = max(mx, lis[i]);
+    }
+    cout << mx << endl;
+  }
 }
 
 
