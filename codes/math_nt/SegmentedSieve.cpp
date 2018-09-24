@@ -2,7 +2,8 @@
 /* Needs primes up to sqrt(N) - Use normal sieve to get them */
 
 namespace NT {
-
+  
+  const int MAX_N = 1123456;
   bitset<MAX_N> prime;
   vector<int> primes;
   vector<int> seg_primes;
@@ -33,7 +34,7 @@ namespace NT {
       }
     }
     for(int i=0; i<r-l+1; i++){
-      if(prime[i]){
+      if(prime[i] && l+i > 1){
         seg_primes.pb(l+i);
       }
     }

@@ -141,4 +141,8 @@ We can write them as:\\
 
 So, $n_1*k_1 + n_2(-k_2) = a_2 - a_1$. The system has answer modulo $lcm(n_1, n_2)$ only if $gcd(n_1,n_2)$ divides $a_2 - a_1$. We can merge these two equations to $x \equiv s (mod$ $n)$, where $s = a_1 + n_1*k_1$, $k_1$ given by the solution of the Diophantine Equation above, and $n = lcm(n_1, n_2)$. We can merge all equations of the system until we remain with only one.
 
+\subsection{2-SAT}
+
+Suppose we have a logical formula containing clauses with 2 literals each in conjuctive normal form. Given a clause $(x \lor y)$, we can translate it to $(\neg x \rightarrow y) \land (\neg y \rightarrow x)$. Now, just construct a graph with these implications and calculate the SCC's using Tarjan/Kosaraju's Algorithm. After that, you need to check if $x$ and $\not x$ are in the same component, $\forall x$. If it's yes for some literal, then we have a contradiction and the formula can't be satisfied.
+ 
 \end{document}

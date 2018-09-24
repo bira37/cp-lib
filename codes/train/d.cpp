@@ -25,76 +25,9 @@ int gcd(int a, int b){
   else return abs(__gcd(a,b));
 }
 
-/* Use upper_bound to swap to longest non decreasing subsequence */
-
-struct LIS{
-
-  vector<int> seq;
-  vector< ii > pointer;
-  int sz;
-  LIS() {}
-
-  LIS(int n){
-    seq.resize(n+1);
-    pointer.resize(n);
-  }
-  
-  void calculate(vector<int> & v){
-    int n = v.size();
-    vector<int> aux(n+1);
-    for(int i=1; i<=n; i++){
-      seq[i] = INT_MAX;
-      aux[i] = -1;
-    }
-    seq[0] = INT_MIN;
-    aux[0] = -1;
-    pointer[0] = ii(0,-1);
-    for(int i=0; i<n; i++){
-      int index = lower_bound(seq.begin(), seq.end(), v[i]) - seq.begin();
-      index--;
-      if(seq[index+1] > v[i]){
-        seq[index+1] = min(seq[index+1], v[i]);
-        aux[index+1] = i;  
-      }
-      pointer[i] = ii(index+1, aux[index]);
-    }
-    for(int i=n; i>=0; i--){
-      if(seq[i] != INT_MAX){
-        sz = i;
-        break;
-      }
-    }
-  }
-};
-
 int32_t main(){
   DESYNC;
-  int t;
-  cin >> t;
-  while(t--){
-    int n;
-    cin >> n;
-    vector<int> v(n);
-    set<int> s;
-    for(int i=0; i<n; i++){
-      cin >> v[i];
-      s.insert(v[i]);
-    }
-    vector<int> aux;
-    for(int x : s) aux.pb(x);
-    for(int i=0; i<n; i++) v[i] = lower_bound(aux.begin(), aux.end(), v[i]) - aux.begin();
-    int dp[n];
-    dp[0] = 1;
-    int ans = 1;
-    for(int i=1; i<n; i++){
-      dp[i] = 1;
-      for(int j=0; j<i; j++){
-        if(v[j] + 1 == v[i]) dp[i] = max(dp[i], dp[j]+1);
-      }
-      ans = max(ans, dp[i]);
-    }
-    cout << n - ans << endl;
-  }
+  
 }
 
 

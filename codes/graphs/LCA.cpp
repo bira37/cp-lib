@@ -1,14 +1,17 @@
 struct LCA {
   
   int tempo;
-  vector<int> st, ed, dad, anc[20];
+  vector<int> st, ed, dad, anc[20], L;
   vector<bool> vis;
   
-  void init(int n){
+  LCA() {}
+  
+  LCA(int n){
     tempo = 0;
     st.resize(n+1);
     ed.resize(n+1);
     dad.resize(n+1);
+    L.resize(n+1);
     for(int i=0; i<20; i++) anc[i].resize(n+1);
     vis.resize(n+1);
     for(int i=0; i<=n; i++) vis[i] = false;
@@ -39,9 +42,14 @@ struct LCA {
     }
     return dad[u];
   }
+  
+  int distance(int u, int v){
+    return L[u] + L[v] - 2*L[query(u,v)];
+  }
 
   void precalculate(){
     dad[1] = -1;
+    L[1] = 0;
     dfs(1);
     for(int i=1; i<st.size(); i++){
       anc[0][i] = dad[i];
