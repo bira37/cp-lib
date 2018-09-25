@@ -144,5 +144,9 @@ So, $n_1*k_1 + n_2(-k_2) = a_2 - a_1$. The system has answer modulo $lcm(n_1, n_
 \subsection{2-SAT}
 
 Suppose we have a logical formula containing clauses with 2 literals each in conjuctive normal form. Given a clause $(x \lor y)$, we can translate it to $(\neg x \rightarrow y) \land (\neg y \rightarrow x)$. Now, just construct a graph with these implications and calculate the SCC's using Tarjan/Kosaraju's Algorithm. After that, you need to check if $x$ and $\not x$ are in the same component, $\forall x$. If it's yes for some literal, then we have a contradiction and the formula can't be satisfied.
- 
+
+\subsection{Count Divisors of a Factorial}
+
+We need to find the prime divisors of the factorial and their exponents. The prime divisors of $n!$ are all prime numbers smaller or equal than $n$. Now, to find the exponent of each number we can loop through the powers of the primes dividing $n$ by $p^x$. The ans is $\prod_{p} (a_p+1)$, where $a_p$ is the exponent of $p$ in factorial.
+
 \end{document}
