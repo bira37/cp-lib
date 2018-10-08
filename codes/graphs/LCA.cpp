@@ -24,6 +24,7 @@ struct LCA {
       int v = adj[u][i];
       if(!vis[v]){
         dad[v] = u;
+        L[v] = L[u]+1;
         dfs(v);
       }
     } 
@@ -66,4 +67,4 @@ struct LCA {
     }
   }
   
-} lca;
+};

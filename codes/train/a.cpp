@@ -25,9 +25,39 @@ int gcd(int a, int b){
   else return abs(__gcd(a,b));
 }
 
+vector< ii > v;
+vector< bool > vis;
+int tot = 0;
+int d;
+
+int dist(ii a, ii b){
+  return (a.ff - b.ff)*(a.ff - b.ff) + (a.ss - b.ss)*(a.ss - b.ss);
+}
+
+void go(int u){
+  vis[u] = true;
+  tot++;
+  for(int i=0; i<v.size(); i++){
+    if(vis[i]) continue;
+    if(dist(v[u], v[i]) > d*d) continue;
+    go(i);
+  }
+}
+  
 int32_t main(){
   DESYNC;
-  
+  int n;
+  cin >> n >> d;
+  v.resize(n);
+  vis.resize(n);
+  for(int i=0; i<n; i++){
+    int x,y;
+    cin >> x >> y;
+    v[i] = ii(x,y);
+  }
+  go(0);
+  if(tot == n) cout << "S" << endl;
+  else cout << "N" << endl;
 }
 
 

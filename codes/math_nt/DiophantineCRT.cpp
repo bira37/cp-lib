@@ -31,8 +31,55 @@ namespace NT{
     int x,y;
     
     tie(x,y) = ExtendedEuclidean(a, b);
+    int s1 = x*(c/g), s2 = y*(c/g);
     
-    return make_tuple(x*(c/g), y*(c/g));
+    //shifts solution
+    int l = 0, r = 1e9;
+    int ans = -1;
+    while(l <= r){
+      int m = (l+r)>>1;
+      if(s2 + m*(a/g) >= 0){
+        ans = m;
+        r = m-1;
+      }
+      else l = m+1;
+    }
+    if(ans != -1){
+      s1 = s1 - ans*(b/g);
+      s2 = s2 + ans*(a/g);
+    }
+    
+    l = 0, r = 1e9;
+    ans = -1;
+    while(l <= r){
+      int m = (l+r)>>1;
+      if(s1 + m*(a/g) >= 0){
+        ans = m;
+        r = m-1;
+      }
+      else l = m+1;
+    }
+    if(ans != -1){
+      s1 = s1 + ans*(b/g);
+      s2 = s2 - ans*(a/g);
+    }
+    
+    l = 0, r = 1e9;
+    ans = -1;
+    while(l <= r){
+      int m = (l+r)>>1;
+      if(s1 - m*(a/g) <= s2 + m*(b/g)){
+        ans = m;
+        r = m-1;
+      }
+      else l = m+1;
+    }
+    if(ans != -1){
+      s1 = s1 - ans*(b/g);
+      s2 = s2 + ans*(a/g);
+    }
+    
+    return make_tuple(s1, s2);
   }
   
   bool FailCRT = false;

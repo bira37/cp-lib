@@ -37,20 +37,29 @@ struct SCC {
     }
   }
 
-  void calculate(int n){
+  void calculate(){
+    int n = vis.size()-1;
+    
     for(int i=0; i<=n; i++){
       vis[i] = false;
     }
+    
     for(int i=1; i<=n; i++){
       if(!vis[i]){
         dfs(i);
       }
     }
     
+    for(int i=1; i<=n; i++){
+      for(int v : adj[i]){
+        adj_t[v].pb(i);
+      }
+    }
+    
     vector< ii > vertex(n);
     
     for(int i=0; i<n; i++){
-      vis[i] = false;
+      vis[i+1] = false;
       vertex[i] = ii(i+1, ed[i+1]);
     }
     

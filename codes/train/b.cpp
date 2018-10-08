@@ -25,9 +25,42 @@ int gcd(int a, int b){
   else return abs(__gcd(a,b));
 }
 
+int dx[] = {0,1,0,-1,1,1,-1,-1};
+int dy[] = {1,0,-1,0,1,-1,-1,1};
+int tot = 0;
+int n,m,k,x,y;
+bool mat[500][500];
+
+bool valid(int a, int b){
+  return a >= 0 && b >= 0 && a < n && b < m && mat[a][b];
+}
+
+void go(int a, int b){
+  tot++;
+  mat[a][b] = false;
+  for(int k=0;  k<8; k++){
+    int nx = a + dx[k];
+    int ny = b + dy[k];
+    if(!valid(nx, ny)) continue;
+    go(nx, ny);
+  }
+}
+  
 int32_t main(){
   DESYNC;
-  
+  cin >> n >> m >> x >> y >> k;
+  for(int i=0; i<n; i++){
+    for(int j=0; j<m;j++) mat[i][j] = true;
+  }
+  while(k--){
+    int a,b;
+    cin>> a >> b;
+    a--,b--;
+    mat[a][b] = false;
+  }
+  x--,y--;
+  go(x,y);
+  cout << tot << endl;
 }
 
 
