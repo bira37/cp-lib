@@ -14,12 +14,12 @@ struct Tarjan{
   Tarjan(int n){
     st.resize(n+1);
     low.resize(n+1);
-    isArticulation(n+1);
+    isArticulation.resize(n+1);
     cont = 0;
     bridges.clear();
   }
   
-  void calculate(int u, int p){
+  void calculate(int u, int p = -1){
     st[u] = low[u] = ++cont;
     int son = 0;
     for(int i=0; i<adj[u].size(); i++){

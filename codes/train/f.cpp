@@ -25,127 +25,40 @@ int gcd(int a, int b){
   else return abs(__gcd(a,b));
 }
 
-vector<int> adj[5123];
-
-struct SCC {
-
-  vector< vector<int> > adj_t;
-  vector< vector<int> > scc_adj;
-  vector<int> ed;
-  int tempo,comp;
-  vector<bool> vis;
-  vector<int> scc;
-  
-  SCC() {}
-  
-  SCC(int n){
-    tempo = 0;
-    adj_t.resize(n+1, vector<int>());
-    scc_adj.resize(n+1, vector<int>());
-    ed.resize(n+1);
-    comp = 0;
-    vis.resize(n+1);
-    scc.resize(n+1);
-  }
-
-  void dfs(int u){
-    vis[u] = true;
-    for(int i=0; i<adj[u].size(); i++){
-      int v = adj[u][i];
-      if(!vis[v]) dfs(v);
-    }
-    ed[u] = ++tempo;
-  }
-
-  void dfst(int u, int comp){
-    scc[u] = comp;
-    vis[u] = true;
-    for(int i=0; i<adj_t[u].size(); i++){
-      int v = adj_t[u][i];
-      if(!vis[v]) dfst(v,comp);
-    }
-  }
-
-  void calculate(){
-    int n = vis.size()-1;
-    
-    for(int i=0; i<=n; i++){
-      vis[i] = false;
-    }
-    
-    for(int i=1; i<=n; i++){
-      if(!vis[i]){
-        dfs(i);
-      }
-    }
-    
-    for(int i=1; i<=n; i++){
-      for(int v : adj[i]){
-        adj_t[v].pb(i);
-      }
-    }
-    
-    vector< ii > vertex(n);
-    
-    for(int i=0; i<n; i++){
-      vis[i+1] = false;
-      vertex[i] = ii(i+1, ed[i+1]);
-    }
-    
-    sort(vertex.begin(), vertex.end(), [](const ii & a, const ii & b) { return a.ss > b.ss; });
-    
-    for(int i=0; i<vertex.size(); i++){
-      if(!vis[vertex[i].ff]){
-        comp++;
-        dfst(vertex[i].ff,comp);
-      }
-    }
-    for(int i=1; i<=n; i++){
-      for(int j=0; j<adj[i].size(); j++){
-        int v = adj[i][j];
-        scc_adj[scc[i]].push_back(scc[v]);
-      }
-    }
-  }
-  
-};
+int dist(ii a, ii b){
+  return abs(a.ff - b.ff) + abs(a.ss-b.ss);
+}
 
 int32_t main(){
   DESYNC;
-  int n, m;
-  while(cin >> n, n!=0){
-    cin >> m;
-    for(int i=0; i<=n; i++){
-      adj[i].clear();
-    }
-    for(int i=0; i<m; i++){
-      int u,v;
-      cin>> u >>v;
-      adj[u].pb(v);
-    }
-    
-    SCC kos(n);
-    
-    kos.calculate();
-    
-    set<int> discard;
-    
-    for(int i=1; i<=n; i++){
-      bool ok = true;
-      for(int v : adj[i]){
-        if(kos.scc[i] != kos.scc[v]) discard.insert(kos.scc[i]);
-      }
-    }
-    
-    bool space = false;
-    for(int i=1; i<=n; i++){
-      if(discard.count(kos.scc[i])) continue;
-      if(space) cout << " ";
-      else space = true;
-      cout << i;
-    }
-    cout << endl;
-  }       
+  map<int, vector< ii > > level;
+  level[0].pb(ii(0,0));
+  int n;
+  cin >> n;
+  for(int i=0; i<n; i++){
+    int a,b;
+    cin >> a >> b;
+    level[max(a,b)].pb(ii(a,b));
+  }
+  for(auto & it: level){
+    sort(it.ss.begin(), it.ss.end(), [](const ii & a, const ii & b){
+      return a.ff < b.ff || (a.ff == b.ff && a.ss > b.ss);
+    });
+  }
+  map< ii, int> dp;
+  dp[ii(0,0)] = 0;
+  dp[ii(0,1)] = 0;
+  int last = 0;
+  for(auto it : level){
+    if(it.ff == 0) continue;
+    ii last0 = *level[last].begin();
+    ii last1 = *level[last].rbegin();
+    int cur = it.ff;
+    ii cur0 = *it.ss.begin();
+    ii cur1 = *it.ss.rbegin();
+    dp[ii(cur, 0)] = min(dp[ii(last, 0)] + dist(last0, cur1) + dist(cur1, cur0), dp[ii(last, 1)] + dist(last1, cur1) + dist(cur1, cur0));
+    dp[ii(cur, 1)] = min(dp[ii(last, 0)] + dist(last0, cur0) + dist(cur0, cur1), dp[ii(last, 1)] + dist(last1, cur0) + dist(cur0, cur1));
+    last = cur;
+  }
+  cout << min(dp[ii(last, 0)], dp[ii(last, 1)]) << endl;    
 }
-
-

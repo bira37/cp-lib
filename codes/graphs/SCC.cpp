@@ -2,18 +2,16 @@ struct SCC {
 
   vector< vector<int> > adj_t;
   vector< vector<int> > scc_adj;
-  vector<int> ed;
-  int tempo,comp;
+  int comp;
   vector<bool> vis;
   vector<int> scc;
+  stack<int> vertex;
   
   SCC() {}
   
   SCC(int n){
-    tempo = 0;
     adj_t.resize(n+1, vector<int>());
     scc_adj.resize(n+1, vector<int>());
-    ed.resize(n+1);
     comp = 0;
     vis.resize(n+1);
     scc.resize(n+1);
@@ -25,7 +23,7 @@ struct SCC {
       int v = adj[u][i];
       if(!vis[v]) dfs(v);
     }
-    ed[u] = ++tempo;
+    vertex.push(u);
   }
 
   void dfst(int u, int comp){
@@ -56,25 +54,27 @@ struct SCC {
       }
     }
     
-    vector< ii > vertex(n);
-    
-    for(int i=0; i<n; i++){
-      vis[i+1] = false;
-      vertex[i] = ii(i+1, ed[i+1]);
+    for(int i=1; i<=n; i++){
+      vis[i] = false;
     }
     
-    sort(vertex.begin(), vertex.end(), [](const ii & a, const ii & b) { return a.ss > b.ss; });
-    
-    for(int i=0; i<vertex.size(); i++){
-      if(!vis[vertex[i].ff]){
+    while(!vertex.empty()){
+      if(!vis[vertex.top()]){
         comp++;
-        dfst(vertex[i].ff,comp);
+        dfst(vertex.top(),comp);
       }
+      vertex.pop();
     }
+    
+    //set< ii > edge_check; //eliminates duplicate edges (additional O(logn))
+    
     for(int i=1; i<=n; i++){
       for(int j=0; j<adj[i].size(); j++){
         int v = adj[i][j];
+        if(scc[i] == scc[v]) continue;
+        //if(edge_check.count(ii(scc[i], scc[v]))) continue; //eliminates duplicate edges (additional O(logn))
         scc_adj[scc[i]].push_back(scc[v]);
+        //edge_check.insert(ii(scc[i], scc[v])); //eliminates duplicate edges (additional O(logn))
       }
     }
   }
