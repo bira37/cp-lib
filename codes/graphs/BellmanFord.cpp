@@ -20,7 +20,7 @@ struct BellmanFord{
 
   void calculate(int source){
     for(int i=0; i<dist.size(); i++){
-      dist[i] = INT_MAX;
+      dist[i] = INF;
     }
     dist[source] = 0;
     for(int k=0; k<dist.size()-1; k++){
