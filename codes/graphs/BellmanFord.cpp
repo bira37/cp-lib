@@ -10,19 +10,16 @@ struct BellmanFord{
 
   vector<int> dist;
 
-  vector<edges> e;
-  
   bool cycle = false;
   
   BellmanFord(){}
   
-  BellmanFord(int n, int m){
+  BellmanFord(int n){
     dist.resize(n+1);
-    e.resize(m+1);
   }
 
   void calculate(int source){
-    for(int i=0; i<=dist.size(); i++){
+    for(int i=0; i<dist.size(); i++){
       dist[i] = INT_MAX;
     }
     dist[source] = 0;
