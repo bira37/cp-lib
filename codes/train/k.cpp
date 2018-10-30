@@ -25,61 +25,9 @@ int gcd(int a, int b){
   else return abs(__gcd(a,b));
 }
 
-vector<int> adj[3000];
-int n,k;
-
-int exp(int a, int k){
-  if(k == 0) return 1;
-  if(k == 1) return a;
-  
-  int mx = exp(a, k/2);
-  
-  mx = mod(mx*mx, M);
-  
-  if(k%2) mx = mod(mx*a, M);
-  
-  return mx;
-}
-
-int fat[3000];
-int inv[3000];
-
-void precalc(){
-  fat[0] = 1;
-  inv[0] = 1;
-  for(int i=1; i<3000; i++){
-    fat[i] = mod(fat[i-1]*i, M);
-    inv[i] = exp(fat[i], M-2);
-  }
-}
-
-int C(int n, int k){
-  return mod(fat[n] * mod(inv[n-k]*inv[k], M), M);
-}  
-  
 int32_t main(){
   DESYNC;
-  precalc();
-  cin >> n >> k;
-  for(int i=1; i<n; i++){
-    int v;
-    cin >> v;
-    adj[i].pb(v);
-    adj[v].pb(i);
-  }  
-  int ans[k+1];
   
-  
-  for(int c = 1; c <= k; c++){
-    ans[c] = mod(c*exp(c-1, n-1), M);
-  }
-  
-  int uhu = 0;
-  for(int c=1; c <= k; c++){
-    if((k-c)%2) uhu = mod(uhu - ans[c]*C(k, c), M);
-    else uhu = mod(uhu + ans[c]*C(k, c), M);
-  }
-  cout << uhu << endl;
 }
 
 
