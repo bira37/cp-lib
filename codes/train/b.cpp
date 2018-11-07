@@ -27,11 +27,30 @@ int gcd(int a, int b){
   else return abs(__gcd(a,b));
 }
 
-vector<bool> v;
-int n;
+int cst[17], p[17];
+double dp[(1LL<<17)][17];
+bool vis[(1LL<<17)][17];
+int n,c,m;
 
-int PA(int n){
-  return (n*(n+1))/2;
+double solve(int msk, int c){
+  if(c == 0) return 1.;
+  if(msk == (1LL<<n)-1) return 0;
+  if(vis[msk][c]) return dp[msk][c];
+  
+  dp[msk][c] = 0;
+  vis[msk][c] = true;
+  int tot = 0;
+  for(int i=0; i<n; i++){
+    if((1LL<<i) & msk) tot += cst[i];
+  }
+  
+  for(int i=0; i<n; i++){
+    if((1LL<<i) & msk) continue;
+    if(tot + cst[i] > m) continue;
+    dp[msk][c] = max(dp[msk][c], solve(msk | (1LL<<i), c-1)*(p[i]/100.) + solve(msk | (1LL<<i), c)*(1. - (p[i]/100.)));
+  }
+  
+  return dp[msk][c];
 }
 
 int32_t main(){
@@ -39,69 +58,17 @@ int32_t main(){
   int t;
   cin >> t;
   while(t--){
-    cin >> n;
-    v.clear();
-    v.resize(n);
+    cin >> n >> c >> m;
     for(int i=0; i<n; i++){
-      char c;
-      cin >> c;
-      if(c == '.') v[i] = false;
-      else v[i] = true;
+      cin >> cst[i] >> p[i];
     }
-    int l = 0;
-    int cnt = 0; 
-    int r = -1;
-    vector< ii > seg;
-    for(int i=0; i<n; i++){
-      if(v[i]) r = i;
-      else {
-        if(l <= r)
-          seg.pb(ii(l,r));
-        l = i+1;
+    for(int i=0; i<(1LL<<n); i++){
+      for(int j=0; j<=n; j++){
+        dp[i][j] = 0;
+        vis[i][j] = 0;
       }
     }
-    if(l <= r) seg.pb(ii(l,r));
-    if(seg.size() == 0){
-      cout << 0 << endl;
-      continue;
-    }
-    if(seg.size() == 1 && seg[0].ff == 0){
-      cout << 0 << endl;
-      continue;
-    }   
-    seg.pb(ii(n,n));
-    int ans = 0;
-    int cur = 0;
-    for(int i=0; i<n; i++){
-      if(v[i]){
-        ans += (i - cur);
-        cur++;
-      }
-    }
-    cout << ans << endl;
-    int acc = 0;
-    for(int i=0; i<(int)seg.size()-1; i++){
-      if(seg[i].ff == 0) continue;
-      int x = seg[i].ff;
-      int y = seg[i].ss;
-      int nxt = seg[i+1].ff;
-      int spaces = nxt - y - 1;
-      ans += 2*PA(y-x);
-      ans += 2*(y-x+1)*acc;
-      int need = y-x+1;
-      if(need < spaces){
-        spaces -= need;
-        int tira = min(acc, spaces);
-        acc -= tira;
-        spaces -= tira;
-      }
-      else {
-        need -= spaces;
-        acc += need;
-      }
-    }
-    if(!acc) cout << ans << endl;
-    else cout << -1 << endl;
+    cout << solve(0, c) << endl; 
   }
 }
 

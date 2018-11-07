@@ -27,9 +27,149 @@ int gcd(int a, int b){
   else return abs(__gcd(a,b));
 }
 
+template<typename T = int>
+struct LinkDsu{
+  vector<int> r;
+  vector<T> best;
+  LinkDsu(int n = 0){
+    r = vector<int>(n); iota(r.begin(), r.end(), 0);
+    best = vector<T>(n);
+  }
+
+  int find(int u) {
+    if (r[u] == u)
+      return u;
+    else {
+      int v = find(r[u]);
+      if (best[r[u]] < best[u]) best[u] = best[r[u]];
+      return r[u] = v;
+    }
+  }
+
+  T eval(int u){ find(u); return best[u]; }
+  void link(int p, int u) { r[u] = p; }
+  void set(int u, T x) { best[u] = x; }
+};
+
+struct DominatorTree{
+  typedef vector<vector<int>> Graph;
+  vector<int> semi, dom, parent, st, from;
+  Graph succ, pred, bucket;
+  int r, n, tempo;
+
+  void dfs(int u, int p){
+    semi[u] = u;
+    from[st[u] = tempo++] = u;
+    parent[u] = p;
+    for (int v : succ[u]) {
+      pred[v].push_back(u);
+      if (semi[v] == -1) { dfs(v, u); }
+    }
+  }
+
+  void build(){
+    n = succ.size();
+    dom.assign(n, -1);
+    semi.assign(n, -1);
+    parent.assign(n, -1);
+    st.assign(n, 0);
+    from.assign(n, -1);
+    pred = Graph(n, vector<int>());
+    bucket = Graph(n, vector<int>());
+    LinkDsu<pair<int,int>> dsu(n);
+    tempo = 0;
+
+    dfs(r, r);
+    for(int i = 0; i < n; i++) dsu.set(i, make_pair(st[i],  i));
+
+    for (int i = tempo - 1; i; i--) {
+      int u = from[i];
+      for (int v : pred[u]) {
+        int w = dsu.eval(v).second;
+        if (st[semi[w]] < st[semi[u]]) { semi[u] = semi[w]; }
+      }
+      dsu.set(u, make_pair(st[semi[u]], u));
+      bucket[semi[u]].push_back(u);
+      dsu.link(parent[u], u);
+      for(int v : bucket[parent[u]]) {
+        int w = dsu.eval(v).second;
+        dom[v] = semi[w] == parent[u] ? parent[u] : w;
+      }
+      bucket[parent[u]].clear();
+    }
+    for (int i = 1; i < tempo; i++) {
+      int u = from[i];
+      if (dom[u] != semi[u]) dom[u] = dom[dom[u]];
+    }
+  }
+
+  DominatorTree(const Graph & g, int s) : succ(g), r(s) {
+    build();
+  }
+};
+
+vector < ii > adj[212345];
+map< ii, int> id;
+vector< vector<int> > g;
+int d[212345];
+int ans[512345];
+int n, m;
+
+int go(int u, int p){
+  int sub = (u <= n);
+  for(int v : g[u]){
+    if(v == p) continue;
+    int got = go(v, u);
+    sub += got;
+  }
+  ans[u] = sub;
+  return sub;
+}
+   
 int32_t main(){
   DESYNC;
+  cin >> n >> m;
+  for(int i=0; i<=n; i++) d[i] = INF;
+  int a[m], b[m];
+  for(int i=0; i<m; i++){
+    int u,v,c;
+    cin >> u >> v >> c;
+    a[i] = min(u,v);
+    b[i] = max(u,v);
+    id[ii(a[i], b[i])] = n+1+i;
+    adj[u].pb(ii(v,c));
+    adj[v].pb(ii(u,c));
+  }
   
+  set< ii > s;
+  d[1] = 0;
+  s.insert(ii(d[1], 1));
+  while(!s.empty()){
+    int u = s.begin()->ss;
+    int cur = s.begin()->ff;
+    s.erase(s.begin());
+    if(cur != d[u]) continue;
+    for(ii v : adj[u]){
+      if(d[v.ff] > cur + v.ss){
+        d[v.ff] = cur + v.ss;
+        s.insert(ii(d[v.ff], v.ff));
+      }
+    }
+  }
+  g.resize(n+m+1, vector<int>());
+  for(int u=1; u<=n; u++){
+    for(ii v : adj[u]){
+      if(d[v.ff] == d[u] + v.ss){
+        int inter = id[ii(min(u,v.ff), max(u,  v.ff))];
+        g[u].pb(inter);
+        g[inter].pb(v.ff);
+      }
+    }
+  }
+  DominatorTree dt(g, 1);
+  for(int i=1; i<=n+m; i++) g[i].clear();
+  for(int i=1; i<=n+m; i++) if(dt.dom[i] != -1) g[dt.dom[i]].pb(i);
+  go(1, -1);
+  for(int i=0; i<m; i++) cout << ans[n+1+i] << endl;
 }
-
 
