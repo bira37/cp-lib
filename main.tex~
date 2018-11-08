@@ -99,9 +99,11 @@
 	\subsection{Segment Tree}{
 		\includecode{data_structures/SegmentTree.cpp}
 	}
+	\newpage
 	\subsection{Fenwick Tree}{
 		\includecode{data_structures/BIT.cpp}
 	}
+	\newpage
 	\subsection{Trie}{
 	  \includecode{data_structures/Trie.cpp}
 	}
@@ -117,9 +119,6 @@
 	\subsection{Lichao Segment Tree - Convex Hull Trick - Double Type}{
 	  \includecode{data_structures/LichaoDouble.cpp}
 	}
-	\subsection{Sparse Table}{
-	  \includecode{data_structures/SparseTable.cpp}
-	}
 }
 
 \newpage
@@ -130,81 +129,14 @@
 	\subsection{Longest Increasing Subsequence}{
 		\includecode{uncategorized/LIS.cpp}
 	}
-	\subsection{LIS 2D}{
-	  \includecode{uncategorized/LIS2D.cpp}
-	}
+	\newpage
 	\subsection{Inversion Count - Merge Sort}{
 	  \includecode{uncategorized/InversionCount.cpp}
 	}
+	\newpage
 	\subsection{Mo's Decomposition}{
 		\includecode{uncategorized/MosQueryDecomposition.cpp}
 	}
-}
-
-\section{Math and Number Theory}{
-  \subsection{Diophantine Equations + CRT}{
-    \includecode{math_nt/DiophantineCRT.cpp}
-  }
-  \subsection{Discrete Logarithm - Shanks Baby-Step Giant-Step}{
-    \includecode{math_nt/discrete_log.cpp}
-  }
-  \newpage
-	\subsection{Binomial Coefficient DP}{
-		\includecode{math_nt/binomial_coefficient.cpp}
-	}
-	\subsection{Erathostenes Sieve + Logn Prime Factorization}{
-		\includecode{math_nt/ErathostenesSieve.cpp}
-	}
-	\newpage
-	\subsection{Segmented Sieve}{
-	  \includecode{math_nt/SegmentedSieve.cpp}
-	}
-	\newpage
-	\subsection{Matrix Exponentiation}{
-		\includecode{math_nt/matrix_exponentiation.cpp}
-	}
-	\subsection{Fast Fourier Transform - Recursive and Iterative}{
-		\includecode{math_nt/FFT.cpp}
-	}
-	\subsection{Count Divisors in cbrt(n)}{
-	  \includecode{math_nt/CountDivisors.cpp}
-	}
-	\subsection{Count Prime Factors in cbrt(n)}{
-	  \includecode{math_nt/CountPrimeFactors.cpp}
-	}
-	\subsection{Shank's Baby Step Giant Step}{
-	  \includecode{math_nt/discrete_log.cpp}
-	}
-	\subsection{Diophantine Equations and CRT}{
-	  \includecode{math_nt/DiophantineCRT.cpp}
-	}
-	\subsection{Miller Rabin Primality Test}{
-	  \includecode{math_nt/MillerRabin.cpp}
-	}
-	\subsection{Sum of Divisors in a Range}{
-	  \includecode{math_nt/SumOfDivisors.cpp}
-	}
-}
-
-\section{String Algorithms}{
-	\subsection{KMP Failure Function + String Matching}{
-		\includecode{strings/KMP.cpp}
-	}
-	\subsection{Z-Function}{
-		\includecode{strings/zfunction.cpp}
-	}
-	\subsection{Suffix Array + Linear Sort}{
-		\includecode{strings/suffixarray.cpp}
-	}
-	\subsection{Rolling Hash}{
-		\includecode{strings/rollinghash.cpp}
-	}
-	\subsection{Aho-Corasick}{
-	  \includecode{strings/AhoCorasick.cpp}
-	}
-	\subsection{Suffix Automata - Tested ??}
-    \includecode{strings/SuffixAutomata.cpp}
-  }
 }
 
 \newpage
@@ -218,9 +150,6 @@
 	\newpage
 	\subsection{Convex Hull - Monotone Chain Algorithm}{
 		\includecode{geometry/convex_hull.cpp}
-	}
-	\subsection{Rotation in 3D}{
-	  \includecode{geometry/Rotation3D.cpp}
 	}
 }
 
@@ -261,17 +190,49 @@
 	\subsection{LCA}{
 	  \includecode{graphs/LCA.cpp}
 	}
-	\subsection{Block-Cut Tree}{
-	  \includecode{graphs/BlockCutTree.cpp}
+}
+
+\section{Math and Number Theory}{
+  \subsection{Diophantine Equations + CRT}{
+    \includecode{math_nt/DiophantineCRT.cpp}
+  }
+  \subsection{Discrete Logarithm - Shanks Baby-Step Giant-Step}{
+    \includecode{math_nt/discrete_log.cpp}
+  }
+  \newpage
+	\subsection{Binomial Coefficient DP}{
+		\includecode{math_nt/binomial_coefficient.cpp}
 	}
-	\subsection{Dominator Tree}{
-	  \includecode{graphs/DominatorTree.cpp}
+	\subsection{Erathostenes Sieve + Logn Prime Factorization}{
+		\includecode{math_nt/ErathostenesSieve.cpp}
 	}
-	\subsection{Minimum Path Cover Problem On DAG's}{
-	  \includecode{graphs/min_path.cpp}
+	\newpage
+	\subsection{Segmented Sieve}{
+	  \includecode{math_nt/SegmentedSieve.cpp}
 	}
-	\subsection{Stoer-Wagner Minimum Cut in Undirected Graphs}{
-	  \includecode{graphs/StoerWagner.cpp}
+	\newpage
+	\subsection{Matrix Exponentiation}{
+		\includecode{math_nt/matrix_exponentiation.cpp}
+	}
+	\subsection{Fast Fourier Transform - Recursive and Iterative}{
+		\includecode{math_nt/FFT.cpp}
+	}
+}
+
+\section{String Algorithms}{
+	\subsection{KMP Failure Function + String Matching}{
+		\includecode{strings/KMP.cpp}
+	}
+	\newpage
+	\subsection{Z-Function}{
+		\includecode{strings/zfunction.cpp}
+	}
+	\subsection{Suffix Array + Linear Sort}{
+		\includecode{strings/suffixarray.cpp}
+	}
+	\newpage
+	\subsection{Rolling Hash}{
+		\includecode{strings/rollinghash.cpp}
 	}
 }
 
