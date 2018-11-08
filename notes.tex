@@ -149,4 +149,18 @@ Suppose we have a logical formula containing clauses with 2 literals each in con
 
 We need to find the prime divisors of the factorial and their exponents. The prime divisors of $n!$ are all prime numbers smaller or equal than $n$. Now, to find the exponent of each number we can loop through the powers of the primes dividing $n$ by $p^x$. The ans is $\prod_{p} (a_p+1)$, where $a_p$ is the exponent of $p$ in factorial.
 
+\subsection{Minimum Vertex Cover - Bipartite Graphs (copy-paste from stack-overflow :D)}
+
+Let's say you have G = (V, E) a bipartite graph, separated between X and Y.
+
+As you said, first you have to find a maximum matching (which can be achieved with Dinic's algorithm for instance). Let's call M this maximum matching.
+
+Then to construct your minimum vertex cover:
+
+Find U the set (possibly empty) of unmatched vertices in X1, ie. not connected to any edge in M
+
+Build Z the set or vertices either in U, or connected to U by alternating paths (paths that alternate between edges of M and edges not in M)
+
+Then K = (X \ Z) U (Y ∩ Z) is your minimum vertex cover
+
 \end{document}

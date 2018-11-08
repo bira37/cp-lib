@@ -1,20 +1,16 @@
 struct ConvexHullTrick {
   //max cht, suppose lines are added in crescent order of a  
-  vector<line> cht; 
   ConvexHullTrick() {}
   struct line{
     int id, a, b;
     line() {}
     line(int id, int a, int b) : id(id), a(a), b(b) {}
   };
-  bool cmp(const line & a, const line & b){
-    return (a.a < b.a || (a.a == b.a && a.b > b.b));
-  } 
   bool remove(line & a, line & b, line & c){
     if((a.a - c.a)*(c.b - b.b) <= (b.a - c.a)*(c.b - a.b)) return true;
     else return false;
   }
-
+  vector<line> cht; 
   void add(line & v){
     if(cht.empty()){
       cht.push_back(v);
@@ -29,7 +25,9 @@ struct ConvexHullTrick {
   }
 
   void preprocess_cht(vector< line > & v){
-    sort(v.begin(), v.end(), cmp);
+    sort(v.begin(), v.end(), [](const line & a, const line & b){
+      return (a.a < b.a || (a.a == b.a && a.b > b.b));
+    });
     cht.clear();
     for(int i=0; i<v.size(); i++){
       add(v[i]);
@@ -41,9 +39,9 @@ struct ConvexHullTrick {
   }
   
   //return line index
-  int query(int x){
-    if(cht.size() == 0) return -1;
-    if(cht.size() == 1) return 0;
+  ii query(int x){
+    if(cht.size() == 0) return ii(-INF,-INF);
+    if(cht.size() == 1) return ii(f(0, x), cht[0].id);
     int l = 0, r = cht.size()-2;
     int ans= cht.size()-1;
     while(l <= r){
@@ -56,7 +54,7 @@ struct ConvexHullTrick {
       }
       else l = m+1;
     }
-    return ans;
+    return ii(f(ans, x), cht[ans].id);
   }
 
 };

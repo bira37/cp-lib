@@ -29,7 +29,11 @@ int gcd(int a, int b){
 
 int32_t main(){
   DESYNC;
-  
+  int v[3];
+  cin>> v[0] >> v[1] >> v[2];
+  sort(v, v+3);
+  int val = v[0] + v[1];
+  cout << max(0LL, v[2] - val + 1) << endl;
 }
 
 
