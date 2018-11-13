@@ -6,7 +6,7 @@
 #define ss second
 #define endl '\n'
 #define ii pair<int, int>
-#define mp make_tuple
+#define mp make_pair
 #define mt make_tuple
 #define DESYNC ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
 #define pb push_back
@@ -29,7 +29,19 @@ int gcd(int a, int b){
 
 int32_t main(){
   DESYNC;
-  
+  int n,l;
+  while(cin >> n >> l, n != 0 && l != 0){
+    vector<int> v(l);
+    for(int i=0; i<l; i++) cin >> v[i];
+    int ans = INF;
+    for(int i=0; i<l; i++){
+      int idx = upper_bound(v.begin(), v.end(), v[i] + n-1) - v.begin();
+      idx--;
+      ans = min(ans, n - (idx-i+1));
+    }
+    cout << ans << endl;
+  }
+      
 }
 
 

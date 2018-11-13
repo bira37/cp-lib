@@ -6,7 +6,7 @@
 #define ss second
 #define endl '\n'
 #define ii pair<int, int>
-#define mp make_tuple
+#define mp make_pair
 #define mt make_tuple
 #define DESYNC ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
 #define pb push_back

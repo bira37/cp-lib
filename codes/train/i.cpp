@@ -6,7 +6,7 @@
 #define ss second
 #define endl '\n'
 #define ii pair<int, int>
-#define mp make_tuple
+#define mp make_pair
 #define mt make_tuple
 #define DESYNC ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0)
 #define pb push_back
@@ -27,9 +27,32 @@ int gcd(int a, int b){
   else return abs(__gcd(a,b));
 }
 
+double fat[11234567+1];
+
 int32_t main(){
   DESYNC;
-  
+  fat[0] = 0;
+  for(int i=1; i<=11234567; i++){
+    fat[i] = fat[i-1] + log(i);
+  }
+  int t;
+  cin >> t;
+  while(t--){
+    int a; cin >> a;
+    int l = 0, r = 11234567;
+    int ans = 0;
+    while(l <= r){
+      int m = (l+r)>>1;
+      if(fat[m] < m*log(a)){
+        l = m+1;
+      }
+      else{
+        ans = m;
+        r = m-1;
+      }
+    }
+    cout << ans << endl;
+  }
 }
 
 

@@ -100,8 +100,8 @@ namespace NT{
         return make_tuple(0,0);
       }
       
-      ans = mod(ans + (x*(a[i] - ans)/g)%(n[i]/g) * modulo, modulo*n[i]/g);
-      modulo = modulo*n[i]/g;
+      ans = mod(ans + (x*((a[i] - ans)/g))%(n[i]/g) * modulo, modulo*(n[i]/g));
+      modulo = modulo*(n[i]/g);
     }
     
     return make_tuple(ans, modulo); 

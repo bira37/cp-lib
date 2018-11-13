@@ -305,7 +305,7 @@ namespace Geo2D {
   vector<Point> intersectionLineCircle(Line l, Circle circ){
     //NOT TESTED!!!!!!!!
     //no intersection
-    if((l.c*l.c)/(circ.r*circ.r) > l.a*l.a + l.b*l.b) return vector<Point>();
+    if((l.c*l.c)/(circ.r*circ.r) > l.a*l.a + l.b*l.b + EPS) return vector<Point>();
     
     double x0 = -l.a*l.c/(l.a*l.a+l.b*l.b), y0 = -l.b*l.c/(l.a*l.a+l.b*l.b);
     //one intersection

@@ -1,5 +1,5 @@
-\contentsline {section}{\numberline {1}Template}{1}
-\contentsline {subsection}{\numberline {1.1}Template Code}{1}
+\contentsline {section}{\numberline {1}Template}{2}
+\contentsline {subsection}{\numberline {1.1}Template Code}{2}
 \contentsline {section}{\numberline {2}Data Structures}{2}
 \contentsline {subsection}{\numberline {2.1}Dynamic Segment Tree}{2}
 \contentsline {subsection}{\numberline {2.2}Segment Tree}{3}
@@ -14,46 +14,44 @@
 \contentsline {subsection}{\numberline {3.1}Coordinate Compression}{6}
 \contentsline {subsection}{\numberline {3.2}Longest Increasing Subsequence}{6}
 \contentsline {subsection}{\numberline {3.3}LIS 2D}{7}
-\contentsline {subsection}{\numberline {3.4}Inversion Count - Merge Sort}{7}
+\contentsline {subsection}{\numberline {3.4}Inversion Count - Merge Sort}{8}
 \contentsline {subsection}{\numberline {3.5}Mo's Decomposition}{8}
 \contentsline {section}{\numberline {4}Math and Number Theory}{8}
-\contentsline {subsection}{\numberline {4.1}Diophantine Equations + CRT}{8}
+\contentsline {subsection}{\numberline {4.1}Binomial Coefficient DP}{8}
 \contentsline {subsection}{\numberline {4.2}Discrete Logarithm - Shanks Baby-Step Giant-Step}{9}
-\contentsline {subsection}{\numberline {4.3}Binomial Coefficient DP}{10}
-\contentsline {subsection}{\numberline {4.4}Erathostenes Sieve + Logn Prime Factorization}{10}
-\contentsline {subsection}{\numberline {4.5}Segmented Sieve}{10}
+\contentsline {subsection}{\numberline {4.3}Erathostenes Sieve + Logn Prime Factorization}{9}
+\contentsline {subsection}{\numberline {4.4}Diophantine Equations + CRT}{10}
+\contentsline {subsection}{\numberline {4.5}Segmented Sieve}{11}
 \contentsline {subsection}{\numberline {4.6}Matrix Exponentiation}{11}
 \contentsline {subsection}{\numberline {4.7}Fast Fourier Transform - Recursive and Iterative}{11}
-\contentsline {subsection}{\numberline {4.8}Count Divisors in cbrt(n)}{12}
-\contentsline {subsection}{\numberline {4.9}Count Prime Factors in cbrt(n)}{12}
-\contentsline {subsection}{\numberline {4.10}Shank's Baby Step Giant Step}{12}
-\contentsline {subsection}{\numberline {4.11}Diophantine Equations and CRT}{13}
-\contentsline {subsection}{\numberline {4.12}Miller Rabin Primality Test}{14}
-\contentsline {subsection}{\numberline {4.13}Sum of Divisors in a Range}{14}
+\contentsline {subsection}{\numberline {4.8}Count Divisors in cbrt(n)}{13}
+\contentsline {subsection}{\numberline {4.9}Count Prime Factors in cbrt(n)}{13}
+\contentsline {subsection}{\numberline {4.10}Miller Rabin Primality Test}{13}
+\contentsline {subsection}{\numberline {4.11}Sum of Divisors in a Range}{14}
 \contentsline {section}{\numberline {5}String Algorithms}{14}
 \contentsline {subsection}{\numberline {5.1}KMP Failure Function + String Matching}{14}
-\contentsline {subsection}{\numberline {5.2}Z-Function}{15}
+\contentsline {subsection}{\numberline {5.2}Z-Function}{14}
 \contentsline {subsection}{\numberline {5.3}Suffix Array + Linear Sort}{15}
 \contentsline {subsection}{\numberline {5.4}Rolling Hash}{16}
 \contentsline {subsection}{\numberline {5.5}Aho-Corasick}{16}
 \contentsline {subsection}{\numberline {5.6}Suffix Automata - Tested ??}{17}
 \contentsline {section}{\numberline {6}Geometry}{19}
 \contentsline {subsection}{\numberline {6.1}2D Structures}{19}
-\contentsline {subsection}{\numberline {6.2}2D Geometry Functions}{21}
+\contentsline {subsection}{\numberline {6.2}2D Geometry Functions}{20}
 \contentsline {subsection}{\numberline {6.3}Convex Hull - Monotone Chain Algorithm}{25}
 \contentsline {subsection}{\numberline {6.4}Rotation in 3D}{26}
-\contentsline {section}{\numberline {7}Graphs}{27}
-\contentsline {subsection}{\numberline {7.1}Dynammic Connectivity - connected(u,v) query}{27}
-\contentsline {subsection}{\numberline {7.2}Bellman Ford Shortest Path}{28}
+\contentsline {section}{\numberline {7}Graphs}{26}
+\contentsline {subsection}{\numberline {7.1}Dynammic Connectivity - connected(u,v) query}{26}
+\contentsline {subsection}{\numberline {7.2}Bellman Ford Shortest Path}{27}
 \contentsline {subsection}{\numberline {7.3}Eulerian Circuits/Paths}{28}
-\contentsline {subsection}{\numberline {7.4}Kosaraju SCC}{29}
+\contentsline {subsection}{\numberline {7.4}Kosaraju SCC}{28}
 \contentsline {subsection}{\numberline {7.5}Centroid Decomposition}{29}
-\contentsline {subsection}{\numberline {7.6}Floyd Warshall Shortest Path}{30}
+\contentsline {subsection}{\numberline {7.6}Floyd Warshall Shortest Path}{29}
 \contentsline {subsection}{\numberline {7.7}Tarjan's Bridge/Articulations Algorithm}{30}
-\contentsline {subsection}{\numberline {7.8}Max Flow Dinic's Algorithm}{31}
-\contentsline {subsection}{\numberline {7.9}HLD}{32}
-\contentsline {subsection}{\numberline {7.10}LCA}{34}
+\contentsline {subsection}{\numberline {7.8}Max Flow Dinic's Algorithm}{30}
+\contentsline {subsection}{\numberline {7.9}HLD}{31}
+\contentsline {subsection}{\numberline {7.10}LCA}{33}
 \contentsline {subsection}{\numberline {7.11}Block-Cut Tree}{34}
-\contentsline {subsection}{\numberline {7.12}Dominator Tree}{35}
+\contentsline {subsection}{\numberline {7.12}Dominator Tree}{34}
 \contentsline {subsection}{\numberline {7.13}Minimum Path Cover Problem On DAG's}{35}
-\contentsline {subsection}{\numberline {7.14}Stoer-Wagner Minimum Cut in Undirected Graphs}{36}
+\contentsline {subsection}{\numberline {7.14}Stoer-Wagner Minimum Cut in Undirected Graphs}{35}

@@ -9,17 +9,14 @@ namespace SegmentTree{
   struct Tree{
     vector<node> st;
     Tree(){}
-    
     Tree(int n){
       st.resize(4*n);
     }
-  
     node combine(node a, node b){
       node res;
       //combine operations
       return res;
     }
-
     void propagate(int cur, int l , int r){
       //return if there is no update
       //update tree using lazy node
@@ -28,18 +25,15 @@ namespace SegmentTree{
       }
       //reset lazy node
     }
-    
     void build(int cur, int l, int r){
       if(l == r){
         //leaf operation
         return;
       }
-      
       int m = (l+r)>>1;
       build(2*cur, l, m);
       build(2*cur + 1, m+1, r);
       st[cur] = combine(st[2*cur], st[2*cur+1]);
-      
     }
 
     void range_update(int cur, int l, int r, int a, int b, long long val){
