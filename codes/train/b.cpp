@@ -23,27 +23,13 @@ using namespace std;
 inline int mod(int n, int m){ int ret = n%m; if(ret < 0) ret += m; return ret; }
 
 int gcd(int a, int b){
-  if(a == 0 || b == 0) return 0;
-  else return abs(__gcd(a,b));
-}
-
-int go(int n){
-  if(n%2 == 0) return n/2;
-  if(n == 0) return 0;
-  for(int i=2; i<=sqrt(n); i++){
-    if(n%i == 0){
-      return 1 + go(n-i);
-    }
-  }
-  return 1 + go(0);
+  if(a == 0) return b;
+  else return gcd(b%a, a);
 }
 
 int32_t main(){
   DESYNC;
-  int n;
-  cin >> n;
-  cout << go(n) << endl;
-    
+  
 }
 
 

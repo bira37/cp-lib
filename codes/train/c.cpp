@@ -23,37 +23,37 @@ using namespace std;
 inline int mod(int n, int m){ int ret = n%m; if(ret < 0) ret += m; return ret; }
 
 int gcd(int a, int b){
-  if(a == 0 || b == 0) return 0;
-  else return abs(__gcd(a,b));
+  if(a == 0) return b;
+  else return gcd(b%a, a);
+}
+
+int n,k,a,b;
+vector<int> v;
+
+int go(int l, int r){
+  auto lef = lower_bound(v.begin(), v.end(), l);
+  auto rig = upper_bound(v.begin(), v.end(), r);
+  int av = rig - lef;
+  if(l == r){
+    if(av > 0) return b*av;
+    else return a;
+  }
+  if(av == 0){
+    return a;
+  }
+  int m = (l+r)/2;
+  return min(b*av*(r-l+1), go(l,m) + go(m+1, r));
 }
 
 int32_t main(){
   DESYNC;
-  int t;
-  cin >> t;
-  cout << fixed << setprecision(9) << endl;
-loop:  while(t--){
-    int d;
-    cin >> d;
-    int delt = d*d - 4*d;
-    if(delt < 0){
-      cout << "N" << endl;
-      goto loop;
-    }
-    double x1 = (-d + sqrt(delt))/(-2.0);
-    double x2 = (-d - sqrt(delt))/(-2.0);
-    if(x1 >= 0 && d - x1 >= 0){
-      cout << "Y" << " ";
-      cout << abs(x1) << " " << abs(d-x1) << endl;
-      goto loop;
-    }
-    if(x2 >= 0 && d - x2 >= 0){
-      cout << "Y" << " ";
-      cout << abs(x2) << " " << abs(d-x2) << endl;
-      goto loop;
-    }
-    cout << "N" << endl;
-  }   
+  cin >> n >> k >> a >> b;
+  n = (1LL<<n);
+  v.resize(k);
+  for(int i=0; i<k; i++) cin >> v[i];
+  sort(v.begin(), v.end());
+  int ans = go(1, n);
+  cout << ans << endl;
 }
 
 

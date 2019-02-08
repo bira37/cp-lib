@@ -23,8 +23,8 @@ using namespace std;
 inline int mod(int n, int m){ int ret = n%m; if(ret < 0) ret += m; return ret; }
 
 int gcd(int a, int b){
-  if(a == 0 || b == 0) return 0;
-  else return abs(__gcd(a,b));
+  if(a == 0) return b;
+  else return gcd(b%a, a);
 }
 
 int32_t main(){

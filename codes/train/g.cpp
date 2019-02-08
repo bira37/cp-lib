@@ -23,25 +23,13 @@ using namespace std;
 inline int mod(int n, int m){ int ret = n%m; if(ret < 0) ret += m; return ret; }
 
 int gcd(int a, int b){
-  if(a == 0 || b == 0) return 0;
-  else return abs(__gcd(a,b));
+  if(a == 0) return b;
+  else return gcd(b%a, a);
 }
 
 int32_t main(){
   DESYNC;
-  int n,l;
-  while(cin >> n >> l, n != 0 && l != 0){
-    vector<int> v(l);
-    for(int i=0; i<l; i++) cin >> v[i];
-    int ans = INF;
-    for(int i=0; i<l; i++){
-      int idx = upper_bound(v.begin(), v.end(), v[i] + n-1) - v.begin();
-      idx--;
-      ans = min(ans, n - (idx-i+1));
-    }
-    cout << ans << endl;
-  }
-      
+  
 }
 
 
