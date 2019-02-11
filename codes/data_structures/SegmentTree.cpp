@@ -13,7 +13,7 @@ namespace SegmentTree{
     int lazy = 0;
     node(){}
     node(int val, int lazy) : val(val), lazy(lazy) {}
-    static node neutral(){ return node(0,0); };
+    node neutral(){ return node(0,0); };
     bool no_update() { return lazy == 0; }
     void update_lazy(val_type val) {lazy += val.val;}
     void apply(int l, int r) { val += (r-l+1)*lazy; }
@@ -54,7 +54,7 @@ namespace SegmentTree{
     }
     node_t query(int cur, int l, int r, int a, int b){
       propagate(cur, l, r);
-      if(b < l || r < a) return node::neutral();
+      if(b < l || r < a) return st[cur].neutral();
       if(a <= l && r <= b) return st[cur];
       int m = (l+r)/2;
       node_t left = query(2*cur, l, m, a, b);
