@@ -29,35 +29,7 @@ int gcd(int a, int b){
 
 int32_t main(){
   DESYNC;
-  int n,m,k;
-  cin >> n >> m >> k;
-  int v[n];
-  vector<bool> mk(n, false);
-  vector< ii > s;
-  for(int i=0; i<n; i++){
-    cin >> v[i]; 
-    s.pb(ii(v[i], i));
-  }
-  sort(s.begin(), s.end(), greater< ii > ());
-  for(int i=0; i<m*k; i++){
-    mk[s[i].ss] = true;
-  }
-  vector<int> ans;
-  int val = 0;
-  int cur = 0;
-  int active = 0;
-  for(int i=0; i<n; i++){
-    active += mk[i];
-    val += mk[i]*v[i];
-    if(active == m){
-      ans.pb(i);
-      active = 0;
-    }
-  }
-  cout << val << endl;
-  ans.pop_back();
-  for(int x : ans) cout << x+1 << " ";
-  cout << endl;
+  
 }
 
 

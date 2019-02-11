@@ -1,77 +1,66 @@
 namespace SegmentTree{
-  
-  struct node{
-    //attributes of node
-    int lazy = 0;
-    node() {}
-  };
 
-  struct Tree{
-    vector<node> st;
+  //val type example
+  struct val_type{
+    int val;
+    val_type() {}
+    val_type(int val) : val(val){}
+  };
+  
+  //node type example
+  struct node{
+    int val = 0;
+    int lazy = 0;
+    node(){}
+    node(int val, int lazy) : val(val), lazy(lazy) {}
+    static node neutral(){ return node(0,0); };
+    bool no_update() { return lazy == 0; }
+    void update_lazy(val_type val) {lazy += val.val;}
+    void apply(int l, int r) { val += (r-l+1)*lazy; }
+    void reset_lazy() { lazy = 0; }
+    node propagate(node b) { b.lazy += lazy; return b; }
+    node combine(node b) { node ans; ans.val = b.val + val; return ans; }
+  };
+  
+  template<class node_t, class update_t>
+  class Tree{
+  public:
+    vector<node_t> st;
     Tree(){}
     Tree(int n){
       st.resize(4*n);
-    }
-    node combine(node a, node b){
-      node res;
-      //combine operations
-      return res;
-    }
+    } 
     void propagate(int cur, int l , int r){
-      //return if there is no update
-      //update tree using lazy node
+      if(st[cur].no_update()) return;
+      st[cur].apply(l, r);
       if(l != r){
-        //propagate for left and right child
+        st[2*cur] = st[cur].propagate(st[2*cur]);
+        st[2*cur+1] = st[cur].propagate(st[2*cur+1]);
       }
-      //reset lazy node
+      st[cur].reset_lazy();
     }
-    void build(int cur, int l, int r){
-      if(l == r){
-        //leaf operation
+    void update(int cur, int l, int r, int a, int b, update_t val){
+      propagate(cur, l, r);
+      if(b < l || r < a) return;
+      if(a <= l && r <= b){
+        st[cur].update_lazy(val);
+        propagate(cur, l, r);
         return;
       }
-      int m = (l+r)>>1;
-      build(2*cur, l, m);
-      build(2*cur + 1, m+1, r);
-      st[cur] = combine(st[2*cur], st[2*cur+1]);
-    }
-
-    void range_update(int cur, int l, int r, int a, int b, long long val){
-      propagate(cur, l, r);
-      if(l == a && r == b){
-        //lazy operation using val
-        return;
-      }
-  
       int m = (l+r)/2;
-  
-      if(b <= m) range_update(2*cur, l, m, a, b, val);
-      else if(m < a) range_update(2*cur+1, m+1, r, a, b, val);
-      else {
-        range_update(2*cur, l, m, a, m, val);
-        range_update(2*cur+1, m+1, r, m+1, b, val);
-      }
-  
-      propagate(cur, l , r);
-      propagate(2*cur, l, m);
-      propagate(2*cur+1, m+1, r);
-      st[cur] = combine(st[2*cur], st[2*cur+1]);
+      update(2*cur, l, m, a, b, val);
+      update(2*cur+1, m+1, r, a, b, val);
+      st[cur] = st[2*cur].combine(st[2*cur+1]);
     }
-
-    node query(int cur, int l, int r, int a, int b){
+    node_t query(int cur, int l, int r, int a, int b){
       propagate(cur, l, r);
-      if(l == a && r == b) return st[cur];
-  
+      if(b < l || r < a) return node::neutral();
+      if(a <= l && r <= b) return st[cur];
       int m = (l+r)/2;
-      if(b <= m) return query(2*cur, l, m, a, b);
-      else if(m < a) return query(2*cur+1, m+1, r, a, b);
-      else {
-        node left = query(2*cur, l, m, a, m);
-        node right = query(2*cur+1, m+1, r, m+1, b);
-        node ans = combine(left, right);
-        return ans;
-      }
+      node_t left = query(2*cur, l, m, a, b);
+      node_t right = query(2*cur+1, m+1, r, a, b);
+      node_t ans = left.combine(right);
+      return ans;
     }
   };
-  
 }

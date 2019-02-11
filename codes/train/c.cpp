@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 
-#define int long long
+#define int unsigned long long
 #define double long double
 #define ff first
 #define ss second
@@ -27,32 +27,38 @@ int gcd(int a, int b){
   else return gcd(b%a, a);
 }
 
-int n,k,a,b;
-vector<int> v;
-
-int go(int l, int r){
-  auto lef = lower_bound(v.begin(), v.end(), l);
-  auto rig = upper_bound(v.begin(), v.end(), r);
-  int av = rig - lef;
-  if(l == r){
-    if(av > 0) return b*av;
-    else return a;
+int legendre(int n, int p){
+  int cur = p;
+  int cnt = 0;
+  while(cur <= n){
+    cnt += n/cur;
+    if(cur > n/p) break;
+    cur *=p;
   }
-  if(av == 0){
-    return a;
-  }
-  int m = (l+r)/2;
-  return min(b*av*(r-l+1), go(l,m) + go(m+1, r));
+  return cnt;
 }
+
+vector< ii > f;
 
 int32_t main(){
   DESYNC;
-  cin >> n >> k >> a >> b;
-  n = (1LL<<n);
-  v.resize(k);
-  for(int i=0; i<k; i++) cin >> v[i];
-  sort(v.begin(), v.end());
-  int ans = go(1, n);
+  int n, k;
+  cin >> n >> k;
+  f.clear();
+  for(int i=2; i<=sqrt(k); i++){
+    if(k%i == 0){
+      f.push_back(ii(i, 0));
+      while(k%i == 0){
+        k/=i;
+        f.back().ss++;
+      }
+    }
+  }
+  if(k != 1) f.push_back(ii(k, 1));
+  int ans = ULLONG_MAX;
+  for(ii p : f){
+    ans = min(legendre(n, p.ff)/p.ss, ans);
+  }
   cout << ans << endl;
 }
 
