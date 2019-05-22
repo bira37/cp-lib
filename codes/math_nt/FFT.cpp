@@ -6,6 +6,7 @@
 /* Remember to use round to get integer value of Coefficients of Poly C */
 /* Iterative FFT is way faster (bit reversal idea + straightforward conquer for each block of each size) */
 /* std::complex doubles the execution time */
+/* FastConvolution receives a Poly A+Bi, and multiply A*B (imaginary part doesn't remains the same)*/
 
 namespace FFT{
 
@@ -137,7 +138,21 @@ namespace FFT{
     return F_C;
   }
   
-  Poly multiply(Poly & A, Poly & B){
+  Poly FastMultiply(Poly & A){
+    Poly C(A.size());
+    
+    DFT(A, false);
+    
+    for(int i=0; i<A.size(); i++) A.c[i] = A.c[i]*A.c[i];
+    
+    DFT(A, true);
+    
+    for(int i=0; i<A.size(); i++) C.c[i] = Complex(A.c[i].b/2, 0);
+    
+    return C;
+  }
+  
+  Poly Multiply(Poly & A, Poly & B){
     DFT(A, false);
   
     DFT(B, false);

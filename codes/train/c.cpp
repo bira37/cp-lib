@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 
-#define int unsigned long long
+#define int long long
 #define double long double
 #define ff first
 #define ss second
@@ -27,39 +27,19 @@ int gcd(int a, int b){
   else return gcd(b%a, a);
 }
 
-int legendre(int n, int p){
-  int cur = p;
-  int cnt = 0;
-  while(cur <= n){
-    cnt += n/cur;
-    if(cur > n/p) break;
-    cur *=p;
-  }
-  return cnt;
-}
+void solve(){
 
-vector< ii > f;
+}
 
 int32_t main(){
   DESYNC;
-  int n, k;
-  cin >> n >> k;
-  f.clear();
-  for(int i=2; i<=sqrt(k); i++){
-    if(k%i == 0){
-      f.push_back(ii(i, 0));
-      while(k%i == 0){
-        k/=i;
-        f.back().ss++;
-      }
-    }
+  int t;
+  cin >> t;
+  int tt = 1;
+  while(t--){
+    cout << "Case " << tt++ << ": ";
+    solve();
   }
-  if(k != 1) f.push_back(ii(k, 1));
-  int ans = ULLONG_MAX;
-  for(ii p : f){
-    ans = min(legendre(n, p.ff)/p.ss, ans);
-  }
-  cout << ans << endl;
 }
 
 

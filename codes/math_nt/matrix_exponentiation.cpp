@@ -13,6 +13,7 @@ struct Matrix{
       for(int j = 0; j<b.m[0].size(); j++){
         for(int k = 0; k<b.m.size(); k++){
           c.m[i][j] += (m[i][k]*b.m[k][j]);
+          //c.m[i][j] = mod(c.m[i][j], M);
         }
       }
     }

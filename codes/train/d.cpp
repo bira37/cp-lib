@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 
+#define int long long
 #define double long double
 #define ff first
 #define ss second
@@ -12,7 +13,7 @@
 #define vi vector<int>
 #define vii vector< ii >
 #define EPS 1e-9
-#define INF 1e9
+#define INF 1e18
 #define ROOT 1
 #define M 1000000007
 const double PI = acos(-1);
@@ -26,36 +27,95 @@ int gcd(int a, int b){
   else return gcd(b%a, a);
 }
 
-int dp[5005][5005];
-vector<int> v;
-int n;
+vector<int> adj[112345];
+vector<int> loop(112345, false);
+vector<int> vis(112345, 0);
+vector<int> g(112345);
 
-int solve(int l, int r){
-  if(l == 0 && r == n-1) return 0;
-  if(dp[l][r] != -1) return dp[l][r];
-  
-  dp[l][r] = INF;
-  if(l > 0) dp[l][r] = min(dp[l][r], solve(l-1, r)+1);
-  if(r < n-1) dp[l][r] = min(dp[l][r], solve(l, r+1)+1);
-  if(l > 0 && r < n-1 && v[l-1] == v[r+1]) dp[l][r] = min(dp[l][r], solve(l-1, r+1)+1);
-  return dp[l][r];
+bool ok = false;
+vector<int> st;
+
+void dfs(int u){
+  vis[u] = 1;
+  st.pb(u);
+  for(int v : adj[u]){
+    if(vis[v] == 2) continue;
+    if(vis[v] == 1){
+      bool valid = false;
+      bool has_loop = false;
+      if(g[v] > 0) valid = true;
+      if(loop[v]) has_loop = true;
+      while(st.size() > 0 && st.back() != v){
+        if(g[st.back()] > 0) valid = true;
+        if(loop[st.back()]) has_loop = true;
+        st.pop_back();
+      }
+      if(valid && has_loop) ok = true;
+    }
+    if(vis[v] == 0) dfs(v);
+  }
+  if(st.back() == u) st.pop_back();
+  vis[u] = 2;
+}
+
+void calc(int u){
+  vis[u] = 1;
+  for(int v : adj[u]){
+    if(vis[v] != 0) continue;
+    calc(v);
+    g[u] += g[v];
+  }
+  if(loop[u] && g[u] > 0) ok = true;
+}
+
+void solve(){
+  int n;
+  cin >> n;
+  for(int i=1; i<=n; i++){
+    vis[i] = 0;
+    loop[i] = false;
+    adj[i].clear();
+  }
+  ok = false;
+  st.clear();
+  for(int i=1; i<=n; i++){
+    int a,b;
+    cin >> a >> b;
+    if(a == i){
+      loop[i] = true;
+    }
+    else adj[a].pb(i);
+    if(b == i){
+      loop[i] = true;
+    }
+    else adj[b].pb(i);
+  }
+  for(int i=1; i<=n; i++) cin >> g[i];
+  dfs(1);
+  if(ok){
+    cout << "UNBOUNDED" << endl;
+    return;
+  }
+  for(int i=1; i<=n; i++){
+    vis[i] = 0;
+  }
+  calc(1);
+  if(ok){
+    cout << "UNBOUNDED" << endl;
+    return;
+  }
+  cout << g[1] << endl; 
 }
 
 int32_t main(){
   DESYNC;
-  cin >> n;
-  for(int i=0; i<n; i++){
-    int x;
-    cin >> x;
-    if(v.size() == 0 || v.back() != x) v.pb(x);
+  int t;
+  cin >> t;
+  int tt = 1;
+  while(t--){
+    cout << "Case #" << tt++ << ": ";
+    solve();
   }
-  n = v.size();
-  memset(dp, -1, sizeof dp);
-  int ans = INF;
-  for(int i=0; i<n; i++){
-    ans = min(ans, solve(i,i));
-  }
-  cout << ans << endl;
 }
 
 
