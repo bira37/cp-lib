@@ -27,18 +27,32 @@ int gcd(int a, int b){
   else return gcd(b%a, a);
 }
 
-void solve(){
-
-}
-
 int32_t main(){
   DESYNC;
-  int t;
-  cin >> t;
-  int tt = 1;
-  while(t--){
-    cout << "Case " << tt++ << ": ";
-    solve();
+  int q;
+  cin >> q;
+  while(q--){
+    int lx = -100000, ly = -100000, rx = 100000, ry = 100000;
+    
+    int n;
+    cin >> n;
+    while(n--){
+      int x,y,lef, up,rig, down;
+      cin >> x >> y >> lef >> up >> rig >> down;
+      int a = x, b = y, c = x, d = y;
+      if(lef) a = -100000;
+      if(rig) c = 100000;
+      if(up) d = 100000;
+      if(down) b = -100000;
+      lx = max(lx, a);
+      ly = max(ly, b);
+      rx = min(rx, c);
+      ry = min(ry, d);
+    }
+    if(lx <= rx and ly <= ry){
+      cout << 1 << " " << lx << " " << ly << endl;
+    }
+    else cout << 0 << endl;
   }
 }
 
