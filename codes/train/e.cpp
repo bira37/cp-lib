@@ -29,47 +29,7 @@ int gcd(int a, int b){
 
 int32_t main(){
   DESYNC;
-  int t;
-  cin >> t;
-  while(t--){
-    int b,w;
-    cin >> b >> w;
-    int tot = b+w;
-    vector<ii> ans;
-    int x = 100000, y = 100000;
-    if(b < w){
-      swap(b,w);
-      x--;
-    }
-    for(int i=0; i<w; i++){
-      ans.pb(ii(x,y));
-      ans.pb(ii(x+1, y));
-      x+=2;
-    }
-    b -= w;
-    if(b > 0){
-      ans.pb(ii(ans.front().ff-1, y));
-      b--;
-    }
-    if(b > 2*w){
-      cout << "NO" << endl;
-    }
-    else {
-      for(int i=0; i<2*w && b > 0; i+=2){
-        ans.pb(ii(ans[i].ff, y+1));
-        b--;
-        if(b > 0){
-          ans.pb(ii(ans[i].ff, y-1));
-          b--;
-        }
-      }
-      cout << "YES" << endl;
-      for(ii p : ans) cout << p.ff << " " << p.ss << endl;
-    }
-  }
-      
-    
-    
+  
 }
 
 

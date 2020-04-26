@@ -29,31 +29,7 @@ int gcd(int a, int b){
 
 int32_t main(){
   DESYNC;
-  int t;
-  cin >> t;
-  while(t--){
-    int n,k;
-    cin >> n >> k;
-    int v[n];
-    for(int i=0; i<n; i++){
-      cin >> v[i];
-    }
-    vector<int> ans;
-    int conta = 0;
-    for(int i=0; i<n; i++){
-      if(v[i]%2 && k == 1) conta += 1;
-      if(v[i]%2 && k > 1){
-        ans.pb(i+1);
-        k--;
-      }
-    }
-    if(k == 1 && conta%2){
-      cout << "YES" << endl;
-      for(int x : ans) cout << x << " ";
-      cout << n << endl;
-    }
-    else cout << "NO" << endl;
-  }
+  
 }
 
 
