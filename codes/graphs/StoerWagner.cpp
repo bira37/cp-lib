@@ -1,3 +1,7 @@
+/* Author: Ubiratan Correia Barbosa Neto
+ * Stoer Wagner
+ */
+
 /* Initialization */
 int cost[n + 1][n + 1];
 memset(cost, 0, sizeof cost);
