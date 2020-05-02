@@ -71,7 +71,7 @@ This repository contains algorithms that I learned through my journey on competi
   	* Minimum Cut in Flow Network
   	* Bellman Ford Shortest Path Algorithm
 	* Dynammic Connectivity for connected(u,v) - query 
-	* Eulerian Circuit Directed/Undirected Graphs (TODO)
+	* Eulerian Circuit Directed/Undirected Graphs
 	* Tarjan Algorithm for Bridges/Articulation Points
 	* Heavy-Light Decomposition
 	* Centroid Decomposition
