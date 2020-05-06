@@ -61,6 +61,7 @@ This repository contains algorithms that I learned through my journey on competi
 	* Knuth - Morris - Pratt (KMP)
 	* Z-Function
 	* Rolling Hash
+	* Aho-Corasick
 	* Suffix Array + Linear Sorting (O(nlogn) S.Array)
 
 * Graphs
