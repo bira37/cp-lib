@@ -62,15 +62,16 @@ This repository contains algorithms that I learned through my journey on competi
 	* Z-Function
 	* Rolling Hash
 	* Aho-Corasick
-	* Suffix Array + Linear Sorting (O(nlogn) S.Array)
+  * Suffix Array + Linear Sorting (O(nlogn) S.Array)
 
 * Graphs
-  	* LCA
-  	* Max-Flow (Dinic's Algorithm)
-  	* Minimum Path Cover in Directed Acyclic Graphs
-  	* Minimum Edge Cover in Bipartite Graph
-  	* Minimum Cut in Flow Network
-  	* Bellman Ford Shortest Path Algorithm
+  * LCA
+  * Max-Flow (Dinic's Algorithm)
+  * Minimum Path Cover in Directed Acyclic Graphs
+  * Minimum Edge Cover in Bipartite Graph
+  * Minimum Cut in Flow Network
+  * Minimum Vertex Cover in Bipartite Graph
+  * Bellman Ford Shortest Path Algorithm
 	* Dynammic Connectivity for connected(u,v) - query 
 	* Eulerian Circuit Directed/Undirected Graphs
 	* Tarjan Algorithm for Bridges/Articulation Points
