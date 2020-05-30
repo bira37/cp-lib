@@ -149,4 +149,52 @@ struct Dinic {
     }
     return edge_cover;
   }
+  
+  /* Vertex Cover */
+  
+  vector<vector<int>> vc_g;
+  vector<bool> vc_vis;
+  vector<bool> vc_mrk;
+
+  void vc_dfs(int u) {
+    vc_vis[u] = true;
+    for (int v : vc_g[u]) {
+      if (vc_vis[v]) continue;
+      vc_dfs(v);
+    }
+  }
+
+  vector<int> min_vertex_cover(int left_sz) {
+    int g_sz = adj.size() - 2;
+    vc_g.resize(g_sz + 1, vector<int>());
+    vc_vis.resize(g_sz + 1, false);
+    vc_mrk.resize(g_sz + 1, true);
+    for (int i = 1; i <= left_sz; i++) {
+      for (auto e : adj[i]) {
+        if (e.v != src && e.v != snk) {
+          if (e.c != e.cap) {
+            // satured goes to right
+            vc_g[e.v].pb(i);
+            vc_mrk[i] = false;
+          } else {
+            // non saturated goes to left
+            vc_g[i].pb(e.v);
+          }
+        }
+      }
+    }
+    for (int i = 1; i <= left_sz; i++) {
+      if (vc_mrk[i]) vc_dfs(i);
+    }
+    vector<int> cover;
+    for (int i = 1; i <= g_sz; i++) {
+      if (!vc_vis[i] && i <= left_sz)
+        cover.pb(i);
+      else if (vc_vis[i] && i > left_sz)
+        cover.pb(i);
+    }
+    return cover;
+  }
+
+  /* End of Vertex Cover */
 };
