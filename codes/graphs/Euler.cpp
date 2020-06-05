@@ -1,55 +1,138 @@
 /* Author: Ubiratan Correia Barbosa Neto
- * Eulerian Path
+ * Eulerian Path / Circuit
+ * REMEMBER TO CHECK IF PATH/CIRCUIT HAS THE DESIRED SIZE (OR COVER ALL VERTEX)
  */
 
-// for undirected graph
-// circuit - 2 vertex with odd grades
-// simple path - all vertex with even grades
-// this algorithm generates a circuit, if you need a path between u,v
-// create a new edge u-v, compute circuit u..u, then delete the last u
-
-// for directed graph
-// circuit - all vertex needs enter grade = exit grade
-// path - one vertex needs to have one more enter grade
-// and the other needs to have one more exit grade
-// this algorithm generates a circuit, if you need a path between u,v
-// create a new edge u-v, considering that u have one more enter grade
-// and v one more exit grade
-
 struct EulerianCircuit {
-  vector<set<int> > adj;
+  vector<vector<int>> g;
+  vector<vector<int>> back_ref;
   vector<int> walk;
-  vector<int> deg;
-  int s, t;
+  vector<int> deg, indeg, outdeg;
+  bool directed;
 
-  EulerianCiruit();
-  EulerianCircuit(int n) {
-    deg.resize(n + 1);
-    adj.resize(n + 1);
+  EulerianCircuit(int n, bool directed) : directed(directed) {
+    if (directed) {
+      indeg.resize(n + 1, 0);
+      outdeg.resize(n + 1, 0);
+    } else {
+      deg.resize(n + 1, 0);
+      back_ref.resize(n + 1);
+    }
+    g.resize(n + 1);
+  }
+
+  void add_directed_edge(int u, int v) {
+    outdeg[u]++;
+    indeg[v]++;
+    g[u].pb(v);
+  }
+
+  void add_undirected_edge(int u, int v) {
+    deg[u]++;
+    deg[v]++;
+    g[u].pb(v);
+    g[v].pb(u);
+    if (u != v) {
+      int ref_u = g[v].size() - 1;
+      int ref_v = g[u].size() - 1;
+      back_ref[u].pb(ref_u);
+      back_ref[v].pb(ref_v);
+    } else {
+      int cur = back_ref[u].size();
+      back_ref[u].pb(cur + 1);
+      back_ref[u].pb(cur);
+    }
+  }
+
+  void add_edge(int u, int v) {
+    if (directed)
+      add_directed_edge(u, v);
+    else
+      add_undirected_edge(u, v);
   }
 
   void undirected_euler(int u) {
-    while (!adj[u].empty()) {
-      int v = *(--adj[u].end());
+    while (g[u].size() > 0) {
+      if (g[u].back() < 0) {
+        g[u].pop_back();
+        back_ref[u].pop_back();
+        continue;
+      }
+      int v = g[u].back();
+      int ref = back_ref[u].back();
+      g[u].pop_back();
+      back_ref[u].pop_back();
 
-      adj[u].erase(v);
-      adj[v].erase(adj[v].find(u));
+      if (g[v].size() > ref) g[v][ref] = -1;
 
-      euler(v);
+      undirected_euler(v);
     }
-
     walk.push_back(u);
   }
 
   void directed_euler(int u) {
-    while (!adj[u].empty()) {
-      int v = *(--adj[u].end());
+    while (g[u].size() > 0) {
+      int v = g[u].back();
 
-      adj[u].erase(v);
+      g[u].pop_back();
 
-      euler(v);
+      directed_euler(v);
     }
 
     walk.push_back(u);
+  }
+  bool process_directed_euler(bool path = false, int root = 1) {
+    int inp = -1, out = -1;
+    if (path) {
+      for (int i = 1; i < g.size(); i++) {
+        if (outdeg[i] - indeg[i] == 1) {
+          if (out != -1) return false;
+          out = i;
+        }
+        if (indeg[i] - outdeg[i] == 1) {
+          if (inp != -1) return false;
+          inp = i;
+        }
+      }
+      if (inp == -1 || out == -1) return false;
+      add_directed_edge(inp, out);
+      directed_euler(inp);
+      walk.pop_back();
+      return true;
+    } else {
+      for (int i = 1; i < g.size(); i++) {
+        if (indeg[i] != outdeg[i]) return false;
+      }
+      directed_euler(root);
+      return true;
+    }
+  }
+
+  bool process_undirected_euler(bool path = false, int root = 1) {
+    vector<int> odds;
+    if (path) {
+      for (int i = 1; i < g.size(); i++) {
+        if (deg[i] % 2) odds.push_back(i);
+      }
+      if (odds.size() != 2) return false;
+      add_undirected_edge(odds[0], odds[1]);
+      undirected_euler(odds[0]);
+      walk.pop_back();
+      return true;
+    } else {
+      for (int i = 1; i < g.size(); i++) {
+        if (deg[i] % 2) return false;
+      }
+      undirected_euler(root);
+      return true;
+    }
+  }
+
+  bool calculate(bool path = false, int root = 1) {
+    if (directed) {
+      return process_directed_euler(path, root);
+    } else {
+      return process_undirected_euler(path, root);
+    }
   }
 };
