@@ -77,6 +77,34 @@ void apply(Node *root) {
   combine(root);
 }
 
+void adjust(Node *&root) {
+  if (!root) return;
+  Node *max_node = root;
+  if (root->l && root->l->prior > max_node->prior) {
+    max_node = root->l;
+  }
+  if (root->r && root->r->prior > max_node->prior) {
+    max_node = root->r;
+  }
+  if (max_node != root) {
+    swap(root->prior, max_node->prior);
+    adjust(max_node);
+  }
+}
+
+void build_from(Node *&root, vector<int> &A, int l, int r) {
+  if (l > r) {
+    root = nullptr;
+    return;
+  }
+  int mid = (l + r) >> 1;
+  root = new Node(A[mid]);
+  build_from(root->l, A, l, mid - 1);
+  build_from(root->r, A, mid + 1, r);
+  adjust(root);
+  apply(root);
+}
+
 void split(Node *root, Node *&l, Node *&r, int pos) {
   if (!root) {
     l = nullptr;
