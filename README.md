@@ -10,6 +10,7 @@ This repository contains algorithms that I learned through my journey on competi
 	* Lichao Segment Tree (Online Convex Hull Trick)/ Integer and Float Version
 	* Offline Convex Hull Trick
 	* Ordered Set
+	* Implicit Treap
 	
 * Uncategorized
 	* Longest Increase Subsequence
