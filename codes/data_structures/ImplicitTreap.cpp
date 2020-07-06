@@ -153,4 +153,13 @@ void insert_before(Node *&root, int i, int x) {
   merge(root, L, R);
 }
 
+Node *remove(Node *&root, int i) {
+  Node *L, *R, *M;
+  split(root, L, R, i - 1);
+  split(R, M, R, 0);
+  Node *ret = new Node(M);
+  merge(root, L, R);
+  return ret;
+}
+
 };  // namespace Treap
