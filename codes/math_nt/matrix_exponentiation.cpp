@@ -27,4 +27,16 @@ struct Matrix {
     if (k % 2) c = c * (*this);
     return c;
   }
+  
+  vector<int> &operator[](int idx) {
+    return m[idx];
+  }
+
+  void show() {
+    for (int i = 0; i < m.size(); i++) {
+      for (int x : m[i])
+        cout << x << " ";
+      cout << endl;
+    }
+  }
 };
