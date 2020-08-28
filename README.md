@@ -11,6 +11,7 @@ This repository contains algorithms that I learned through my journey on competi
 	* Offline Convex Hull Trick
 	* Ordered Set
 	* Implicit Treap
+	* Splay Tree
 	
 * Uncategorized
 	* Longest Increase Subsequence
