@@ -11,5 +11,8 @@ void precalculate(int n) {
   }
 }
 
-int C(int n, int k) { return mod(mod(fat[n] * ifat[n - k]) * ifat[k]); }
+int C(int n, int k) {
+  if (n < k) return 0;
+  return mod(mod(fat[n] * ifat[n - k]) * ifat[k]);
+}
 }  // namespace Combinatorics
