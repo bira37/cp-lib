@@ -41,6 +41,37 @@ tuple<int, int> Diophantine(int a, int b, int c) {
   int s1 = x * (c / g), s2 = y * (c / g);
 
   // shifts solution
+  return shift_solution(a, b, g, s1, s2);
+}
+
+bool FailCRT = false;
+
+tuple<int, int> CRT(vector<int>& a, vector<int>& n) {
+  FailCRT = false;
+  for (int i = 0; i < a.size(); i++) a[i] = mod(a[i], n[i]);
+  int ans = a[0];
+  int modulo = n[0];
+
+  for (int i = 1; i < a.size(); i++) {
+    int x, y;
+    tie(x, y) = ExtendedEuclidean(modulo, n[i]);
+    int g = GCD(modulo, n[i]);
+
+    if (g == 0 || (a[i] - ans) % g != 0) {
+      FailCRT = true;
+      return make_tuple(0, 0);
+    }
+
+    ans = mod(ans + (x * ((a[i] - ans) / g)) % (n[i] / g) * modulo,
+              modulo * (n[i] / g));
+    modulo = modulo * (n[i] / g);
+  }
+
+  return make_tuple(ans, modulo);
+}
+
+tuple<int, int> shift_solution(int a, int b, int g, int s1, int s2) {
+  // shifts solution
   int l = 0, r = 1e9;
   int ans = -1;
   while (l <= r) {
@@ -87,32 +118,6 @@ tuple<int, int> Diophantine(int a, int b, int c) {
   }
 
   return make_tuple(s1, s2);
-}
-
-bool FailCRT = false;
-
-tuple<int, int> CRT(vector<int>& a, vector<int>& n) {
-  FailCRT = false;
-  for (int i = 0; i < a.size(); i++) a[i] = mod(a[i], n[i]);
-  int ans = a[0];
-  int modulo = n[0];
-
-  for (int i = 1; i < a.size(); i++) {
-    int x, y;
-    tie(x, y) = ExtendedEuclidean(modulo, n[i]);
-    int g = GCD(modulo, n[i]);
-
-    if (g == 0 || (a[i] - ans) % g != 0) {
-      FailCRT = true;
-      return make_tuple(0, 0);
-    }
-
-    ans = mod(ans + (x * ((a[i] - ans) / g)) % (n[i] / g) * modulo,
-              modulo * (n[i] / g));
-    modulo = modulo * (n[i] / g);
-  }
-
-  return make_tuple(ans, modulo);
 }
 
 }  // namespace NT
