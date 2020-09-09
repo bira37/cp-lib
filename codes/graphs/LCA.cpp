@@ -5,6 +5,7 @@
 struct LCA {
   int tempo;
   vector<int> st, ed, dad, anc[20], L;
+  vector<vector<int>> adj;
   vector<bool> vis;
 
   LCA() {}
@@ -14,6 +15,7 @@ struct LCA {
     st.resize(n + 1);
     ed.resize(n + 1);
     dad.resize(n + 1);
+    adj.resize(n+1, vector<int>());
     L.resize(n + 1);
     for (int i = 0; i < 20; i++) anc[i].resize(n + 1);
     vis.resize(n + 1);
