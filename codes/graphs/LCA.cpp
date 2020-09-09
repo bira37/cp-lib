@@ -50,9 +50,12 @@ struct LCA {
   int distance(int u, int v) { return L[u] + L[v] - 2 * L[query(u, v)]; }
 
   void precalculate() {
-    dad[1] = -1;
-    L[1] = 0;
-    dfs(1);
+    for (int i = 1; i < st.size(); i++) {
+      if (vis[i]) continue;
+      dad[i] = -1;
+      L[i] = 0;
+      dfs(i);
+    }
     for (int i = 1; i < st.size(); i++) {
       anc[0][i] = dad[i];
     }
