@@ -13,6 +13,7 @@ struct CentroidDecomposition {
   vector<bool> removed;
   vector<int> L, subsz;
   vector<int> c_p;
+  vector<vector<int>> adj;
 
   CentroidDecomposition() {}
 
@@ -21,7 +22,8 @@ struct CentroidDecomposition {
     L.resize(n + 1);
     c_p.resize(n + 1);
     subsz.resize(n + 1);
-    for (int i = 0; i <= n; i++) {
+    adj.resize(n + 1, vector<int>());
+    for (int i = 0; i < n + 1; i++) {
       c_p[i] = -1;
     }
   }
@@ -47,19 +49,23 @@ struct CentroidDecomposition {
     return u;
   }
 
-  void centroid_decomp(int u, int p, int r) {
+  void decompose(int u = 1, int p = -1, int r = 0) {
     centroid_subsz(u, -1);
     int centroid = find_centroid(u, -1, u);
     L[centroid] = r;
     c_p[centroid] = p;
     removed[centroid] = true;
 
-    // problem pre-processing
+    process(centroid, p);
 
     for (int i = 0; i < adj[centroid].size(); i++) {
       int v = adj[centroid][i];
       if (removed[v]) continue;
-      centroid_decomp(v, centroid, r + 1);
+      decompose(v, centroid, r + 1);
     }
+  }
+
+  void process(int u, int p) {
+    // do something here to process subtree
   }
 };
