@@ -31,6 +31,17 @@ struct Complex {
     this->a = b.a;
     this->b = b.b;
   }
+  void operator+=(const Complex& y) {
+    this->a += y.a;
+    this->b += y.b;
+  }
+  void operator-=(const Complex& y) {
+    this->a -= y.a;
+    this->b -= y.b;
+  }
+  void operator*=(const Complex& y) {
+    *this = Complex(a * y.a - b * y.b, a * y.b + b * y.a);
+  }
   Complex operator+(const Complex& y) const {
     return Complex(a + y.a, b + y.b);
   }
@@ -51,11 +62,33 @@ struct Poly {
   Poly() {}
 
   Poly(int n) {
-    int sz = (31 - __builtin_clz(n) % 32) + 1;
-    c.resize((1 << (sz - 1) == n ? n : (1 << sz)) << 1);
+    if (n <= 0) n = 1;
+    c.resize(n);
+  }
+
+  Poly(const Poly& b) { copy(b); }
+
+  void copy(const Poly& b) {
+    c.clear();
+    for (Complex elem : b.c) c.pb(elem);
+  }
+
+  void operator+=(const Poly& b) {
+    while (size() < b.size()) c.pb(Complex(0, 0));
+    for (int i = 0; i < b.size(); i++) c[i] += b.c[i];
+  }
+
+  void operator-=(const Poly& b) {
+    while (size() < b.size()) c.pb(Complex(0, 0));
+    for (int i = 0; i < b.size(); i++) c[i] -= b.c[i];
   }
 
   int size() const { return (int)c.size(); }
+
+  Complex& operator[](int idx) {
+    assert(idx < size());
+    return c[idx];
+  }
 };
 
 inline Complex PrimitiveRootOfUnity(int n) {
@@ -96,7 +129,7 @@ void DFT(Poly& A, bool inverse) {
         Complex u = A.c[i + j], v = x * A.c[i + j + len / 2];
         A.c[i + j] = u + v;
         A.c[i + j + len / 2] = u - v;
-        x = x * w;
+        x *= w;
       }
     }
   }
@@ -105,62 +138,64 @@ void DFT(Poly& A, bool inverse) {
     for (int i = 0; i < n; i++) A.c[i] = A.c[i] / n;
 }
 
-/* Skipable */
-Poly RecursiveFFT(Poly A, int n, Complex w) {
-  if (n == 1) return A;
+Poly FastMultiply(Poly& A, Poly& B) {
+  Poly F_A(max(A.size(), B.size()));
 
-  Poly A_even(n / 2), A_odd(n / 2);
-
-  for (int i = 0; i < n; i += 2) {
-    A_even.c[i / 2] = A.c[i];
-    A_odd.c[i / 2] = A.c[i + 1];
+  for (int i = 0; i < F_A.size(); i++) {
+    F_A.c[i].a = (A.size() > i ? A.c[i].a : 0);
+    F_A.c[i].b = (B.size() > i ? B.c[i].a : 0);
   }
 
-  Poly F_even = RecursiveFFT(A_even, n / 2, w * w);
-  Poly F_odd = RecursiveFFT(A_odd, n / 2, w * w);
-  Poly F(n);
-  Complex x(1, 0);
+  int n = 1;
+  while (n < F_A.size() + F_A.size()) n <<= 1;
+  F_A.c.resize(n);
 
-  for (int i = 0; i < n / 2; i++) {
-    F.c[i] = F_even.c[i] + x * F_odd.c[i];
-    F.c[i + n / 2] = F_even.c[i] - x * F_odd.c[i];
-    x = x * w;
-  }
+  Poly C(F_A.size());
 
-  return F;
-}
-/* Skipable */
+  DFT(F_A, false);
 
-Poly Convolution(Poly& F_A, Poly& F_B) {
-  Poly F_C(F_A.size() >> 1);
-  for (int i = 0; i < F_A.size(); i++) F_C.c[i] = F_A.c[i] * F_B.c[i];
-  return F_C;
-}
+  for (int i = 0; i < F_A.size(); i++) F_A.c[i] *= F_A.c[i];
 
-Poly FastMultiply(Poly& A) {
-  Poly C(A.size());
+  DFT(F_A, true);
 
-  DFT(A, false);
-
-  for (int i = 0; i < A.size(); i++) A.c[i] = A.c[i] * A.c[i];
-
-  DFT(A, true);
-
-  for (int i = 0; i < A.size(); i++) C.c[i] = Complex(A.c[i].b / 2, 0);
+  for (int i = 0; i < F_A.size(); i++) C.c[i] = Complex(F_A.c[i].b / 2, 0);
 
   return C;
 }
 
 Poly Multiply(Poly& A, Poly& B) {
-  DFT(A, false);
+  Poly F_A(A), F_B(B);
 
-  DFT(B, false);
+  int n = 1;
+  while (n < F_A.size() + F_B.size()) n <<= 1;
+  F_A.c.resize(n);
+  F_B.c.resize(n);
 
-  Poly C = Convolution(A, B);
+  DFT(F_A, false);
 
-  DFT(C, true);
+  DFT(F_B, false);
 
-  return C;
+  for (int i = 0; i < F_A.size(); i++) F_A.c[i] *= F_B.c[i];
+
+  DFT(F_A, true);
+
+  return F_A;
+}
+
+Poly Double(Poly& A) {
+  Poly F_A(A);
+
+  int n = 1;
+  while (n < F_A.size() + F_A.size()) n <<= 1;
+  F_A.c.resize(n);
+
+  DFT(F_A, false);
+
+  for (int i = 0; i < F_A.size(); i++) F_A.c[i] *= F_A.c[i];
+
+  DFT(F_A, true);
+
+  return F_A;
 }
 
 };  // namespace FFT
