@@ -46,6 +46,9 @@ This repository contains algorithms that I learned through my journey on competi
 	* Convex Hull(Monotone Chain) + Perimeter/Area Calculation
 	* Smallest Enclosing Circle Randomized Algorithm
 	* Check if a Point Lies in Convex Hull
+	* Largest quadrilater given a set of distinct points
+	* Check if line intersects polygon
+	* Maximum dot product queries
   
 * Math and Number Theory
 	* Binomial Coefficient
