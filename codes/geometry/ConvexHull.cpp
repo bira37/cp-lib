@@ -242,26 +242,25 @@ struct ConvexHull {
     };
 
     auto solve_convex = [&](ConvexHull& ch) {
-      const vector<Point>& v = (ch.points);
+      vector<Point>& v = ch.points;
       int n = v.size();
       int ans = 0;
-      for (int i = 0; i < n; i++) {
+      for (int i = 0; i < n - 3; i++) {
         int l = i + 1;
         int r = i + 3;
-        for (int j = i + 2; j <= i + n - 2; j++) {
+        for (int j = i + 2; j <= n - 2; j++) {
           l = max(l, i + 1);
           r = max(r, j + 1);
-          while (l + 1 < j &&
-                 triangle_area2(v[i % n], v[j % n], v[l % n]) <=
-                     triangle_area2(v[i % n], v[j % n], v[(l + 1) % n]))
+
+          while (l + 1 < j && triangle_area2(v[i], v[j], v[l]) <=
+                                  triangle_area2(v[i], v[j], v[(l + 1)]))
             l++;
-          while (r + 1 < i + n &&
-                 triangle_area2(v[i % n], v[j % n], v[r % n]) <=
-                     triangle_area2(v[i % n], v[j % n], v[(r + 1) % n]))
+          while (r + 1 < n && triangle_area2(v[i], v[j], v[r]) <=
+                                  triangle_area2(v[i], v[j], v[(r + 1)]))
             r++;
 
-          ans = max(ans, triangle_area2(v[i % n], v[j % n], v[l % n]) +
-                             triangle_area2(v[i % n], v[j % n], v[r % n]));
+          ans = max(ans, triangle_area2(v[i], v[j], v[l]) +
+                             triangle_area2(v[i], v[j], v[r]));
         }
       }
       return ans;
