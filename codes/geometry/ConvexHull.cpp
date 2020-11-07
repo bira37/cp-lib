@@ -11,6 +11,12 @@ struct ConvexHull {
 
   void calculate(vector<Point> v) {
     sort(v.begin(), v.end());
+    lower.clear();
+    upper.clear();
+    if (v.size() < 3) {
+      for (Point p : v) upper.pb(p), lower.pb(p);
+      return;
+    }
     for (int i = 0; i < v.size(); i++) {
       while (upper.size() >= 2 &&
              (Point(upper[upper.size() - 2], upper.back()) ^
@@ -114,6 +120,42 @@ struct ConvexHull {
       return true;
     else
       return false;
+  }
+  
+  int _f_dot_product(Point a, Point b) { return a.x * b.x + a.y * b.y; }
+  int _maximize_dot_product(Point p, const vector<Point>& envelope) {
+    if (envelope.size() < 3) {
+      int result = -INF;
+      for (Point q : envelope) {
+        result = max(result, _f_dot_product(p, q));
+      }
+      return result;
+    }
+    int l = 0, r = envelope.size() - 2;
+    int ans = 0;
+    while (l <= r) {
+      int m1 = (l + r) >> 1;
+      int m2 = m1 + 1;
+      if (_f_dot_product(p, envelope[m1]) <= _f_dot_product(p, envelope[m2])) {
+        l = m1 + 1;
+      } else {
+        ans = m1;
+        r = m1 - 1;
+      }
+    }
+    int result = max(_f_dot_product(p, envelope.front()),
+                     _f_dot_product(p, envelope.back()));
+    result = max(result, _f_dot_product(p, envelope[ans]));
+    result = max(result, _f_dot_product(p, envelope[ans + 1]));
+    return result;
+  }
+
+  int max_dot_product(Point p) {
+    if (p.y < 0) {
+      return _maximize_dot_product(p, lower);
+    } else {
+      return _maximize_dot_product(p, upper);
+    }
   }
 };
 
