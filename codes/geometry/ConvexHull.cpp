@@ -157,7 +157,7 @@ struct ConvexHull {
     }
   }
   
-  bool line_intersection(const Hull& ch, Line& l) {
+  bool line_intersection(const ConvexHull& ch, Line& l) {
     auto f = [&](const Line& l, const Point& p) {
       return l.a * p.x + l.b * p.y + l.c;
     };
