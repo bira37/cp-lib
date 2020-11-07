@@ -1,15 +1,12 @@
-/* Author: Ubiratan Correia Barbosa Neto
- * Convex Hull
- */
-
 namespace Geo2D {
 
 struct ConvexHull {
-  vector<Point> points, lower, upper;
+  vector<Point> v, points, lower, upper;
 
   ConvexHull() {}
+  ConvexHull(vector<Point> v) : v(v) {}
 
-  void calculate(vector<Point> v) {
+  void calculate() {
     sort(v.begin(), v.end());
     lower.clear();
     upper.clear();
@@ -121,7 +118,7 @@ struct ConvexHull {
     else
       return false;
   }
-  
+
   int _f_dot_product(Point a, Point b) { return a.x * b.x + a.y * b.y; }
   int _maximize_dot_product(Point p, const vector<Point>& envelope) {
     if (envelope.size() < 3) {
