@@ -218,6 +218,64 @@ struct ConvexHull {
     if (ansl.ff && ansl.ss) return true;
     return false;
   }
+  
+  int largest_quad(vector<Point>& v) {
+    auto triangle_area2 = [&](Point a, Point b, Point c) {
+      return abs(Point(a, b) ^ Point(a, c));
+    };
+    auto solve_non_convex = [&](vector<Point>& v, ConvexHull& ch) {
+      int area2 = ch.area2();
+      int best_ans = 0;
+      for (Point p : v) {
+        bool inhull = false;
+        for (Point q : ch.points)
+          if (p == q) inhull = true;
+        if (inhull) continue;
+        int n = ch.points.size();
+        for (int cur = 0; cur < n; cur++) {
+          int nxt = (cur + 1) % n;
+          best_ans = max(best_ans, area2 - triangle_area2(ch.points[cur],
+                                                          ch.points[nxt], p));
+        }
+      }
+      return best_ans;
+    };
+
+    auto solve_convex = [&](ConvexHull& ch) {
+      const vector<Point>& v = (ch.points);
+      int n = v.size();
+      int ans = 0;
+      for (int i = 0; i < n; i++) {
+        int l = i + 1;
+        int r = i + 3;
+        for (int j = i + 2; j <= i + n - 2; j++) {
+          l = max(l, i + 1);
+          r = max(r, j + 1);
+          while (l + 1 < j &&
+                 triangle_area2(v[i % n], v[j % n], v[l % n]) <=
+                     triangle_area2(v[i % n], v[j % n], v[(l + 1) % n]))
+            l++;
+          while (r + 1 < i + n &&
+                 triangle_area2(v[i % n], v[j % n], v[r % n]) <=
+                     triangle_area2(v[i % n], v[j % n], v[(r + 1) % n]))
+            r++;
+
+          ans = max(ans, triangle_area2(v[i % n], v[j % n], v[l % n]) +
+                             triangle_area2(v[i % n], v[j % n], v[r % n]));
+        }
+      }
+      return ans;
+    };
+
+    ConvexHull ch = ConvexHull(v);
+    ch.calculate();
+    if (ch.points.size() <= 2)
+      return 0;
+    else if (ch.points.size() == 3)
+      return solve_non_convex(v, ch);
+    else
+      return solve_convex(ch);
+  }
 };
 
 }  // namespace Geo2D
