@@ -18,6 +18,7 @@ This repository contains algorithms that I learned through my journey on competi
 	* 2D Longest Increase Subsequence
 	* Inversion Count Offline (Merge-Sort)
 	* Mos Query Decomposition
+	* Find kth permutation
 	
 * Basic 2D Geometry
   * Point/Vector Structure
