@@ -154,6 +154,68 @@ struct ConvexHull {
       return _maximize_dot_product(p, upper);
     }
   }
+  
+  bool line_intersection(const Hull& ch, Line& l) {
+    auto f = [&](const Line& l, const Point& p) {
+      return l.a * p.x + l.b * p.y + l.c;
+    };
+
+    auto query = [&](const vector<Point>& v, Line& lin) {
+      if (v.size() < 3) {
+        ii ret(false, false);
+        for (Point p : v) {
+          if (f(lin, p) >= 0) ret.ff = true;
+          if (f(lin, p) <= 0) ret.ss = true;
+        }
+        return ret;
+      }
+      int l = 0, r = v.size() - 2;
+      int ans = -1;
+      vector<Point> test;
+      test.pb(v[0]);
+      test.pb(v.back());
+      // maximize
+      while (l <= r) {
+        int m1 = (l + r) >> 1;
+        int m2 = m1 + 1;
+        if (f(lin, v[m1]) > f(lin, v[m2])) {
+          ans = m1;
+          r = m1 - 1;
+        } else {
+          l = m1 + 1;
+        }
+      }
+      if (ans != -1) test.pb(v[ans]), test.pb(v[ans + 1]);
+
+      l = 0, r = v.size() - 2;
+      ans = -1;
+      // minimize
+      while (l <= r) {
+        int m1 = (l + r) >> 1;
+        int m2 = m1 + 1;
+        if (f(lin, v[m1]) < f(lin, v[m2])) {
+          ans = m1;
+          r = m1 - 1;
+        } else {
+          l = m1 + 1;
+        }
+      }
+      if (ans != -1) test.pb(v[ans]), test.pb(v[ans + 1]);
+      ii ret(false, false);
+      for (Point p : test) {
+        if (f(lin, p) >= 0) ret.ff = true;
+        if (f(lin, p) <= 0) ret.ss = true;
+      }
+      return ret;
+    };
+    ii ansu = query(ch.upper, l);
+    ii ansl = query(ch.lower, l);
+    if (ansu.ff && ansl.ss) return true;
+    if (ansu.ss && ansl.ff) return true;
+    if (ansu.ff && ansu.ss) return true;
+    if (ansl.ff && ansl.ss) return true;
+    return false;
+  }
 };
 
 }  // namespace Geo2D
