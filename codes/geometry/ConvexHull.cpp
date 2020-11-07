@@ -119,35 +119,37 @@ struct ConvexHull {
       return false;
   }
 
-  int _f_dot_product(Point a, Point b) { return a.x * b.x + a.y * b.y; }
-  int _maximize_dot_product(Point p, const vector<Point>& envelope) {
-    if (envelope.size() < 3) {
-      int result = -INF;
-      for (Point q : envelope) {
-        result = max(result, _f_dot_product(p, q));
-      }
-      return result;
-    }
-    int l = 0, r = envelope.size() - 2;
-    int ans = 0;
-    while (l <= r) {
-      int m1 = (l + r) >> 1;
-      int m2 = m1 + 1;
-      if (_f_dot_product(p, envelope[m1]) <= _f_dot_product(p, envelope[m2])) {
-        l = m1 + 1;
-      } else {
-        ans = m1;
-        r = m1 - 1;
-      }
-    }
-    int result = max(_f_dot_product(p, envelope.front()),
-                     _f_dot_product(p, envelope.back()));
-    result = max(result, _f_dot_product(p, envelope[ans]));
-    result = max(result, _f_dot_product(p, envelope[ans + 1]));
-    return result;
-  }
-
   int max_dot_product(Point p) {
+    auto _f_dot_product = [&](Point a, Point b) {
+      return a.x * b.x + a.y * b.y;
+    };
+    auto _maximize_dot_product = [&](Point p, const vector<Point>& envelope) {
+      if (envelope.size() < 3) {
+        int result = -INF;
+        for (Point q : envelope) {
+          result = max(result, _f_dot_product(p, q));
+        }
+        return result;
+      }
+      int l = 0, r = envelope.size() - 2;
+      int ans = 0;
+      while (l <= r) {
+        int m1 = (l + r) >> 1;
+        int m2 = m1 + 1;
+        if (_f_dot_product(p, envelope[m1]) <=
+            _f_dot_product(p, envelope[m2])) {
+          l = m1 + 1;
+        } else {
+          ans = m1;
+          r = m1 - 1;
+        }
+      }
+      int result = max(_f_dot_product(p, envelope.front()),
+                       _f_dot_product(p, envelope.back()));
+      result = max(result, _f_dot_product(p, envelope[ans]));
+      result = max(result, _f_dot_product(p, envelope[ans + 1]));
+      return result;
+    };
     if (p.y < 0) {
       return _maximize_dot_product(p, lower);
     } else {
