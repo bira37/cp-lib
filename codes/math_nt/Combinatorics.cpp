@@ -1,4 +1,4 @@
-namespace Combinatorics {
+namespace NT {
 vector<int> fat;
 vector<int> ifat;
 
