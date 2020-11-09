@@ -21,11 +21,11 @@ namespace NTT {
 const ll mod = (119 << 23) + 1, root = 62;  // = 998244353
 // For p < 2^30 there is also e.g. 5 << 25, 7 << 26, 479 << 21
 // and 483 << 21 (same root). The last two are > 10^9.
-typedef vector<ll> vl;
-int sz(const vl &x) { return x.size(); }
-void ntt(vl &a) {
+typedef vector<ll> poly;
+int sz(const poly& x) { return x.size(); }
+void ntt(poly& a) {
   int n = sz(a), L = 31 - __builtin_clz(n);
-  static vl rt(2, 1);
+  static poly rt(2, 1);
   for (static int k = 2, s = 2; k < n; k *= 2, s++) {
     rt.resize(n);
     ll z[] = {1, exp(root, mod >> s)};
@@ -43,11 +43,11 @@ void ntt(vl &a) {
         ai += (ai + z >= mod ? z - mod : z);
       }
 }
-vl Multiply(const vl &a, const vl &b) {
+poly Multiply(const poly& a, const poly& b) {
   if (a.empty() || b.empty()) return {};
   int s = sz(a) + sz(b) - 1, B = 32 - __builtin_clz(s), n = 1 << B;
   int inv = exp(n, mod - 2);
-  vl L(a), R(b), out(n);
+  poly L(a), R(b), out(n);
   L.resize(n), R.resize(n);
   ntt(L), ntt(R);
   for (int i = 0; i < n; i++)
