@@ -13,7 +13,6 @@ int Interpolate(const vector<ii>& v, int k) {
       num = mod(num * (k - v[j].ff));
       den = mod(den * (v[i].ff - v[j].ff));
     }
-    cout << num << endl;
     ans = mod(ans + divp(num, den));
   }
   return ans;
