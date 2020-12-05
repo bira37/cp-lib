@@ -42,5 +42,17 @@ void EulerTotient(int n) {
     }
   }
 }
+  
+int SingleTotient(int x) {
+  int ans = x;
+  for (int i = 2; i * i <= x; i++) {
+    if (x % i == 0) {
+      while (x % i == 0) x /= i;
+      ans -= ans / i;
+    }
+  }
+  if (x > 1) ans -= ans / x;
+  return ans;
+}
 
 };  // namespace NT
