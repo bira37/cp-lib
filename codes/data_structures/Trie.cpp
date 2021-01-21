@@ -2,11 +2,11 @@
  * Trie structure example
  */
 namespace Trie {
-
+const int SIZE_NODE = 26;
 struct node {
   node *adj[SIZE_NODE];
   node() {
-    for (int i = 0; i < SIZE_NODE; i++) adj[i] = NULL;
+    for (int i = 0; i < SIZE_NODE; i++) adj[i] = nullptr;
   }
 };
 

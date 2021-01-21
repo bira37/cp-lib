@@ -1,4 +1,4 @@
-namespace PersistentSegmentTree {
+namespace RangeDynamicSegmentTree {
 
 struct Node {
   Node *left, *right;
@@ -82,4 +82,4 @@ int query(Node* cur, int l, int r, int a, int b) {
   return max(ansl, ansr);
 }
 
-};  // namespace PersistentSegmentTree
+};  // namespace RangeDynamicSegmentTree
