@@ -34,6 +34,7 @@ struct RollingHash {
   }
 
   ii query(int l, int r) {
+    l++, r++;
     ii ret;
     ret.ff = mod(hash[r].ff - hash[l - 1].ff * base[r - l + 1].ff, M1);
     ret.ss = mod(hash[r].ss - hash[l - 1].ss * base[r - l + 1].ss, M2);

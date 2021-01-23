@@ -3,11 +3,11 @@
  */
 
 struct Compresser {
-  vector<int> value;
-
+  vector<int> original;
+  map<int, int> comp;
   Compresser() {}
 
-  Compresser(int n) { value.resize(n); }
+  Compresser(int n) { original.resize(n, -1); }
 
   void compress(vector<int>& v) {
     vector<int> tmp;
@@ -16,8 +16,9 @@ struct Compresser {
     for (int x : s) tmp.pb(x);
     for (int i = 0; i < v.size(); i++) {
       int idx = lower_bound(tmp.begin(), tmp.end(), v[i]) - tmp.begin();
-      value[idx] = v[i];
+      original[idx] = v[i];
       v[i] = idx;
+      comp[v[i]] = idx;
     }
   }
 

@@ -7,12 +7,14 @@ struct Manacher {
   vector<int> d_e, d_o;
   Manacher() {}
 
-  Manacher(int n) {
+  Manacher(string& s) {
+    int n = s.size();
     d_e.resize(n);
     d_o.resize(n);
+    _calculate(s);
   }
 
-  void calculate(string& s) {
+  void _calculate(string& s) {
     int n = d_e.size();
     // calculate for odd
     for (int i = 0, l = 0, r = -1; i < n; i++) {

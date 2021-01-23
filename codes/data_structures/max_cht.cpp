@@ -3,19 +3,19 @@
  */
 struct ConvexHullTrick {
   ConvexHullTrick() {}
-  struct line {
+  struct Line {
     int id, a, b;
-    line() {}
-    line(int id, int a, int b) : id(id), a(a), b(b) {}
+    Line() {}
+    Line(int id, int a, int b) : id(id), a(a), b(b) {}
   };
-  bool remove(line& a, line& b, line& c) {
+  bool remove(Line& a, Line& b, Line& c) {
     if ((a.a - c.a) * (c.b - b.b) <= (b.a - c.a) * (c.b - a.b))
       return true;
     else
       return false;
   }
-  vector<line> cht;
-  void add(line& v) {
+  vector<Line> cht;
+  void add(Line& v) {
     if (cht.empty()) {
       cht.push_back(v);
     } else {
@@ -27,8 +27,8 @@ struct ConvexHullTrick {
     }
   }
 
-  void preprocess_cht(vector<line>& v) {
-    sort(v.begin(), v.end(), [](const line& a, const line& b) {
+  void preprocess_cht(vector<Line>& v) {
+    sort(v.begin(), v.end(), [](const Line& a, const Line& b) {
       return (a.a < b.a || (a.a == b.a && a.b > b.b));
     });
     cht.clear();
@@ -39,7 +39,7 @@ struct ConvexHullTrick {
 
   int f(int i, int x) { return cht[i].a * x + cht[i].b; }
 
-  // return line index
+  // return Line index
   ii query(int x) {
     if (cht.size() == 0) return ii(-INF, -INF);
     if (cht.size() == 1) return ii(f(0, x), cht[0].id);

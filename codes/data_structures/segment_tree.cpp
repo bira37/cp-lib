@@ -17,9 +17,9 @@ struct node {
   node() {}
   node(int val, int lazy) : val(val), lazy(lazy) {}
   node neutral() { return node(0, 0); };
-  bool no_update() { return lazy == 0; }
+  bool empty_lazy() { return lazy == 0; }
   void update_lazy(val_type val) { lazy += val.val; }
-  void apply(int l, int r) { val += (r - l + 1) * lazy; }
+  void apply_lazy(int l, int r) { val += (r - l + 1) * lazy; }
   void reset_lazy() { lazy = 0; }
   node propagate(node b) {
     b.lazy += lazy;
@@ -32,22 +32,22 @@ struct node {
   }
 };
 
-template <class node_t, class update_t>
+template <class node_t, class val_t>
 class Tree {
  public:
   vector<node_t> st;
   Tree() {}
   Tree(int n) { st.resize(4 * n); }
   void propagate(int cur, int l, int r) {
-    if (st[cur].no_update()) return;
-    st[cur].apply(l, r);
+    if (st[cur].empty_lazy()) return;
+    st[cur].apply_lazy(l, r);
     if (l != r) {
       st[2 * cur] = st[cur].propagate(st[2 * cur]);
       st[2 * cur + 1] = st[cur].propagate(st[2 * cur + 1]);
     }
     st[cur].reset_lazy();
   }
-  void update(int cur, int l, int r, int a, int b, update_t val) {
+  void update(int cur, int l, int r, int a, int b, val_t val) {
     propagate(cur, l, r);
     if (b < l || r < a) return;
     if (a <= l && r <= b) {
