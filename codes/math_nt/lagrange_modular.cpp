@@ -1,4 +1,4 @@
-namespace NT {
+namespace ModularLagrange {
 /* Interpolates a polynomial of degree N-1 given N point-value pairs (x,y) and
  * returns f(k) */
 /* Uses modular arithmetic */
@@ -54,4 +54,4 @@ int FastInterpolate(const vector<int>& v, int k) {
   }
   return ans;
 }
-}  // namespace NT
+}  // namespace ModularLagrange

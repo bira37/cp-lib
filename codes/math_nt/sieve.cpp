@@ -7,12 +7,13 @@
 
 namespace NT {
 
-const int MAX_N = 1123456;
+const int MAX_SIEVE = 1123456;
 
-bitset<MAX_N> prime;
+bitset<MAX_SIEVE> prime;
 vector<int> primes;
-int lf[MAX_N];
-int totient[MAX_N];
+vector<int> seg_primes;
+int lf[MAX_SIEVE];
+int totient[MAX_SIEVE];
 
 void Sieve(int n) {
   for (int i = 0; i <= n; i++) lf[i] = i;
@@ -31,6 +32,24 @@ void Sieve(int n) {
     if (prime[i]) primes.pb(i);
 }
 
+void SegmentedSieve(int l, int r) {
+  prime.set();
+  seg_primes.clear();
+  for (int p : primes) {
+    int start = l - l % p - p;
+    while (start < l) start += p;
+    if (p == start) start += p;
+    for (int i = start; i <= r; i += p) {
+      prime[i - l] = false;
+    }
+  }
+  for (int i = 0; i < r - l + 1; i++) {
+    if (prime[i] && l + i > 1) {
+      seg_primes.pb(l + i);
+    }
+  }
+}
+
 void EulerTotient(int n) {
   for (int i = 0; i <= n; i++) totient[i] = i;
   for (int p = 2; p <= n; p++) {
@@ -42,7 +61,7 @@ void EulerTotient(int n) {
     }
   }
 }
-  
+
 int SingleTotient(int x) {
   int ans = x;
   for (int i = 2; i * i <= x; i++) {
